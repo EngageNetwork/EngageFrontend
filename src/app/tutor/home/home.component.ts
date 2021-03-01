@@ -11,6 +11,6 @@ export class HomeComponent {
     constructor(private accountService: AccountService, private title: Title) { }
 
     ngOnInit() {
-      this.title.setTitle('Home | User');
+      this.title.setTitle('Home | Tutor');
     }
 }
