@@ -6,7 +6,11 @@ import { TermsComponent } from './terms/terms.component';
 const routes: Routes = [
   { path: '', children: [
     { path: '', redirectTo: 'terms', pathMatch: 'full' },
-    { path: 'terms', component: TermsComponent }
+    { path: 'terms', component: TermsComponent },
+    {
+      path: 'privacy',
+      loadChildren: () => import('./privacy/privacy.module').then(m => m.PrivacyModule)
+    }
   ]}
 ];
 

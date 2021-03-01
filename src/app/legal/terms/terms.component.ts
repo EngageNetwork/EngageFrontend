@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-@Component({ templateUrl: './terms.component.html' })
+@Component({
+  templateUrl: './terms.component.html',
+  styleUrls: ['./terms.component.css']
+})
 
 export class TermsComponent implements OnInit {
 

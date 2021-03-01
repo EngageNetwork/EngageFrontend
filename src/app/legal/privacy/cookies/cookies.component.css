@@ -1,0 +1,9 @@
+.keyline.keyline-top-all {
+    border-top: 1px solid #d2d2d7;
+}
+
+.section-content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 980px;
+}

@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: '', component: GlobalHomeComponent },
   {
     path: 'legal',
-    loadChildren: () => import('./legal/legal.module').then(m => m.LegalModule),
+    loadChildren: () => import('./legal/legal.module').then(m => m.LegalModule)
   },
   {
     path: 'account',
