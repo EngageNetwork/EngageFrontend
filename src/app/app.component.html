@@ -1,0 +1,44 @@
+<div class="app-container" [ngClass]="{ 'bg-light': account }">
+  <!-- Main Navbar -->
+  <!-- Logged In -->
+  <nav *ngIf="account" class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="navbar-nav mr-auto">
+      <a *ngIf="account.role === Role.Admin" routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3"><strong>Home</strong></a>
+      <a *ngIf="account.role === Role.Tutor" routerLink="/tutor" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3"><strong>Home</strong></a>
+      <a *ngIf="account.role === Role.Student" routerLink="/student" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3"><strong>Home</strong></a>
+      <a routerLink="/profile" routerLinkActive="active" class="nav-item nav-link px-3"><strong>Profile</strong></a>
+      <a *ngIf="account.role === Role.Admin" routerLink="/admin/manage" routerLinkActive="active" class="nav-item nav-link px-3"><strong>Admin</strong></a>
+      <a *ngIf="account.role === Role.Admin" routerLink="/tutor/listings" routerLinkActive="active" class="nav-item nav-link px-3"><strong>My Listings</strong></a>
+      <a *ngIf="account.role === Role.Tutor" routerLink="/tutor/listings" routerLinkActive="active" class="nav-item nav-link px-3"><strong>My Listings</strong></a>
+      <a *ngIf="account.role === Role.Admin" routerLink="/student/positions" routerLinkActive="active" class="nav-item nav-link px-3"><strong>My Positions</strong></a>
+      <a *ngIf="account.role === Role.Student" routerLink="/student/positions" routerLinkActive="active" class="nav-item nav-link px-3"><strong>My Positions</strong></a>
+    </div>
+    <div class="navbar-nav my-2 my-lg-0">
+      <a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-4"><strong>Contact Us</strong></a>
+      <button (click)="logout()" class="btn btn-danger my-2 my-sm-0">Logout</button>
+    </div>
+  </nav>
+
+  <!-- Not Logged In -->
+  <nav *ngIf="!account" class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="navbar-nav mr-auto">
+      <a routerLink="/" routerLinkActive="active" class="nav-item nav-link px-3"><strong>Home</strong></a>
+    </div>
+    <div class="navbar-nav my-2 my-lg-0">
+      <a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-2"><strong>Contact Us</strong></a>
+      <a routerLink="/account/register" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="btn btn-primary mx-2 my-2 my-sm-0">Register</a>
+      <a routerLink="/account/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="btn btn-primary my-2 my-sm-0">Login</a>
+    </div>
+  </nav>
+
+  <!-- Subnav Router Outlet -->
+  <router-outlet name="subnav"></router-outlet>
+
+  <!-- Global Alerts -->
+  <alert></alert>
+
+  <!-- Main Router Outlet -->
+  <router-outlet></router-outlet>
+
+  <!-- Webpage Footer -->
+</div>

@@ -1,0 +1,27 @@
+<h1>Available Positions</h1>
+<p>All open positions are shown below</p>
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th style="width: 85%">Task</th>
+            <th style="width: 15%">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let listing of listings">
+            <td>{{listing.task}}</td>
+            <td style="white-space: nowrap">
+                <a routerLink="details/{{listing.id}}" class="btn btn-sm btn-secondary mr-1">Details</a>
+                <button (click)="registerPosition(listing.id)" class="btn btn-sm btn-primary btn-delete-account" [disabled]="listing.isRegistering">
+                    <span *ngIf="listing.isRegistering" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!listing.isRegistering">Register</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!listings">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>

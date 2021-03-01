@@ -1,0 +1,27 @@
+<h1>Create New Listing</h1>
+<form [formGroup]="createListingForm" (ngSubmit)="onSubmit()">
+  <div class="form-row pt-2">
+    <label>Task</label>
+    <input type="text" formControlName="task" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.task.errors }" />
+    <div *ngIf="submitted && f.task.errors" class="invalid-feedback">
+      <div *ngIf="f.task.errors.required">Task is required</div>
+    </div>
+  </div>
+  <div class="form-row pt-2">
+    <label>Details</label>
+    <input type="text" formControlName="details" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.details.errors }" />
+    <div *ngIf="submitted && f.details.errors" class="invalid-feedback">
+      <div *ngIf="f.details.errors.required">Details are required</div>
+    </div>
+  </div>
+  <div class="form-row pt-3">
+    <div class="form-group">
+      <button [disabled]="loading" class="btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Create Listing
+      </button>
+      <a routerLink="../" class="btn btn-link">Cancel</a>
+    </div>
+  </div>
+
+</form>
