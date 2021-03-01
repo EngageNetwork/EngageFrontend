@@ -10,6 +10,10 @@ const routes: Routes = [
   // Temporary until real global home page setup
   { path: '', component: GlobalHomeComponent },
   {
+    path: 'legal',
+    loadChildren: () => import('./legal/legal.module').then(m => m.LegalModule),
+  },
+  {
     path: 'account',
     loadChildren: () => import('./account/account.module').then(m => m.AccountModule)
   },
