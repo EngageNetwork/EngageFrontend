@@ -1,5 +1,12 @@
+#global-footer div {
+    color: #515154;
+    font-size: 14px;
+    text-decoration: none;
+}
+
 #global-footer a {
     color: #515154;
+    font-size: 14px;
     text-decoration: none;
 }
 
@@ -19,7 +26,7 @@
 }
 
 #global-footer .footer-legal-copyright, #global-footer .footer-legal-links {
-    margin-right: 30px;
+    margin-right: 50px;
     float: left;
     margin-top: 5px;
 }
@@ -32,6 +39,7 @@
 
 #global-footer .footer-legal-link {
     border-right: 1px solid #d2d2d7;
+    margin-left: 6px;
     margin-right: 7px;
     padding-right: 10px;
     display: inline-block;
