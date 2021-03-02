@@ -1,35 +1,48 @@
 <div class="app-container" [ngClass]="{ 'bg-light': account }">
   <!-- Main Navbar -->
-  <!-- Logged In -->
-  <nav *ngIf="account" class="navbar navbar-expand navbar-dark bg-dark">
-    <div class="navbar-nav mr-auto">
-      <a *ngIf="account.role === Role.Admin" routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3"><strong>Home</strong></a>
-      <a *ngIf="account.role === Role.Tutor" routerLink="/tutor" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3"><strong>Home</strong></a>
-      <a *ngIf="account.role === Role.Student" routerLink="/student" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3"><strong>Home</strong></a>
-      <a routerLink="/profile" routerLinkActive="active" class="nav-item nav-link px-3"><strong>Profile</strong></a>
-      <a *ngIf="account.role === Role.Admin" routerLink="/admin/manage" routerLinkActive="active" class="nav-item nav-link px-3"><strong>Admin</strong></a>
-      <a *ngIf="account.role === Role.Admin" routerLink="/tutor/listings" routerLinkActive="active" class="nav-item nav-link px-3"><strong>My Listings</strong></a>
-      <a *ngIf="account.role === Role.Tutor" routerLink="/tutor/listings" routerLinkActive="active" class="nav-item nav-link px-3"><strong>My Listings</strong></a>
-      <a *ngIf="account.role === Role.Admin" routerLink="/student/positions" routerLinkActive="active" class="nav-item nav-link px-3"><strong>My Positions</strong></a>
-      <a *ngIf="account.role === Role.Student" routerLink="/student/positions" routerLinkActive="active" class="nav-item nav-link px-3"><strong>My Positions</strong></a>
-    </div>
-    <div class="navbar-nav my-2 my-lg-0">
-      <a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-4"><strong>Contact Us</strong></a>
-      <button (click)="logout()" class="btn btn-danger my-2 my-sm-0">Logout</button>
-    </div>
-  </nav>
+  <div id="main-navbar" class="px-5 py-3 d-flex w-100 h-100 text-center text-white bg-dark flex-column">
+    <header class="mb-auto">
+      <div>
+        <h3 class="float-md-start mb-0">Engage Network</h3>
+        <!-- Logged In -->
+        <nav *ngIf="account" class="nav nav-masthead justify-content-center navbar-expand-lg float-md-end">
+          <a *ngIf="account.role === Role.Admin" routerLink="/admin/home" routerLinkActive="active" class="nav-item nav-link px-3">Home</a>
+          <a *ngIf="account.role === Role.Tutor" routerLink="/tutor/home" routerLinkActive="active" class="nav-item nav-link px-3">Home</a>
+          <a *ngIf="account.role === Role.Student" routerLink="/student/home" routerLinkActive="active" class="nav-item nav-link px-3">Home</a>
+          <a *ngIf="account.role === Role.Admin" routerLink="/admin/manage" routerLinkActive="active" class="nav-item nav-link px-3">Admin</a>
+          <a *ngIf="account.role === Role.Admin" routerLink="/tutor/listings" routerLinkActive="active" class="nav-item nav-link px-3">My Listings</a>
+          <a *ngIf="account.role === Role.Tutor" routerLink="/tutor/listings" routerLinkActive="active" class="nav-item nav-link px-3">My Listings</a>
+          <a *ngIf="account.role === Role.Admin" routerLink="/student/positions" routerLinkActive="active" class="nav-item nav-link px-3">My Positions</a>
+          <a *ngIf="account.role === Role.Student" routerLink="/student/positions" routerLinkActive="active" class="nav-item nav-link px-3">My Positions</a>
+          <a routerLink="/about" routerLinkActive="active" class="nav-item nav-link px-3">About Us</a>
+          <!-- <a (click)="logout()" class="nav-item nav-link px-3">Logout</a> -->
+          <!-- User Dropdown Menu -->
+          <div class="dropdown">
+            <a class="nav-link">
+              <div class="btn-group" mdbDropdown>
+                <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
+                <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                  <div class="divider dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+              </div>
+            </a>
+          </div>
+        </nav>
 
-  <!-- Not Logged In -->
-  <nav *ngIf="!account" class="navbar navbar-expand navbar-dark bg-dark">
-    <div class="navbar-nav mr-auto">
-      <a routerLink="/" routerLinkActive="active" class="nav-item nav-link px-3"><strong>Home</strong></a>
-    </div>
-    <div class="navbar-nav my-2 my-lg-0">
-      <a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-2"><strong>Contact Us</strong></a>
-      <a routerLink="/account/register" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="btn btn-primary mx-2 my-2 my-sm-0">Register</a>
-      <a routerLink="/account/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="btn btn-primary my-2 my-sm-0">Login</a>
-    </div>
-  </nav>
+        <!-- Not Logged In -->
+        <nav *ngIf="!account" class="nav nav-masthead justify-content-center float-md-end">
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3">Home</a>
+          <a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3">Contact Us</a>
+          <a routerLink="/account/register" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3">Register</a>
+          <a routerLink="/account/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3">Login</a>
+        </nav>
+      </div>
+    </header>
+  </div>
 
   <!-- Subnav Router Outlet -->
   <router-outlet name="subnav"></router-outlet>

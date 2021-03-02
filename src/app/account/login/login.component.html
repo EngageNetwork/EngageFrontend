@@ -1,4 +1,4 @@
-<h3 class="card-header">Login</h3>
+<!-- <h3 class="card-header">Login</h3>
 <div class="card-body">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
@@ -29,4 +29,30 @@
             </div>
         </div>
     </form>
-</div>
+</div> -->
+
+<body class="text-center">
+    <main class="form-signin">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <img class="mb-4" src="/assets/logos/EngageLogoNoBackground.png" width="200" height="85">
+            <h1 class="h3 mb-4 fw-normal">Please login</h1>
+            <input type="email" formControlName="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+                <div *ngIf="f.email.errors.email">Email is invalid</div>
+            </div>
+            <input type="password" formControlName="password" id="inputPassword" class="form-control" placeholder="Password" required [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Password is required</div>
+            </div>
+            <button [disabled]="loading" class="my-2 w-100 btn btn-lg btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Login
+            </button>
+            <div class="form-row">
+                <a routerLink="../register" class="btn btn-link mr-auto">Register now!</a>
+                <a routerLink="../forgot-password" class="btn btn-link my-2 my-lg-0">Forgot Password?</a>
+            </div>
+        </form>
+    </main>
+</body>
