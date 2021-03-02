@@ -18,18 +18,14 @@
           <!-- <a (click)="logout()" class="nav-item nav-link px-3">Logout</a> -->
           <!-- User Dropdown Menu -->
           <div class="dropdown">
-            <a class="nav-link">
-              <div class="btn-group" mdbDropdown>
-                <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
-                <div class="dropdown-menu dropdown-menu-right dropdown-primary">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                  <div class="divider dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Separated link</a>
-                </div>
-              </div>
+            <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-mdb-toggle="dropdown" aria-expanded="false">
+              Dropdown link
             </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
           </div>
         </nav>
 
