@@ -8,6 +8,6 @@ export class GlobalHomeComponent implements OnInit {
   constructor(private title: Title) { }
 
   ngOnInit() {
-    this.title.setTitle('Connection Home');
+    this.title.setTitle('Engage Network');
   }
 }
