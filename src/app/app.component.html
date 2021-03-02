@@ -15,17 +15,13 @@
           <a *ngIf="account.role === Role.Admin" routerLink="/student/positions" routerLinkActive="active" class="nav-item nav-link px-3">My Positions</a>
           <a *ngIf="account.role === Role.Student" routerLink="/student/positions" routerLinkActive="active" class="nav-item nav-link px-3">My Positions</a>
           <a routerLink="/about" routerLinkActive="active" class="nav-item nav-link px-3">About Us</a>
-          <!-- <a (click)="logout()" class="nav-item nav-link px-3">Logout</a> -->
           <!-- User Dropdown Menu -->
-          <div class="dropdown">
-            <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-mdb-toggle="dropdown" aria-expanded="false">
-              Dropdown link
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
+          <div class="ms-4 d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+            <a class="nav-item nav-link" id="userDropdown" tabindex="0" ngbDropdownToggle role="button">{{account.firstName}} {{account.lastName}}</a>
+            <div ngbDropdownMenu aria-labelledby="userDropdown">
+              <button ngbDropdownItem routerLink="/profile">Profile</button>
+              <button ngbDropdownItem (click)="logout()">Logout</button>
+            </div>
           </div>
         </nav>
 
