@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { OverviewComponent } from './overview/overview.component';
 import { TermsComponent } from './terms/terms.component';
 
 const routes: Routes = [
   { path: '', children: [
-    { path: '', redirectTo: 'terms', pathMatch: 'full' },
+    { path: '', component: OverviewComponent },
     { path: 'terms', component: TermsComponent },
     {
       path: 'privacy',
