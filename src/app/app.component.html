@@ -1,6 +1,6 @@
-<div class="app-container" [ngClass]="{ 'bg-light': account }">
+<div class="app-container d-flex flex-column h-100" [ngClass]="{ 'bg-light': account }">
   <!-- Main Navbar -->
-  <div id="main-navbar" class="px-5 py-3 d-flex w-100 h-100 text-center text-white bg-dark flex-column">
+  <div id="main-navbar" class="px-5 py-3 d-flex w-100 text-center text-white bg-dark flex-column">
     <header class="mb-auto">
       <div>
         <h3 class="float-md-start mb-0">Engage Network</h3>
@@ -46,7 +46,7 @@
   <router-outlet></router-outlet>
 
   <!-- Webpage Footer -->
-  <footer id="global-footer">
+  <footer id="global-footer" class="mt-auto mb-1">
     <div class="global-footer-content">
       <div class="footer-legal">
         <div class="footer-legal-copyright">
