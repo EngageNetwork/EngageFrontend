@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { PrivacyRoutingModule } from './privacy-routing.module';
 import { CookiesComponent } from './cookies/cookies.component';
+import { PolicyComponent } from './policy/policy.component';
 
 
 @NgModule({
-  declarations: [CookiesComponent],
+  declarations: [CookiesComponent, PolicyComponent],
   imports: [
     CommonModule,
     PrivacyRoutingModule
