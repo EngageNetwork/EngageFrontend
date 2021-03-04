@@ -12,8 +12,8 @@
           <a *ngIf="account.role === Role.Admin" routerLink="/admin/manage" routerLinkActive="active" class="nav-item nav-link px-3">Admin</a>
           <a *ngIf="account.role === Role.Admin" routerLink="/tutor/listings" routerLinkActive="active" class="nav-item nav-link px-3">My Listings</a>
           <a *ngIf="account.role === Role.Tutor" routerLink="/tutor/listings" routerLinkActive="active" class="nav-item nav-link px-3">My Listings</a>
-          <a *ngIf="account.role === Role.Admin" routerLink="/student/positions" routerLinkActive="active" class="nav-item nav-link px-3">My Sessions</a>
-          <a *ngIf="account.role === Role.Student" routerLink="/student/positions" routerLinkActive="active" class="nav-item nav-link px-3">My Sessions</a>
+          <a *ngIf="account.role === Role.Admin" routerLink="/student/sessions" routerLinkActive="active" class="nav-item nav-link px-3">My Sessions</a>
+          <a *ngIf="account.role === Role.Student" routerLink="/student/sessions" routerLinkActive="active" class="nav-item nav-link px-3">My Sessions</a>
           <a routerLink="/about" routerLinkActive="active" class="nav-item nav-link px-3">About Us</a>
           <!-- User Dropdown Menu -->
           <div class="ms-4 d-inline-block" ngbDropdown #myDrop="ngbDropdown">
