@@ -7,6 +7,6 @@ export class OverviewComponent {
   constructor(private title: Title) { }
 
   ngOnInit() {
-    this.title.setTitle('System Controls | Admin');
+    this.title.setTitle('Management Interface | Admin');
   }
 }
