@@ -10,12 +10,14 @@ import { AppComponent } from './app.component';
 import { AlertComponent } from './_components';
 import { GlobalHomeComponent } from './global-home/global-home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AlertComponent,
-    GlobalHomeComponent
+    GlobalHomeComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
