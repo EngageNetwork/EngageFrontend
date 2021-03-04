@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PositionsRoutingModule } from './positions-routing.module';
+import { SessionsRoutingModule } from './sessions-routing.module';
 import { LayoutComponent } from './layout/layout.component';
 import { SubNavComponent } from './subnav/subnav.component';
 import { OverviewComponent } from './overview/overview.component';
@@ -15,7 +15,7 @@ import { OverviewComponent } from './overview/overview.component';
   ],
   imports: [
     CommonModule,
-    PositionsRoutingModule
+    SessionsRoutingModule
   ]
 })
-export class PositionsModule { }
+export class SessionsModule { }
