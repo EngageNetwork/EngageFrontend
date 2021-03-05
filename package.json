@@ -1,6 +1,9 @@
 {
   "name": "engage-frontend",
   "version": "0.0.0",
+  "description": "Angular frontend for Engage Network web application.",
+  "author": "Michael Wang",
+  "license": "Proprietary",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open --host 0.0.0.0",
