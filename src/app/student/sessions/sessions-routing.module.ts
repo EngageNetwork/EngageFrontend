@@ -28,4 +28,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class PositionsRoutingModule { }
+export class SessionsRoutingModule { }

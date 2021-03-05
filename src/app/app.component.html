@@ -1,6 +1,6 @@
-<div class="app-container" [ngClass]="{ 'bg-light': account }">
+<div class="app-container d-flex flex-column h-100 w-100">
   <!-- Main Navbar -->
-  <div id="main-navbar" class="px-5 py-3 d-flex w-100 h-100 text-center text-white bg-dark flex-column">
+  <div id="main-navbar" class="px-5 py-3 d-flex flex-column w-100 text-center text-white bg-dark">
     <header class="mb-auto">
       <div>
         <h3 class="float-md-start mb-0">Engage Network</h3>
@@ -12,8 +12,8 @@
           <a *ngIf="account.role === Role.Admin" routerLink="/admin/manage" routerLinkActive="active" class="nav-item nav-link px-3">Admin</a>
           <a *ngIf="account.role === Role.Admin" routerLink="/tutor/listings" routerLinkActive="active" class="nav-item nav-link px-3">My Listings</a>
           <a *ngIf="account.role === Role.Tutor" routerLink="/tutor/listings" routerLinkActive="active" class="nav-item nav-link px-3">My Listings</a>
-          <a *ngIf="account.role === Role.Admin" routerLink="/student/positions" routerLinkActive="active" class="nav-item nav-link px-3">My Positions</a>
-          <a *ngIf="account.role === Role.Student" routerLink="/student/positions" routerLinkActive="active" class="nav-item nav-link px-3">My Positions</a>
+          <a *ngIf="account.role === Role.Admin" routerLink="/student/sessions" routerLinkActive="active" class="nav-item nav-link px-3">My Sessions</a>
+          <a *ngIf="account.role === Role.Student" routerLink="/student/sessions" routerLinkActive="active" class="nav-item nav-link px-3">My Sessions</a>
           <a routerLink="/about" routerLinkActive="active" class="nav-item nav-link px-3">About Us</a>
           <!-- User Dropdown Menu -->
           <div class="ms-4 d-inline-block" ngbDropdown #myDrop="ngbDropdown">
@@ -28,7 +28,7 @@
         <!-- Not Logged In -->
         <nav *ngIf="!account" class="nav nav-masthead justify-content-center float-md-end">
           <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3">Home</a>
-          <a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3">Contact Us</a>
+          <a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3">About Us</a>
           <a routerLink="/account/register" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3">Register</a>
           <a routerLink="/account/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3">Login</a>
         </nav>
@@ -46,13 +46,14 @@
   <router-outlet></router-outlet>
 
   <!-- Webpage Footer -->
-  <footer id="global-footer">
+  <footer id="global-footer" class="mt-auto mb-1">
     <div class="global-footer-content">
       <div class="footer-legal">
         <div class="footer-legal-copyright">
           Copyright © 2021 Engage Network Organization. All rights reserved.
         </div>
         <div class="footer-legal-links">
+          <a class="footer-legal-link" routerLink="/legal/privacy/policy" routerLinkActive="active" >Privacy Policy</a>
           <a class="footer-legal-link" routerLink="/legal/privacy/cookies" routerLinkActive="active" >Use of Cookies</a>
           <a class="footer-legal-link" routerLink="/legal/terms" routerLinkActive="active" >Terms of Service</a>
           <a class="footer-legal-link" routerLink="/legal" routerLinkActive="active" >Legal</a>

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { AccountService } from './_services';
-import { Account, Role } from './_models';
+import { AlertService } from '@app/_services';
+import { AccountService } from '@app/_services';
+import { Account, Alert, Role } from '@app/_models';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +17,17 @@ export class AppComponent {
   Role = Role;
   account: Account;
 
-  constructor(private accountService: AccountService) {
+  constructor(
+    private router: Router,
+    private alertService: AlertService,
+    private accountService: AccountService
+  ) {
     this.accountService.account.subscribe(a => this.account = a);
   }
 
   logout() {
     this.accountService.logout();
+    this.router.navigate(['/']);
+    this.alertService.success('You have been logged out');
   }
 }

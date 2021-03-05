@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ConnectionWebApp": {
+    "EngageFrontend": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ConnectionWebApp",
+            "outputPath": "dist/EngageFrontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ConnectionWebApp:build"
+            "browserTarget": "EngageFrontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ConnectionWebApp:build:production"
+              "browserTarget": "EngageFrontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ConnectionWebApp:build"
+            "browserTarget": "EngageFrontend:build"
           }
         },
         "test": {
@@ -108,16 +108,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ConnectionWebApp:serve"
+            "devServerTarget": "EngageFrontend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ConnectionWebApp:serve:production"
+              "devServerTarget": "EngageFrontend:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "ConnectionWebApp"
+  "defaultProject": "EngageFrontend"
 }

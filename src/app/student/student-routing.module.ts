@@ -8,8 +8,8 @@ const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     {
-      path: 'positions',
-      loadChildren: () => import ('./positions/positions.module').then(x => x.PositionsModule)
+      path: 'sessions',
+      loadChildren: () => import ('./sessions/sessions.module').then(x => x.SessionsModule)
     }
   ]}
 ];
