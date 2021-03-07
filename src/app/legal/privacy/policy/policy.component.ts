@@ -7,6 +7,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./policy.component.css']
 })
 export class PolicyComponent implements OnInit {
+  panelOpenState = false;
 
   constructor(private title: Title) { }
 
