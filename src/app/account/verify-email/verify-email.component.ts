@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { AccountService, AlertService } from '@app/_services';
+import { AccountService } from '@app/_services';
 
 enum EmailStatus {
     Verifying,
@@ -18,8 +19,8 @@ export class VerifyEmailComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private accountService: AccountService,
-        private alertService: AlertService
+        private snackBar: MatSnackBar,
+        private accountService: AccountService
     ) { }
 
     ngOnInit() {
@@ -32,7 +33,7 @@ export class VerifyEmailComponent implements OnInit {
             .pipe(first())
             .subscribe({
                 next: () => {
-                    this.alertService.success('Verification successful, you can now login', { keepAfterRouteChange: true });
+                    this.snackBar.open('Verification successful, you can now login', 'Close', { duration: 10000 });
                     this.router.navigate(['../login'], { relativeTo: this.route });
                 },
                 error: () => {
