@@ -1,4 +1,8 @@
-/* Header */  
+/* Header */ 
+#main-navbar a {
+    letter-spacing: 1px;
+}
+
 #main-navbar .nav-masthead .nav-link {
     padding: .25rem 0;
     font-weight: 700;

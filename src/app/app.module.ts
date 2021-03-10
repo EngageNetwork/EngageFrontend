@@ -5,11 +5,14 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor, ErrorInterceptor, appInitializer } from './_helpers';
-import { AccountService } from './_services';
 import { AppComponent } from './app.component';
-import { AlertComponent } from './_components';
-import { GlobalHomeComponent } from './global-home/global-home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AlertComponent } from './_components';
+import { AccountService } from './_services';
+
+import { GlobalHomeComponent } from './global-home/global-home.component';
 import { AboutComponent } from './about/about.component';
 
 @NgModule({
@@ -24,7 +27,8 @@ import { AboutComponent } from './about/about.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },

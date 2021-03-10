@@ -16,3 +16,7 @@
     list-style-type: none;
     border-top: 1px solid #d2d2d7;
 }
+
+mat-expansion-panel mat-expansion-panel-header {
+    height: auto; 
+}
