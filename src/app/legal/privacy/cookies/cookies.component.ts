@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 
 @Component({
   templateUrl: './cookies.component.html',
-  styleUrls: ['./cookies.component.css']
+  styleUrls: ['./cookies.component.scss']
 })
 
 export class CookiesComponent implements OnInit {
