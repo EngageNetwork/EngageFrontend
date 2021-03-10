@@ -21,7 +21,7 @@ export class OverviewComponent implements OnInit {
 
   deleteListing(id: string) {
     const listing = this.listings.find(x => x.id === id);
-    if (confirm(`Are you sure you want to delete this listing?? This action cannot be reversed.`)) {
+    if (confirm(`Are you sure you want to delete this listing? This action cannot be reversed.`)) {
       listing.isDeleting = true;
       this.slateService.delete(id)
         .pipe(first())
