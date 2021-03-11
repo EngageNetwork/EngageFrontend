@@ -27,10 +27,9 @@ export class AddComponent implements OnInit {
 			this.title.setTitle('Creating New Listing');
 			
 			this.createListingForm = this.formBuilder.group({
-				date: ['', Validators.required],
 				subject: ['', Validators.required],
-				startTime: ['', Validators.required],
-				endTime: ['', Validators.required]
+				startDateTime: ['', Validators.required],
+				endDateTime: ['', Validators.required]
 			});
 		}
 		
@@ -60,6 +59,6 @@ export class AddComponent implements OnInit {
 					this.snackBar.open(error, 'Close', { duration: 10000 });
 					this.loading = false;
 				}
-			})
+			});
 		}
 	}

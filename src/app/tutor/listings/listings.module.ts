@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTimepickerModule } from 'mat-timepicker';
+import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
 
 import { ListingsRoutingModule } from './listings-routing.module';
 import { OverviewComponent } from './overview/overview.component';
@@ -35,7 +36,9 @@ import { EditComponent } from './edit/edit.component';
     MatSelectModule,
     MatIconModule,
     MatDatepickerModule,
-    MatTimepickerModule
+    MatTimepickerModule,
+    DlDateTimeDateModule,
+    DlDateTimePickerModule
   ]
 })
 export class ListingsModule { }
