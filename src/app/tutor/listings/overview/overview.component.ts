@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
+import * as moment from 'moment';
 
 import { SlateService } from '@app/_services';
 
@@ -19,7 +20,13 @@ export class OverviewComponent implements OnInit {
 		
 		this.slateService.getMyListings()
 		.pipe(first())
-		.subscribe(listings => this.listings = listings)
+		.subscribe(listings => {
+			listings.forEach(function(item) {
+				item.startDateTime = moment(item.startDateTime).format("LT MMMM Do[,] YYYY");
+				item.endDateTime = moment(item.endDateTime).format("LT MMMM Do[,] YYYY");
+			});
+			this.listings = listings;
+		})
 	}
 	
 	deleteListing(id: string) {
@@ -32,6 +39,6 @@ export class OverviewComponent implements OnInit {
 				this.listings = this.listings.filter(x => x.id !== id);
 			});
 		}
-	}	
+	}
 }
 	
