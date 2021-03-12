@@ -11,7 +11,7 @@
 <p>All of your posted listings are shown below</p>
 <a routerLink="add" class="btn btn-sm btn-success mb-2">Create New Listing</a>
 <table class="table table-bordered table-hover">
-  <thead class="">
+  <thead id="table-header" class="thead-dark">
     <tr>
       <th style="width: 35%">Date/Time Range</th>
       <th style="width: 30%">Registered Student</th>
@@ -22,7 +22,7 @@
   <tbody>
     <tr *ngFor="let listing of listings">
       <td><h6>{{listing.startDateTime}}</h6> to <h6>{{listing.endDateTime}}</h6></td>
-      <td>{{listing.registered}}</td>
+      <td>{{listing.studentName}}</td>
       <td>{{listing.subject}}</td>
       <td style="white-space: nowrap">
         <a routerLink="details/{{listing.id}}" class="btn btn-sm btn-primary mr-1">Details</a>

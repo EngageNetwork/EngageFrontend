@@ -4,8 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import * as moment from 'moment';
 
-import { AccountService } from '@app/_services';
-import { SlateService } from '@app/_services';
+import { AccountService, SlateService } from '@app/_services';
 
 @Component({
 	templateUrl: './list.component.html',
