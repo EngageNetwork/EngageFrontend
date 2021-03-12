@@ -19,7 +19,7 @@ export class OverviewComponent implements OnInit {
 		
 		this.slateService.getMyListings()
 		.pipe(first())
-		.subscribe(listings => this.listings = listings);
+		.subscribe(listings => this.listings = listings)
 	}
 	
 	deleteListing(id: string) {
