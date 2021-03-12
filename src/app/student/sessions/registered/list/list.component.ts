@@ -2,46 +2,65 @@ import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
+import * as moment from 'moment';
 
+import { AccountService } from '@app/_services';
 import { SlateService } from '@app/_services';
 
-@Component({ templateUrl: './list.component.html' })
+@Component({
+	templateUrl: './list.component.html',
+	styleUrls: ['./list.component.scss']
+})
 
 export class ListComponent implements OnInit {
-  sessions: any[];
-
-  constructor(
-    private snackBar: MatSnackBar,
-    private slateService: SlateService,
-    private title: Title
-  ) { }
-
-  ngOnInit(): void {
-    this.title.setTitle('My Sessions');
-
-    this.slateService.getMySessions()
-      .pipe(first())
-      .subscribe(sessions => this.sessions = sessions);
-  }
-
-  cancelSession(id: string) {
-    const session = this.sessions.find(x => x.id === id);
-    if (confirm(`Cancel session?`)) {
-      session.isRemoving = true;
-      this.slateService.cancel(id)
-        .pipe(first())
-        .subscribe({
-          next: () => {
-            // Display success message to user
-            this.snackBar.open('Session cancelled successfully', 'Close', { duration: 10000 });
-            this.sessions = this.sessions.filter(x => x.id !== id);
-          },
-          error: error => {
-            // Display error to user
-            this.snackBar.open(error, 'Close', { duration: 10000 });
-            session.isRemoving = false;
-          }
-        })
-    }
-  }
-}
+	sessions: any[];
+	
+	constructor(
+		private snackBar: MatSnackBar,
+		private accountService: AccountService, // Ignore "unused" warnings
+		private slateService: SlateService,
+		private title: Title
+		) { }
+		
+		ngOnInit(): void {
+			this.title.setTitle('My Sessions');
+			
+			this.slateService.getMySessions()
+			.pipe(first())
+			.subscribe(sessions => {
+				sessions.forEach(function(item) {
+					item.startDateTime = moment(item.startDateTime).format("LT MMMM Do[,] YYYY");
+					item.endDateTime = moment(item.endDateTime).format("LT MMMM Do[,] YYYY");
+					
+					this.accountService.getByIdPublic(item.account)
+					.pipe(first())
+					.subscribe(account => {
+						item.tutorName = account.firstName + ' ' + account.lastName;
+					});
+				}.bind(this));
+				this.sessions = sessions;
+			});
+		}
+		
+		cancelSession(id: string) {
+			const session = this.sessions.find(x => x.id === id);
+			if (confirm(`Cancel session?`)) {
+				session.isRemoving = true;
+				this.slateService.cancel(id)
+				.pipe(first())
+				.subscribe({
+					next: () => {
+						// Display success message to user
+						this.snackBar.open('Session cancelled successfully', 'Close', { duration: 10000 });
+						this.sessions = this.sessions.filter(x => x.id !== id);
+					},
+					error: error => {
+						// Display error to user
+						this.snackBar.open(error, 'Close', { duration: 10000 });
+						session.isRemoving = false;
+					}
+				})
+			}
+		}
+	}
+	

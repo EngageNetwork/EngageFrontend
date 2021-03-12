@@ -7,14 +7,17 @@ import * as moment from 'moment';
 import { AccountService } from '@app/_services';
 import { SlateService } from '@app/_services';
 
-@Component({ templateUrl: './list.component.html' })
+@Component({
+	templateUrl: './list.component.html',
+	styleUrls: ['./list.component.scss']
+})
 
 export class ListComponent implements OnInit {
 	listings: any[];
 	
 	constructor(
 		private snackBar: MatSnackBar,
-		private accountService: AccountService,
+		private accountService: AccountService, // Ignore "unused" warnings
 		private slateService: SlateService,
 		private title: Title
 	) { }

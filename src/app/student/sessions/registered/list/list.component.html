@@ -1,18 +1,26 @@
 <h1>My Sessions</h1>
-<p>All registered sessions are shown below</p>
+<p>All of your registered sessions are shown below</p>
 <table class="table table-striped table-hover">
-    <thead class="thead-dark">
+    <thead id="table-header" class="thead-dark">
         <tr>
-            <th style="width: 85%">Task</th>
+            <th style="width: 15%">Tutor Name</th>
+            <th style="width: 15%">Content Rating</th>
+            <th style="width: 15%">Behaviour Rating</th>
+            <th style="width: 15%">Subject</th>
+            <th style="width: 25%">Date/Time Range</th>
             <th style="width: 15%">Actions</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let session of sessions">
-            <td>{{session.task}}</td>
+            <td>{{session.tutorName}}</td>
+            <td></td>
+            <td></td>
+            <td>{{session.subject}}</td>
+            <td><h6>{{session.startDateTime}}</h6> to <h6>{{session.endDateTime}}</h6></td>
             <td style="white-space: nowrap">
                 <a routerLink="details/{{session.id}}" class="btn btn-sm btn-secondary mr-1">Details</a>
-                <button (click)="cancelSession(session.id)" class="btn btn-sm btn-primary btn-delete-account" [disabled]="session.isRemoving">
+                <button (click)="cancelSession(session.id)" class="btn btn-sm btn-primary" [disabled]="session.isRemoving">
                     <span *ngIf="session.isRemoving" class="spinner-border spinner-border-sm"></span>
                     <span *ngIf="!session.isRemoving">Cancel</span>
                 </button>
