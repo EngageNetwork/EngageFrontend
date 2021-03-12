@@ -8,7 +8,7 @@ export class OverviewComponent {
   constructor(private title: Title) { }
 
   ngOnInit() {
-    this.title.setTitle('Volunteer Menu')
+    this.title.setTitle('Student Session Menu')
   }
 
 }

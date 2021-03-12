@@ -26,7 +26,7 @@ export class OverviewComponent implements OnInit {
 				item.endDateTime = moment(item.endDateTime).format("LT MMMM Do[,] YYYY");
 			});
 			this.listings = listings;
-		})
+		});
 	}
 	
 	deleteListing(id: string) {

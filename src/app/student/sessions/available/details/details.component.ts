@@ -14,7 +14,6 @@ export class DetailsComponent implements OnInit {
 	constructor(
 		private slateService: SlateService,
 		private route: ActivatedRoute,
-		private router: Router,
 		private title: Title
 		) { }
 		
@@ -29,3 +28,4 @@ export class DetailsComponent implements OnInit {
 		}
 		
 	}
+	

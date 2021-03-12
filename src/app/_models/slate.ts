@@ -10,4 +10,6 @@ export class Slate {
   registered: string;
   markedCompletedStudent: boolean;
   markedCompletedTutor: boolean;
+  tutorName: string;
+  studentName: string;
 }
