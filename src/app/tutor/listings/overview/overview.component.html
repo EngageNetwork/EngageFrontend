@@ -1,7 +1,7 @@
 <!-- Breadcrumb -->
 <nav aria-label="breadcrumb" class="main-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/user">Home</a></li>
+    <li class="breadcrumb-item"><a routerLink="/tutor/home">Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">My Listings</li>
   </ol>
 </nav>
@@ -13,15 +13,15 @@
 <table class="table table-bordered table-hover">
   <thead id="table-header" class="thead-dark">
     <tr>
-      <th style="width: 35%">Date/Time Range</th>
-      <th style="width: 30%">Registered Student</th>
-      <th style="width: 20%">Subject</th>
+      <th style="width: 45%">Date/Time Range</th>
+      <th style="width: 25%">Registered Student</th>
+      <th style="width: 15%">Subject</th>
       <th style="width: 15%">Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let listing of listings">
-      <td><h6>{{listing.startDateTime}}</h6> to <h6>{{listing.endDateTime}}</h6></td>
+      <td><h6 style="display:inline">{{listing.startDateTime}}</h6> to <h6 style="display:inline">{{listing.endDateTime}}</h6></td>
       <td>{{listing.studentName}}</td>
       <td>{{listing.subject}}</td>
       <td style="white-space: nowrap">
