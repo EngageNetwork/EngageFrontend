@@ -1,6 +1,7 @@
 <h1>My Sessions</h1>
 <p>All of your registered sessions are shown below</p>
-<table class="table table-bordered table-hover">
+<p class="fw-light fs-6">Looking to register for a new session? Click <a routerLink="../available">here</a> to see available sessions.</p>
+<table class="table table-hover">
 	<thead id="table-header" class="thead-dark">
 		<tr>
 			<th style="width: 21%">Tutor Name</th>
@@ -22,9 +23,10 @@
 				</button>
 			</td>
 		</tr>
-		<tr *ngIf="!sessions">
+		<tr *ngIf="!sessions?.length">
 			<td colspan="4" class="text-center">
-				<span class="spinner-border spinner-border-lg align-center"></span>
+				<span class="spinner-border spinner-border-lg align-center mt-3"></span>
+				<p class="text-center mt-4">You currently have no registered sessions. Take a look at the <a routerLink="../available">available sessions</a> and register for one today!</p>
 			</td>
 		</tr>
 	</tbody>
