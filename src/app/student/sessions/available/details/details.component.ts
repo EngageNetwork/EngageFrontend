@@ -43,8 +43,10 @@ export class DetailsComponent implements OnInit {
 		});
 	}
 	
-	registerPosition(id: string) {
+	registerSession(id: string) {
+		const listing = this.listing;
 		if (confirm(`Sign up for session?`)) {
+			listing.isRegistering = true;
 			this.slateService.register(id)
 			.pipe(first())
 			.subscribe({
@@ -56,6 +58,7 @@ export class DetailsComponent implements OnInit {
 				error: error => {
 					// Display error to user
 					this.snackBar.open(error, 'Close', { duration: 10000 });
+					listing.isRegistering = false;
 				}
 			});
 		}

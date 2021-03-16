@@ -42,7 +42,7 @@ export class ListComponent implements OnInit {
 		});
 	}
 	
-	registerPosition(id: string) {
+	registerSession(id: string) {
 		const listing = this.listings.find(x => x.id === id);
 		if (confirm(`Sign up for session?`)) {
 			listing.isRegistering = true;

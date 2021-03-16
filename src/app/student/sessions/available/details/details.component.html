@@ -38,7 +38,7 @@
 			</div>
 		</div>
 		<div class="pt-4">
-			<button (click)="registerPosition(listing.id)" class="btn btn-sm btn-primary mr-2" [disabled]="listing.isRegistering">
+			<button (click)="registerSession(listing.id)" class="btn btn-sm btn-primary mr-2" [disabled]="listing.isRegistering">
 				<span *ngIf="listing.isRegistering" class="spinner-border spinner-border-sm"></span>
 				<span *ngIf="!listing.isRegistering">Register</span>
 			</button>

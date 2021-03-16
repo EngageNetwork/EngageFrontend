@@ -44,7 +44,9 @@ export class DetailsComponent implements OnInit {
 	}
 	
 	cancelSession(id: string) {
+		const session = this.session;
 		if (confirm(`Cancel session?`)) {
+			session.isRegistering = true;
 			this.slateService.cancel(id)
 			.pipe(first())
 			.subscribe({
@@ -56,6 +58,7 @@ export class DetailsComponent implements OnInit {
 				error: error => {
 					// Display error to user
 					this.snackBar.open(error, 'Close', { duration: 10000 });
+					session.isRegistering = false;
 				}
 			})
 		}
