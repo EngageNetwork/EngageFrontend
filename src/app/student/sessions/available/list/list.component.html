@@ -13,7 +13,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let listing of listings">
-            <td>{{listing.tutorName}}</td>
+            <td><a routerLink="/viewprofile/{{listing.account}}">{{listing.tutorName}}</a></td>
             <td></td>
             <td></td>
             <td>{{listing.subject}}</td>
