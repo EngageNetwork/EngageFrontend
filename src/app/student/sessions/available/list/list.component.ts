@@ -13,6 +13,7 @@ import { AccountService, SlateService } from '@app/_services';
 
 export class ListComponent implements OnInit {
 	listings: any[];
+	interval: any;
 	
 	constructor(
 		private snackBar: MatSnackBar,
@@ -24,6 +25,13 @@ export class ListComponent implements OnInit {
 	ngOnInit(): void {
 		this.title.setTitle('Available Positions');
 
+		this.fetchData();
+		this.interval = setInterval(() => {
+			this.fetchData();
+		}, 1000);
+	}
+	
+	fetchData() {
 		this.slateService.getAllListings()
 		.pipe(first())
 		.subscribe(listings => {
@@ -38,10 +46,13 @@ export class ListComponent implements OnInit {
 				});
 			}.bind(this));
 
+			if (this.listings != listings) {
+				console.log('not the same')
+			}
 			this.listings = listings;
 		});
 	}
-	
+
 	registerSession(id: string) {
 		const listing = this.listings.find(x => x.id === id);
 		if (confirm(`Sign up for session?`)) {
