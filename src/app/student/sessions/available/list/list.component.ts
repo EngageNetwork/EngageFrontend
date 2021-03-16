@@ -28,8 +28,8 @@ export class ListComponent implements OnInit {
 		.pipe(first())
 		.subscribe(listings => {
 			listings.forEach(function(item) {
-				item.startDateTime = moment(item.startDateTime).format("LT MMMM Do[,] YYYY");
-				item.endDateTime = moment(item.endDateTime).format("LT MMMM Do[,] YYYY");
+				item.startDateTime = moment(item.startDateTime).format('LT MMMM Do[,] YYYY');
+				item.endDateTime = moment(item.endDateTime).format('LT MMMM Do[,] YYYY');
 
 				this.accountService.getByIdPublic(item.account)
 				.pipe(first())
@@ -37,13 +37,14 @@ export class ListComponent implements OnInit {
 					item.tutorName = account.firstName + ' ' + account.lastName;
 				});
 			}.bind(this));
+
 			this.listings = listings;
 		});
 	}
 	
 	registerPosition(id: string) {
 		const listing = this.listings.find(x => x.id === id);
-		if (confirm(`Sign up for position?`)) {
+		if (confirm(`Sign up for session?`)) {
 			listing.isRegistering = true;
 			this.slateService.register(id)
 			.pipe(first())

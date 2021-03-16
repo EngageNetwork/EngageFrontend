@@ -1,34 +1,50 @@
 <!-- Breadcrumb -->
 <nav aria-label="breadcrumb" class="main-breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/volunteer">Home</a></li>
-    <li class="breadcrumb-item"><a routerLink="/volunteer/positions/available">Available Positions</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Position Details</li>
-  </ol>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a routerLink="/student/home">Home</a></li>
+		<li class="breadcrumb-item"><a routerLink="/student/sessions/available">Available Sessions</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Session Details</li>
+	</ol>
 </nav>
 <!-- /Breadcrumb -->
 
 <h1>Position Details</h1>
 <div class="card mb-3 mt-5">
-  <div class="card-body">
-    <div class="row">
-      <div class="col-sm-3">
-        <h6 class="mb-0">Task</h6>
-      </div>
-      <div class="col-sm-9 text-secondary">
-        {{listing.task}}
-      </div>
-    </div>
-    <hr>
-      <div class="row">
-        <div class="col-sm-3">
-          <h6 class="mb-0">Details</h6>
-        </div>
-        <div class="col-sm-9 text-secondary">
-          {{listing.details}}
-        </div>
-    </div>
-  </div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Tutor Name</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				<a routerLink="viewprofile/{{listing.account}}">{{listing.tutorName}}</a>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Start of Time Range</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{listing.startDateTime}}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">End of Time Range</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{listing.endDateTime}}
+			</div>
+		</div>
+		<div class="pt-4">
+			<button (click)="registerPosition(listing.id)" class="btn btn-sm btn-primary mr-2" [disabled]="listing.isRegistering">
+				<span *ngIf="listing.isRegistering" class="spinner-border spinner-border-sm"></span>
+				<span *ngIf="!listing.isRegistering">Register</span>
+			</button>
+			<a routerLink="../../" class="btn btn-sm btn-secondary">Back</a>
+		</div>
+	</div>
 </div>
 
 
