@@ -1,31 +1,31 @@
 <h1>My Sessions</h1>
 <p>All of your registered sessions are shown below</p>
 <table class="table table-bordered table-hover">
-    <thead id="table-header" class="thead-dark">
-        <tr>
-            <th style="width: 21%">Tutor Name</th>
-            <th style="width: 21%">Subject</th>
-            <th style="width: 45%">Date/Time Range</th>
-            <th style="width: 13%">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let session of sessions">
-            <td><a routerLink="/viewprofile/{{session.account}}">{{session.tutorName}}</a></td>
-            <td>{{session.subject}}</td>
-            <td><h6 style="display:inline">{{session.startDateTime}}</h6> to <h6 style="display:inline">{{session.endDateTime}}</h6></td>
-            <td style="white-space: nowrap">
-                <a routerLink="details/{{session.id}}" class="btn btn-sm btn-secondary mr-1">Details</a>
-                <button (click)="cancelSession(session.id)" class="btn btn-sm btn-danger" [disabled]="session.isRemoving">
-                    <span *ngIf="session.isRemoving" class="spinner-border spinner-border-sm"></span>
-                    <span *ngIf="!session.isRemoving">Cancel</span>
-                </button>
-            </td>
-        </tr>
-        <tr *ngIf="!sessions">
-            <td colspan="4" class="text-center">
-                <span class="spinner-border spinner-border-lg align-center"></span>
-            </td>
-        </tr>
-    </tbody>
+	<thead id="table-header" class="thead-dark">
+		<tr>
+			<th style="width: 21%">Tutor Name</th>
+			<th style="width: 21%">Subject</th>
+			<th style="width: 45%">Date/Time Range</th>
+			<th style="width: 13%">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let session of sessions">
+			<td><a routerLink="/viewprofile/{{session.account}}">{{session.tutorName}}</a></td>
+			<td>{{session.subject}}</td>
+			<td><h6 style="display:inline">{{session.startDateTime}}</h6> to <h6 style="display:inline">{{session.endDateTime}}</h6></td>
+			<td style="white-space: nowrap">
+				<a routerLink="details/{{session.id}}" class="btn btn-sm btn-secondary mr-1">Details</a>
+				<button (click)="cancelSession(session.id)" class="btn btn-sm btn-danger" [disabled]="session.isRemoving">
+					<span *ngIf="session.isRemoving" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!session.isRemoving">Cancel</span>
+				</button>
+			</td>
+		</tr>
+		<tr *ngIf="!sessions">
+			<td colspan="4" class="text-center">
+				<span class="spinner-border spinner-border-lg align-center"></span>
+			</td>
+		</tr>
+	</tbody>
 </table>
