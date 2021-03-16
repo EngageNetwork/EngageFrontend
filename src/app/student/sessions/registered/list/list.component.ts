@@ -34,7 +34,7 @@ export class ListComponent implements OnInit {
 					this.accountService.getByIdPublic(item.account)
 					.pipe(first())
 					.subscribe(account => {
-						item.tutorName = account.firstName + ' ' + account.lastName;
+						item.tutorName = [account.firstName, account.lastName].join(' ');
 					});
 				}.bind(this));
 				this.sessions = sessions;

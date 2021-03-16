@@ -36,7 +36,7 @@ export class DetailsComponent implements OnInit {
 			this.accountService.getByIdPublic(listing.account)
 			.pipe(first())
 			.subscribe(account => {
-				listing.tutorName = account.firstName + ' ' + account.lastName;
+				listing.tutorName = [account.firstName, account.lastName].join(' ');
 			});
 
 			this.listing = listing;
