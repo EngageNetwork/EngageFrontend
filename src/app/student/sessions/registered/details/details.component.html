@@ -1,34 +1,50 @@
 <!-- Breadcrumb -->
 <nav aria-label="breadcrumb" class="main-breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/student">Home</a></li>
-    <li class="breadcrumb-item"><a routerLink="/student/sessions/registered">My Sessions</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Session Details</li>
-  </ol>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a routerLink="/student">Home</a></li>
+		<li class="breadcrumb-item"><a routerLink="/student/sessions/registered">My Sessions</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Session Details</li>
+	</ol>
 </nav>
 <!-- /Breadcrumb -->
 
 <h1>Session Details</h1>
 <div class="card mb-3 mt-5">
-  <div class="card-body">
-    <div class="row">
-      <div class="col-sm-3">
-        <h6 class="mb-0">Task</h6>
-      </div>
-      <div class="col-sm-9 text-secondary">
-        {{session.task}}
-      </div>
-    </div>
-    <hr>
-      <div class="row">
-        <div class="col-sm-3">
-          <h6 class="mb-0">Details</h6>
-        </div>
-        <div class="col-sm-9 text-secondary">
-          {{session.details}}
-        </div>
-    </div>
-  </div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Tutor Name</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				<a routerLink="/viewprofile/{{session.account}}">{{session.tutorName}}</a>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Start of Time Range</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{session.startDateTime}}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">End of Time Range</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{session.endDateTime}}
+			</div>
+		</div>
+		<div class="pt-4">
+			<button (click)="cancelSession(session.id)" class="btn btn-sm btn-danger mr-2" [disabled]="session.isRegistering">
+				<span *ngIf="session.isRegistering" class="spinner-border spinner-border-sm"></span>
+				<span *ngIf="!session.isRegistering">Cancel Session</span>
+			</button>
+			<a routerLink="../../" class="btn btn-sm btn-secondary">Back</a>
+		</div>
+	</div>
 </div>
 
 

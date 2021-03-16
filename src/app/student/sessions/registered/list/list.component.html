@@ -16,7 +16,7 @@
             <td><h6 style="display:inline">{{session.startDateTime}}</h6> to <h6 style="display:inline">{{session.endDateTime}}</h6></td>
             <td style="white-space: nowrap">
                 <a routerLink="details/{{session.id}}" class="btn btn-sm btn-secondary mr-1">Details</a>
-                <button (click)="cancelSession(session.id)" class="btn btn-sm btn-primary" [disabled]="session.isRemoving">
+                <button (click)="cancelSession(session.id)" class="btn btn-sm btn-danger" [disabled]="session.isRemoving">
                     <span *ngIf="session.isRemoving" class="spinner-border spinner-border-sm"></span>
                     <span *ngIf="!session.isRemoving">Cancel</span>
                 </button>
