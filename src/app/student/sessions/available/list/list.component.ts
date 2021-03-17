@@ -28,7 +28,7 @@ export class ListComponent implements OnInit {
 		this.fetchData();
 		this.interval = setInterval(() => {
 			this.fetchData();
-		}, 1000);
+		}, 30000);
 	}
 	
 	fetchData() {
@@ -46,9 +46,6 @@ export class ListComponent implements OnInit {
 				});
 			}.bind(this));
 
-			if (this.listings != listings) {
-				console.log('not the same')
-			}
 			this.listings = listings;
 		});
 	}
