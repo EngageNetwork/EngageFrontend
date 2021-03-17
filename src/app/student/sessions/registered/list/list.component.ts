@@ -13,6 +13,7 @@ import { AccountService, SlateService } from '@app/_services';
 
 export class ListComponent implements OnInit {
 	sessions: any[];
+	interval: any;
 	
 	constructor(
 		private snackBar: MatSnackBar,
@@ -24,6 +25,13 @@ export class ListComponent implements OnInit {
 		ngOnInit(): void {
 			this.title.setTitle('My Sessions');
 			
+			this.fetchData();
+			this.interval = setInterval(() => {
+				this.fetchData();
+			}, 30000);
+		}
+
+		fetchData() {
 			this.slateService.getMySessions()
 			.pipe(first())
 			.subscribe(sessions => {
@@ -37,6 +45,7 @@ export class ListComponent implements OnInit {
 						item.tutorName = [account.firstName, account.lastName].join(' ');
 					});
 				}.bind(this));
+
 				this.sessions = sessions;
 			});
 		}
