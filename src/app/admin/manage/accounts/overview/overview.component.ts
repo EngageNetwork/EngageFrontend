@@ -4,9 +4,9 @@ import { Title } from '@angular/platform-browser';
 
 import { AccountService } from '@app/_services';
 
-@Component({ templateUrl: 'list.component.html' })
+@Component({ templateUrl: 'overview.component.html' })
 
-export class ListComponent implements OnInit {
+export class OverviewComponent implements OnInit {
   accounts: any[];
 
   constructor(private accountService: AccountService, private title: Title) {}
