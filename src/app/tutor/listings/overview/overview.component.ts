@@ -13,6 +13,7 @@ import { AccountService, SlateService } from '@app/_services';
 
 export class OverviewComponent implements OnInit {
 	listings: any[];
+	interval: any;
 	
 	constructor(
 		private snackBar: MatSnackBar,
@@ -22,8 +23,15 @@ export class OverviewComponent implements OnInit {
 	) { }
 		
 	ngOnInit() {
-		this.title.setTitle('My Listing Overview')
+		this.title.setTitle('Listings Overview')
 		
+		this.fetchData();
+		this.interval = setInterval(() => {
+			this.fetchData();
+		}, 30000);
+	}
+
+	fetchData() {
 		this.slateService.getMyListings()
 		.pipe(first())
 		.subscribe(listings => {

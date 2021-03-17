@@ -1,34 +1,50 @@
 <!-- Breadcrumb -->
 <nav aria-label="breadcrumb" class="main-breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/user">Home</a></li>
-    <li class="breadcrumb-item"><a routerLink="/user/listings">My Listings</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Listing Details</li>
-  </ol>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a routerLink="/tutor/home">Home</a></li>
+		<li class="breadcrumb-item"><a routerLink="/tutor/listings">My Listings</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Listing Details</li>
+	</ol>
 </nav>
 <!-- /Breadcrumb -->
 
 <h1>Listing Details</h1>
 <div class="card mb-3 mt-5">
-  <div class="card-body">
-    <div class="row">
-      <div class="col-sm-3">
-        <h6 class="mb-0">Task</h6>
-      </div>
-      <div class="col-sm-9 text-secondary">
-        {{listing.task}}
-      </div>
-    </div>
-    <hr>
-      <div class="row">
-        <div class="col-sm-3">
-          <h6 class="mb-0">Details</h6>
-        </div>
-        <div class="col-sm-9 text-secondary">
-          {{listing.details}}
-        </div>
-    </div>
-  </div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Student Name</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				<a *ngIf="!!listing.studentName" routerLink="/viewprofile/{{listing.registered}}">{{listing.studentName}}</a>
+				<a *ngIf="!listing.studentName">N/A</a>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Start of Time Range</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{listing.startDateTime}}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">End of Time Range</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{listing.endDateTime}}
+			</div>
+		</div>
+		<div class="pt-4">
+			<a routerLink="../../edit/{{listing.id}}" class="btn btn-sm btn-primary mr-2">Edit Listing</a>
+			<button (click)="deleteListing(listing.id)" class="btn btn-sm btn-danger mr-2" [disabled]="listing.isDeleting">
+				<span *ngIf="listing.isDeleting" class="spinner-border spinner-border-sm"></span>
+				<span *ngIf="!listing.isDeleting">Delete Listing</span>
+			</button>
+			<a routerLink="../../" class="btn btn-sm btn-secondary">Back</a>
+		</div>
+	</div>
 </div>
-
-
