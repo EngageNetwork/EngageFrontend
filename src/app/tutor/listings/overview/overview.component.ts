@@ -39,12 +39,15 @@ export class OverviewComponent implements OnInit {
 				item.startDateTime = moment(item.startDateTime).format("LT MMMM Do[,] YYYY");
 				item.endDateTime = moment(item.endDateTime).format("LT MMMM Do[,] YYYY");
 
-				this.accountService.getByIdPublic(item.registered)
-				.pipe(first())
-				.subscribe(account => {
-					item.studentName = account.firstName + ' ' + account.lastName;
-				});
+				if (!!item.registered) {
+					this.accountService.getByIdPublic(item.registered)
+					.pipe(first())
+					.subscribe(account => {
+						item.studentName = [account.firstName, account.lastName].join(' ');
+					});
+				}
 			}.bind(this));
+			
 			this.listings = listings;
 		});
 	}

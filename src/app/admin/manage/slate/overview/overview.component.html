@@ -1,1 +1,38 @@
-<p>overview works!</p>
+<h1>Slates</h1>
+<p class="mb-4">All slates saved to the secure API database are listed below</p>
+<table class="table table-bordered table-hover">
+	<thead class="thead-dark">
+		<tr>
+			<th style="width: 20%">Tutor Name</th>
+			<th style="width: 20%">Student Name</th>
+			<th style="width: 20%">Subject</th>
+			<th style="width: 25%">Date/Time Range</th>
+			<th style="width: 15%">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let slate of slates">
+			<td><a routerLink="/viewprofile/{{slate.account}}">{{slate.tutorName}}</a></td>
+			<td><a routerLink="/viewprofile/{{slate.registered}}">{{slate.studentName}}</a></td>
+			<td>{{slate.subject}}</td>
+			<td><h6 style="display:inline">{{slate.startDateTime}}</h6> to <h6 style="display:inline">{{slate.endDateTime}}</h6></td>
+			<td style="white-space: nowrap">
+				<a routerLink="details/{{slate.id}}" class="btn btn-sm btn-secondary mr-2">Details</a>
+				<!-- <button (click)="deleteAccount(account.id, account)" class="btn btn-sm btn-danger btn-delete-account" [disabled]="account.isDeleting">
+					<span *ngIf="account.isDeleting" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!account.isDeleting">Delete</span>
+				</button> -->
+			</td>
+		</tr>
+		<tr *ngIf="!slates">
+			<td colspan="5">
+				<div class="m-4 text-center">
+					<div class="stage">
+						<div class="dot-flashing align-center"></div>	
+					</div>
+					<p class="mt-4">Contacting API endpoint</p>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>

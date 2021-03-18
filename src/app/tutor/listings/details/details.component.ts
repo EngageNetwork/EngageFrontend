@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ActivationEnd } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
@@ -20,30 +20,30 @@ export class DetailsComponent implements OnInit {
 		private accountService: AccountService, // Ignore "unused" warnings
 		private slateService: SlateService,
 		private title: Title
-		) { }
+	) { }
+	
+	ngOnInit(): void {
+		this.title.setTitle('Listing Details');
 		
-		ngOnInit(): void {
-			this.title.setTitle('Listing Details');
+		this.id = this.route.snapshot.params['id'];
+		
+		this.slateService.getListingById(this.id)
+		.pipe(first())
+		.subscribe(listing => {
+			listing.startDateTime = moment(listing.startDateTime).format('LT MMMM Do[,] YYYY');
+			listing.endDateTime = moment(listing.endDateTime).format('LT MMMM Do[,] YYYY');
 			
-			this.id = this.route.snapshot.params['id'];
-			
-			this.slateService.getListingById(this.id)
+			this.accountService.getByIdPublic(listing.registered)
 			.pipe(first())
-			.subscribe(listing => {
-				listing.startDateTime = moment(listing.startDateTime).format('LT MMMM Do[,] YYYY');
-				listing.endDateTime = moment(listing.endDateTime).format('LT MMMM Do[,] YYYY');
-				
-				this.accountService.getByIdPublic(listing.registered)
-				.pipe(first())
-				.subscribe(registered => {
-					listing.studentName = [registered.firstName, registered.lastName].join(' ');
-				});
-				
-				this.listing = listing;
+			.subscribe(registered => {
+				listing.studentName = [registered.firstName, registered.lastName].join(' ');
 			});
-		}
+			
+			this.listing = listing;
+		});
+	}
 
-		deleteListing(id: string) {
+	deleteListing(id: string) {
 		const listing = this.listing;
 		if (confirm(`Are you sure you want to delete this listing? This action cannot be reversed.`)) {
 			listing.isDeleting = true;
@@ -63,5 +63,5 @@ export class DetailsComponent implements OnInit {
 			});
 		}
 	}
-	}
+}
 	

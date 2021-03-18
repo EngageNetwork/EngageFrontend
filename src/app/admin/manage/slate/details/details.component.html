@@ -1,0 +1,133 @@
+<h1>Slate Details</h1>
+<div class="card mb-3 mt-4">
+	<div *ngIf="!!slate" class="card-body">
+		<div class="row">
+			<div class="col">
+				<h6 class="mb-0">Slate Created: </h6>
+				{{slate.created}} (<p class="tiny-info" style="display:inline">{{isoCreated}}</p>)
+			</div>
+			<div class="col">
+				<h6 class="mb-0">Last Updated: </h6>
+				{{slate.updated}} (<p class="tiny-info" style="display:inline">{{isoUpdated}}</p>)
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Tutor Name</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				<a routerLink="/viewprofile/{{slate.account}}">{{slate.tutorName}}</a>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Student Name</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				<a *ngIf="!!slate.registered" routerLink="/viewprofile/{{slate.registered}}">{{slate.studentName}}</a>
+				<a *ngIf="!slate.registered">N/A</a>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Subject</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{slate.subject}}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Start of Time Range</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{slate.startDateTime}} (<p class="tiny-info" style="display:inline">{{isoStartDateTime}}</p>)
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">End of Time Range</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{slate.endDateTime}} (<p class="tiny-info" style="display:inline">{{isoEndDateTime}}</p>)
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Registration Date</h6>
+			</div>
+			<div *ngIf="!!slate.registered" class="col-sm-9 text-secondary">
+				{{slate.registerDate}} (<p class="tiny-info" style="display:inline">{{isoRegisterDate}}</p>)
+			</div>
+			<div *ngIf="!slate.registered" class="col-sm-9 text-secondary">
+				N/A
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Marked Completed - Tutor</h6>
+			</div>
+			<div *ngIf="!!slate.markedCompletedTutor && slate.markedCompletedTutor === true" class="col-sm-9 text-secondary">
+				Yes
+			</div>
+			<div *ngIf="!slate.markedCompletedTutor || slate.markedCompletedTutor == false" class="col-sm-9 text-secondary">
+				No
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Marked Completed - Student</h6>
+			</div>
+			<div *ngIf="!!slate.markedCompletedStudent && slate.markedCompletedStudent === true" class="col-sm-9 text-secondary">
+				Yes
+			</div>
+			<div *ngIf="!slate.markedCompletedStudent || slate.markedCompletedStudent == false" class="col-sm-9 text-secondary">
+				No
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Deleted</h6>
+			</div>
+			<div *ngIf="!!slate.deleted && slate.deleted === true" class="col-sm-9 text-secondary">
+				Yes
+			</div>
+			<div *ngIf="!slate.deleted || slate.deleted == false" class="col-sm-9 text-secondary">
+				No
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Deletion Date</h6>
+			</div>
+			<div *ngIf="!!slate.deleted && slate.deleted === true" class="col-sm-9 text-secondary">
+				{{slate.deleteDate}} (<p class="tiny-info" style="display:inline">{{isoDeleteDate}}</p>)
+			</div>
+			<div *ngIf="!slate.deleted || slate.deleted == false" class="col-sm-9 text-secondary">
+				N/A
+			</div>
+		</div>
+		
+		<div class="pt-4">
+			<a routerLink="../../" class="btn btn-sm btn-secondary float-right">Back</a>
+		</div>
+	</div>
+	<div *ngIf="!slate" class="card-body">
+		<div class="mt-5 mb-4 text-center">
+			<div class="stage">
+				<div class="dot-flashing align-center"></div>	
+			</div>
+			<p class="mt-4">Contacting API endpoint</p>
+		</div>
+	</div>
+</div>
