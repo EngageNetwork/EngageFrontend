@@ -34,6 +34,14 @@ export class SlateService {
 			return this.http.post(`${baseUrl}/cancel/${id}`, null);
 		}
 		
+		getAllSlates() {
+			return this.http.get<Slate[]>(`${baseUrl}`);
+		}
+
+		getSlateById(id: string) {
+			return this.http.get<Slate>(`${baseUrl}/slate/${id}`);
+		}
+
 		getAllListings() {
 			return this.http.get<Slate[]>(`${baseUrl}/listings`);
 		}

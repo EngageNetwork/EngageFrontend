@@ -4,6 +4,7 @@ export class Slate {
   id: string;
   account: string;
   created: string;
+  updated: string;
   subject: Subject;
   startDateTime: string;
   endDateTime: string;
