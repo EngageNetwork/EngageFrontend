@@ -9,8 +9,11 @@ export class Slate {
   startDateTime: string;
   endDateTime: string;
   registered: string;
+  registerDate: string;
   markedCompletedStudent: boolean;
   markedCompletedTutor: boolean;
   tutorName: string;
   studentName: string;
+  deleted: Boolean;
+  deleteDate: string;
 }
