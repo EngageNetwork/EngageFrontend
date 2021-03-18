@@ -10,7 +10,7 @@
 
 <h1>Listing Details</h1>
 <div class="card mb-3 mt-5">
-	<div class="card-body">
+	<div *ngIf="!!listing" class="card-body">
 		<div class="row">
 			<div class="col-sm-3">
 				<h6 class="mb-0">Student Name</h6>
@@ -54,6 +54,15 @@
 				<span *ngIf="!listing.isDeleting">Delete Listing</span>
 			</button>
 			<a routerLink="../../" class="btn btn-sm btn-secondary float-right">Back</a>
+		</div>
+	</div>
+	<div *ngIf="!listing" class="card-body">
+		<div class="mt-5 mb-4 text-center">
+			<div class="stage">
+				<div class="dot-flashing align-center"></div>	
+			</div>
+			<p class="mt-4">Loading details</p>
+			<a routerLink="../../" class="btn btn-sm btn-secondary">Back</a>
 		</div>
 	</div>
 </div>

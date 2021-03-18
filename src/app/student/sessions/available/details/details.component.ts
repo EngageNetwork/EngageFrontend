@@ -7,7 +7,10 @@ import * as moment from 'moment';
 
 import { AccountService, SlateService } from '@app/_services';
 
-@Component({ templateUrl: './details.component.html' })
+@Component({
+	templateUrl: './details.component.html',
+	styleUrls: ['./details.component.scss']
+})
 
 export class DetailsComponent implements OnInit {
 	id: string;
