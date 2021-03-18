@@ -1,7 +1,7 @@
 <h1>Accounts</h1>
 <p class="mb-4">All accounts saved to the secure API database are listed below</p>
 <a routerLink="add" class="btn btn-sm btn-success mb-3">Create Account</a>
-<table class="table table-striped table-hover">
+<table class="table table-bordered table-hover">
 	<thead class="thead-dark">
 		<tr>
 			<th style="width: 30%">Name</th>
@@ -24,8 +24,13 @@
 			</td>
 		</tr>
 		<tr *ngIf="!accounts">
-			<td colspan="4" class="text-center">
-				<span class="spinner-border spinner-border-lg align-center"></span>
+			<td colspan="4">
+				<div class="m-4 text-center">
+					<div class="stage">
+						<div class="dot-flashing align-center"></div>	
+					</div>
+					<p class="mt-4">Contacting API endpoint</p>
+				</div>
 			</td>
 		</tr>
 	</tbody>

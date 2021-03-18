@@ -4,7 +4,10 @@ import { Title } from '@angular/platform-browser';
 
 import { AccountService } from '@app/_services';
 
-@Component({ templateUrl: 'overview.component.html' })
+@Component({
+	templateUrl: 'overview.component.html',
+	styleUrls: ['./overview.component.scss']
+})
 
 export class OverviewComponent implements OnInit {
 	accounts: any[];
