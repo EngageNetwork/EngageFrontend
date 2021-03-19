@@ -16,7 +16,7 @@
 				<h6 class="mb-0">Student Name</h6>
 			</div>
 			<div class="col-sm-9 text-secondary">
-				<a *ngIf="!!listing.studentName" routerLink="/viewprofile/{{listing.registered}}">{{listing.studentName}}</a>
+				<a *ngIf="!!listing.studentName" routerLink="/profile/viewprofile/{{listing.registered}}">{{listing.studentName}}</a>
 				<a *ngIf="!listing.studentName">N/A</a>
 			</div>
 		</div>
