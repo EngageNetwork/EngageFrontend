@@ -14,14 +14,12 @@ import { AccountService } from './_services';
 
 import { GlobalHomeComponent } from './global-home/global-home.component';
 import { AboutComponent } from './about/about.component';
-import { ViewprofileComponent } from './viewprofile/viewprofile.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		GlobalHomeComponent,
-		AboutComponent,
-		ViewprofileComponent
+		AboutComponent
 	],
 	imports: [
 		BrowserModule,
