@@ -4,6 +4,7 @@ import { first } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 
 import { AccountService } from '@app/_services';
+import { Role } from '@app/_models';
 
 @Component({
 	selector: 'app-viewprofile',
@@ -13,6 +14,7 @@ import { AccountService } from '@app/_services';
 export class ViewProfileComponent implements OnInit {
 	id: string;
 	account: any;
+	Role = Role;
 	
 	constructor(
 		private route: ActivatedRoute,
@@ -28,7 +30,7 @@ export class ViewProfileComponent implements OnInit {
 
 		this.accountService.getByIdPublic(this.id)
 		.pipe(first())
-		.subscribe(account => this.account = account)
+		.subscribe(account => this.account = account);
 	}
 	
 }
