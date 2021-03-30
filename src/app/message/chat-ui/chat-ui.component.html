@@ -1,0 +1,30 @@
+<div class="chatWindow">
+	<div id="otherUserName" class="d-flex w-100 px-5 py-3">
+		<h5 class="mb-0 d-flex align-items-center float-start">{{otherUserName}}</h5>
+		<a class="ms-auto float-end" href="/profile/viewprofile/{{id}}"><span data-feather="info" width="30" height="30" stroke="black"></span></a>
+	</div>
+	<div class="p-2 keyline keyline-top-all"></div>
+	<div class="main-content-area">
+		<div class="messages px-4 m-0" #scrollableChatArea [scrollTop]="scrollableChatArea.scrollHeight">
+			<ul class="message-list">
+				<li *ngFor="let message of messages" class="message-item mt-4">
+					<p class="fw-light small-role-text mb-0">{{message.postedByUser.role}}</p>
+					<div *ngIf="message.postedByUser._id === account.id">
+						<h6 style="display:inline">You</h6>
+						<p style="display:inline"> @ {{message.createdAt}}</p>
+					</div>
+					<div *ngIf="message.postedByUser._id !== account.id">
+						<h6 style="display:inline">{{otherUserName}}</h6>
+						<p style="display:inline"> @ {{message.createdAt}}</p>
+					</div>
+					
+					<p>{{message.message.messageText}}</p>
+				</li>
+			</ul>
+		</div>
+		<div class="px-5 mt-5">
+			<textarea class="inputArea mb-0" [(ngModel)]="msgPayload" placeholder="Message {{otherUserName}}"></textarea>
+			<button class="ms-3 p-3 sendMessageBtn align-top" (click)="sendMessage()"><span data-feather="send" stroke="black"></span></button>
+		</div>
+	</div>
+</div>

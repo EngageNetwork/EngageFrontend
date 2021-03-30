@@ -17,57 +17,56 @@ export class SlateService {
 	constructor(
 		private router: Router,
 		private http: HttpClient
-		) {
-			this.slateSubject = new BehaviorSubject<Slate>(null);
-			this.slate = this.slateSubject.asObservable();
-		}
-		
-		create(slate: Slate) {
-			return this.http.post(`${baseUrl}/create`, slate);
-		}
-		
-		register(id: string) {
-			return this.http.post(`${baseUrl}/register/${id}`, null);
-		}
-		
-		cancel(id: string) {
-			return this.http.post(`${baseUrl}/cancel/${id}`, null);
-		}
-		
-		getAllSlates() {
-			return this.http.get<Slate[]>(`${baseUrl}`);
-		}
-
-		getSlateById(id: string) {
-			return this.http.get<Slate>(`${baseUrl}/slate/${id}`);
-		}
-
-		getAllListings() {
-			return this.http.get<Slate[]>(`${baseUrl}/listings`);
-		}
-		
-		getMyListings() {
-			return this.http.get<Slate[]>(`${baseUrl}/mylistings`);
-		}
-		
-		getListingById(id: string) {
-			return this.http.get<Slate>(`${baseUrl}/listing/${id}`);
-		}
-		
-		getMySessions() {
-			return this.http.get<Slate[]>(`${baseUrl}/mysessions`);
-		}
-		
-		getSessionById(id: string) {
-			return this.http.get<Slate>(`${baseUrl}/session/${id}`);
-		}
-		
-		update(id: string, slate: Slate) {
-			return this.http.put(`${baseUrl}/update/${id}`, slate);
-		}
-		
-		delete(id: string) {
-			return this.http.delete(`${baseUrl}/delete/${id}`);
-		}
+	) {
+		this.slateSubject = new BehaviorSubject<Slate>(null);
+		this.slate = this.slateSubject.asObservable();
 	}
 	
+	create(slate: Slate) {
+		return this.http.post(`${baseUrl}/create`, slate);
+	}
+	
+	register(id: string) {
+		return this.http.post(`${baseUrl}/register/${id}`, null);
+	}
+	
+	cancel(id: string) {
+		return this.http.post(`${baseUrl}/cancel/${id}`, null);
+	}
+	
+	getAllSlates() {
+		return this.http.get<Slate[]>(`${baseUrl}`);
+	}
+
+	getSlateById(id: string) {
+		return this.http.get<Slate>(`${baseUrl}/slate/${id}`);
+	}
+
+	getAllListings() {
+		return this.http.get<Slate[]>(`${baseUrl}/listings`);
+	}
+	
+	getMyListings() {
+		return this.http.get<Slate[]>(`${baseUrl}/mylistings`);
+	}
+	
+	getListingById(id: string) {
+		return this.http.get<Slate>(`${baseUrl}/listing/${id}`);
+	}
+	
+	getMySessions() {
+		return this.http.get<Slate[]>(`${baseUrl}/mysessions`);
+	}
+	
+	getSessionById(id: string) {
+		return this.http.get<Slate>(`${baseUrl}/session/${id}`);
+	}
+	
+	update(id: string, slate: Slate) {
+		return this.http.put(`${baseUrl}/update/${id}`, slate);
+	}
+	
+	delete(id: string) {
+		return this.http.delete(`${baseUrl}/delete/${id}`);
+	}
+}

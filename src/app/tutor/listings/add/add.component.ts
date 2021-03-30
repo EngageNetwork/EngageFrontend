@@ -21,44 +21,46 @@ export class AddComponent implements OnInit {
 		private snackBar: MatSnackBar,
 		private slateService: SlateService,
 		private title: Title
-		) { }
+	) { }
+	
+	ngOnInit() {
+		this.title.setTitle('Creating New Listing');
 		
-		ngOnInit() {
-			this.title.setTitle('Creating New Listing');
-			
-			this.createListingForm = this.formBuilder.group({
-				subject: ['', Validators.required],
-				startDateTime: ['', Validators.required],
-				endDateTime: ['', Validators.required]
-			});
-		}
-		
-		// Get form fields easily in code below and to call from angular template
-		get f() { return this.createListingForm.controls; }
-		
-		onSubmit() {
-			this.submitted = true;
-			
-			// Stop code if form has anything invalid
-			if (this.createListingForm.invalid) {
-				return;
-			}
-			
-			// Access API to send listing creation request
-			this.loading = true;
-			this.slateService.create(this.createListingForm.value)
-			.pipe(first())
-			.subscribe({
-				next: () => {
-					// Display success message to admin and redirects to listing overview page
-					this.snackBar.open('Listing created successfully', 'Close', { duration: 10000 });
-					this.router.navigate(['../'], { relativeTo: this.route });
-				},
-				error: error => {
-					// Display error to user
-					this.snackBar.open(error, 'Close', { duration: 10000 });
-					this.loading = false;
-				}
-			});
-		}
+		this.createListingForm = this.formBuilder.group({
+			subject: ['', Validators.required],
+			startDateTime: ['', Validators.required],
+			endDateTime: ['', Validators.required]
+		});
 	}
+	
+	// Get form fields easily in code below and to call from angular template
+	get f() { return this.createListingForm.controls; }
+	
+	onSubmit() {
+		this.submitted = true;
+		
+		console.log(this.createListingForm.value);
+
+		// Stop code if form has anything invalid
+		if (this.createListingForm.invalid) {
+			return;
+		}
+		
+		// Access API to send listing creation request
+		this.loading = true;
+		this.slateService.create(this.createListingForm.value)
+		.pipe(first())
+		.subscribe({
+			next: () => {
+				// Display success message to admin and redirects to listing overview page
+				this.snackBar.open('Listing created successfully', 'Close', { duration: 10000 });
+				this.router.navigate(['../'], { relativeTo: this.route });
+			},
+			error: error => {
+				// Display error to user
+				this.snackBar.open(error, 'Close', { duration: 10000 });
+				this.loading = false;
+			}
+		});
+	}
+}

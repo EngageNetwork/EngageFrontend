@@ -23,13 +23,13 @@ export class AppComponent {
 		private router: Router,
 		private snackBar: MatSnackBar,
 		private accountService: AccountService
-		) {
-			this.accountService.account.subscribe(a => this.account = a);
-		}
-		
-		logout() {
-			this.accountService.logout();
-			this.router.navigate(['/']);
-			this.snackBar.open('You have been logged out', 'Close', { duration: 10000 });
-		}
+	) {
+		this.accountService.account.subscribe(a => this.account = a);
 	}
+	
+	logout() {
+		this.accountService.logout();
+		this.router.navigate(['/']);
+		this.snackBar.open('You have been logged out', 'Close', { duration: 10000 });
+	}
+}
