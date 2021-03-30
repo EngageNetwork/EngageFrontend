@@ -30,8 +30,9 @@ export class EditComponent implements OnInit {
 			this.id = this.route.snapshot.params['id'];
 			
 			this.updateListingForm = this.formBuilder.group({
-				task: ['', Validators.required],
-				details: ['', Validators.required]
+				subject: ['', Validators.required],
+				startDateTime: ['', Validators.required],
+				endDateTime: ['', Validators.required]
 			});
 			
 			this.slateService.getListingById(this.id)
@@ -69,3 +70,4 @@ export class EditComponent implements OnInit {
 		}
 		
 	}
+	

@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
 			.subscribe({
 				next: () => {
 					// Display success message and instructions to user, and redirects to login page
-					this.snackBar.open('Registration successful, please check your email for verification instructions', 'Close', { duration: 10000 });
+					this.snackBar.open('Registration successful, please check your email to verify your account', 'Close', { duration: 10000 });
 					this.router.navigate(['../login'], { relativeTo: this.route });
 				},
 				error: error => {

@@ -1,38 +1,45 @@
 <!-- Breadcrumb -->
 <nav aria-label="breadcrumb" class="main-breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/user">Home</a></li>
-    <li class="breadcrumb-item"><a routerLink="/user/listings">My Listings</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Update Listing</li>
-  </ol>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a routerLink="/tutor/home">Home</a></li>
+		<li class="breadcrumb-item"><a routerLink="/tutor/listings">My Listings</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Update Listing Details</li>
+	</ol>
 </nav>
 <!-- /Breadcrumb -->
 
 <h1>Edit Listing</h1>
-<form [formGroup]="updateListingForm" (ngSubmit)="onSubmit()">
-  <div class="form-row col">
-    <div class="form-group">
-      <label>Task</label>
-      <input type="text" formControlName="task" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.task.errors }" />
-      <div *ngIf="submitted && f.task.errors" class="invalid-feedback">
-        <div *ngIf="f.task.errors.required">Task is required</div>
-      </div>
-    </div>
-  </div>
-  <div class="form-row col">
-    <div class="form-group">
-      <label>Details</label>
-      <input type="text" formControlName="details" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.details.errors }" />
-      <div *ngIf="submitted && f.details.errors" class="invalid-feedback">
-        <div *ngIf="f.details.errors.required">Details is required</div>
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <button [disabled]="loading" class="btn btn-primary">
-        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-        Save Changes
-    </button>
-    <a routerLink="/user/listings" class="btn btn-link">Cancel</a>
-</div>
+<form [formGroup]="updateListingForm" (ngSubmit)="onSubmit()" class="mat-typography">
+	<div class="form-row pt-2">
+		<mat-form-field appearance="outline">
+			<mat-label>Subject</mat-label>
+			<mat-select formControlName="subject">
+				<mat-option value="Math">Math</mat-option>
+				<mat-option value="Science">Science</mat-option>
+				<mat-option value="SocialStudies">Social Studies</mat-option>
+				<mat-option value="LanguageArts">Language Arts</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+	
+	<div class="form-row pt-3">
+		<div class="form-group">
+			<h3 class="text-center">Start of Time Range</h3>
+			<dl-date-time-picker startView="day" maxView="year" minView="minute" minuteStep="5" formControlName="startDateTime"></dl-date-time-picker>
+		</div>
+		<div class="form-group ms-5">
+			<h3 class="text-center">End of Time Range</h3>
+			<dl-date-time-picker startView="day" maxView="year" minView="minute" minuteStep="5" formControlName="endDateTime"></dl-date-time-picker>
+		</div>
+	</div>
+
+	<div class="form-row pt-3">
+		<div class="form-group">
+			<button [disabled]="loading" class="btn btn-primary">
+				<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+				Save Changes
+			</button>
+			<a routerLink="../../" class="btn btn-link">Cancel</a>
+		</div>
+	</div>
 </form>

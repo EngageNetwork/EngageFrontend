@@ -1,0 +1,34 @@
+.main-content-area {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.keyline.keyline-top-all {
+	border-top: 1px solid #d2d2d7;
+}
+
+.messages {
+	height: 70vh;
+	overflow: auto;
+}
+
+.message-item {
+	list-style: none;
+}
+
+.small-role-text {
+	font-size: 15px;
+}
+
+.inputArea {
+	width: 80%;
+	resize: none;
+	padding: 10px;
+	line-height: 1.5;
+	border-radius: 10px;
+	border: 1px solid #000;
+}
+
+.sendMessageBtn {
+	border-radius: 10px;
+}

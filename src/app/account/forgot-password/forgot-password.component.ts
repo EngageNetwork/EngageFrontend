@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first, finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -14,6 +15,8 @@ export class ForgotPasswordComponent implements OnInit {
 	
 	constructor(
 		private formBuilder: FormBuilder,
+		private route: ActivatedRoute,
+		private router: Router,
 		private snackBar: MatSnackBar,
 		private accountService: AccountService
 		) { }
@@ -41,7 +44,10 @@ export class ForgotPasswordComponent implements OnInit {
 			.pipe(first())
 			.pipe(finalize(() => this.loading = false))
 			.subscribe({
-				next: () => this.snackBar.open('Please check your email to reset your password.', 'Close', { duration: 10000 }),
+				next: () => {
+					this.snackBar.open('Please check your email to reset your password.', 'Close', { duration: 10000 });
+					this.router.navigate(['../login'], { relativeTo: this.route })
+				},
 				error: error => this.snackBar.open(error, 'Close', { duration: 10000 })
 			});
 		}
