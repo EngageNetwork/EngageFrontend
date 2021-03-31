@@ -17,6 +17,7 @@
 			</div>
 			<div class="col-sm-9 text-secondary">
 				<a routerLink="/profile/viewprofile/{{session.account}}">{{session.tutorName}}</a>
+				<a class="ms-5 btn btn-sm btn-outline-primary" href="/message/{{session.account}}">Message</a>
 			</div>
 		</div>
 		<hr>
@@ -38,9 +39,9 @@
 			</div>
 		</div>
 		<div class="pt-4">
-			<button (click)="cancelSession(session.id)" class="btn btn-sm btn-danger mr-2" [disabled]="session.isRegistering">
-				<span *ngIf="session.isRegistering" class="spinner-border spinner-border-sm"></span>
-				<span *ngIf="!session.isRegistering">Cancel Session</span>
+			<button (click)="cancelSession(session.id)" class="btn btn-sm btn-danger mr-2" [disabled]="session.isRemoving">
+				<span *ngIf="session.isRemoving" class="spinner-border spinner-border-sm"></span>
+				<span *ngIf="!session.isRemoving">Cancel Session</span>
 			</button>
 			<a routerLink="../../" class="btn btn-sm btn-secondary float-right">Back</a>
 		</div>
