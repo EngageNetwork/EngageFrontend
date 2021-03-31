@@ -27,7 +27,7 @@ export class ListComponent implements OnInit {
 		this.fetchData();
 		this.interval = setInterval(() => {
 			this.fetchData();
-		}, 30000);
+		}, 60000);
 	}
 	
 	fetchData() {
