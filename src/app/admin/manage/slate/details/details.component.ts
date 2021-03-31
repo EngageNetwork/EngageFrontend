@@ -70,7 +70,6 @@ export class DetailsComponent implements OnInit {
 				}
 				
 				this.slate = slate;
-				console.log(this.slate.markedCompletedTutor)
 			});
 		}
 	}
