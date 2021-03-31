@@ -2,36 +2,36 @@
 <p class="big-info-text">All open sessions are shown below</p>
 <p class="fw-light small-linker-text">Looking for your registered sessions? Click <a routerLink="../registered">here</a> to see them.</p>
 <table class="table table-hover">
-    <thead id="table-header" class="thead-dark">
-        <tr>
-            <th style="width: 15%">Tutor Name</th>
-            <th style="width: 15%">Content Rating</th>
-            <th style="width: 15%">Behaviour Rating</th>
-            <th style="width: 15%">Subject</th>
-            <th style="width: 25%">Date/Time Range</th>
-            <th style="width: 15%">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let listing of listings">
-            <td><a routerLink="/profile/viewprofile/{{listing.account}}">{{listing.tutorName}}</a></td>
-            <td></td>
-            <td></td>
-            <td>{{listing.subject}}</td>
-            <td><h6 style="display:inline">{{listing.startDateTime}}</h6> to <h6 style="display:inline">{{listing.endDateTime}}</h6></td>
-            <td style="white-space: nowrap">
-                <a routerLink="details/{{listing.id}}" class="btn btn-sm btn-secondary mr-2">Details</a>
-                <button (click)="registerSession(listing.id)" class="btn btn-sm btn-primary" [disabled]="listing.isRegistering">
-                    <span *ngIf="listing.isRegistering" class="spinner-border spinner-border-sm"></span>
-                    <span *ngIf="!listing.isRegistering">Register</span>
-                </button>
-            </td>
-        </tr>
-        <tr *ngIf="!listings?.length">
+	<thead id="table-header" class="thead-dark">
+		<tr>
+			<th style="width: 15%">Tutor Name</th>
+			<th style="width: 15%">Content Rating</th>
+			<th style="width: 15%">Behaviour Rating</th>
+			<th style="width: 15%">Subject</th>
+			<th style="width: 25%">Date/Time Range</th>
+			<th style="width: 15%">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let listing of listings">
+			<td><a routerLink="/profile/viewprofile/{{listing.accountDetails._id}}">{{listing.accountDetails.firstName}} {{listing.accountDetails.lastName}}</a></td>
+			<td></td>
+			<td></td>
+			<td>{{listing.subject}}</td>
+			<td><h6 style="display:inline">{{listing.startDateTime}}</h6> to <h6>{{listing.endDateTime}}</h6></td>
+			<td style="white-space: nowrap">
+				<a routerLink="details/{{listing.id}}" class="btn btn-sm btn-secondary mr-2">Details</a>
+				<button (click)="registerSession(listing.id)" class="btn btn-sm btn-primary" [disabled]="listing.isRegistering">
+					<span *ngIf="listing.isRegistering" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!listing.isRegistering">Register</span>
+				</button>
+			</td>
+		</tr>
+		<tr *ngIf="!listings?.length">
 			<td colspan="6" class="text-center">
 				<span class="spinner-border spinner-border-lg align-center mt-3"></span>
 				<p class="text-center mt-4">There are currently no available sessions. Come back in a bit to check again!</p>
 			</td>
 		</tr>
-    </tbody>
+	</tbody>
 </table>
