@@ -22,7 +22,7 @@
   <tbody>
     <tr *ngFor="let listing of listings">
       <td><h6 style="display:inline">{{listing.startDateTime}}</h6> to <h6 style="display:inline">{{listing.endDateTime}}</h6></td>
-      <td><a routerLink="/profile/viewprofile/{{listing.registered}}">{{listing.studentName}}</a></td>
+      <td><a *ngIf="!!listing.registeredDetails" routerLink="/profile/viewprofile/{{listing.registered}}">{{listing.registeredDetails.firstName}} {{listing.registeredDetails.lastName}}</a></td>
       <td>{{listing.subject}}</td>
       <td style="white-space: nowrap">
         <a routerLink="details/{{listing.id}}" class="btn btn-sm btn-primary mr-1">Details</a>
