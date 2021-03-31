@@ -12,7 +12,7 @@
 	</thead>
 	<tbody>
 		<tr *ngFor="let session of sessions">
-			<td><a routerLink="/profile/viewprofile/{{session.account}}">{{session.tutorName}}</a></td>
+			<td><a routerLink="/profile/viewprofile/{{session.account}}">{{session.accountDetails.firstName}} {{session.accountDetails.lastName}}</a></td>
 			<td>{{session.subject}}</td>
 			<td><h6 style="display:inline">{{session.startDateTime}}</h6> to <h6 style="display:inline">{{session.endDateTime}}</h6></td>
 			<td style="white-space: nowrap">
