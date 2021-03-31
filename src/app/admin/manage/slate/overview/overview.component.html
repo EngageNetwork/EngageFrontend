@@ -12,13 +12,13 @@
 	</thead>
 	<tbody>
 		<tr *ngFor="let slate of slates">
-			<td><a routerLink="/profile/viewprofile/{{slate.account}}">{{slate.tutorName}}</a></td>
-			<td><a routerLink="/profile/viewprofile/{{slate.registered}}">{{slate.studentName}}</a></td>
+			<td><a routerLink="/profile/viewprofile/{{slate.account}}">{{slate.accountDetails.firstName}} {{slate.accountDetails.lastName}}</a></td>
+			<td><a *ngIf="!!slate.registered" routerLink="/profile/viewprofile/{{slate.registered}}">{{slate.registeredDetails.firstName}} {{slate.registeredDetails.lastName}}</a></td>
 			<td>{{slate.subject}}</td>
 			<td><h6 style="display:inline">{{slate.startDateTime}}</h6> to <h6>{{slate.endDateTime}}</h6></td>
 			<td style="white-space: nowrap">
 				<a routerLink="details/{{slate.id}}" class="btn btn-sm btn-secondary mr-2">Details</a>
-				<!-- <button (click)="deleteAccount(account.id, account)" class="btn btn-sm btn-danger btn-delete-account" [disabled]="account.isDeleting">
+				<!-- <button (click)="deleteSlate(account.id, account)" class="btn btn-sm btn-danger btn-delete-account" [disabled]="account.isDeleting">
 					<span *ngIf="account.isDeleting" class="spinner-border spinner-border-sm"></span>
 					<span *ngIf="!account.isDeleting">Delete</span>
 				</button> -->
