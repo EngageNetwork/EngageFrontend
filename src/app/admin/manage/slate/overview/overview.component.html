@@ -15,7 +15,7 @@
 			<td><a routerLink="/profile/viewprofile/{{slate.account}}">{{slate.tutorName}}</a></td>
 			<td><a routerLink="/profile/viewprofile/{{slate.registered}}">{{slate.studentName}}</a></td>
 			<td>{{slate.subject}}</td>
-			<td><h6 style="display:inline">{{slate.startDateTime}}</h6> to <h6 style="display:inline">{{slate.endDateTime}}</h6></td>
+			<td><h6 style="display:inline">{{slate.startDateTime}}</h6> to <h6>{{slate.endDateTime}}</h6></td>
 			<td style="white-space: nowrap">
 				<a routerLink="details/{{slate.id}}" class="btn btn-sm btn-secondary mr-2">Details</a>
 				<!-- <button (click)="deleteAccount(account.id, account)" class="btn btn-sm btn-danger btn-delete-account" [disabled]="account.isDeleting">
