@@ -105,4 +105,13 @@ export class ChatUIComponent implements OnInit, AfterViewInit {
 			}
 		})
 	}
+	
+	triggerFunction(event) {
+		if (event.ctrlKey && event.key === 'Enter') {
+			this.msgPayload += '\n';
+		} else if (event.key === 'Enter') {
+			event.preventDefault();
+			this.sendMessage();
+		}
+	}
 }

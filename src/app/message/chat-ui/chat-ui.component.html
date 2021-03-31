@@ -23,7 +23,7 @@
 			</ul>
 		</div>
 		<div class="px-5 mt-5">
-			<textarea class="inputArea mb-0" [(ngModel)]="msgPayload" placeholder="Message {{otherUserName}}"></textarea>
+			<textarea class="inputArea mb-0" [(ngModel)]="msgPayload" placeholder="Message {{otherUserName}}" (keydown)="triggerFunction($event)"></textarea>
 			<button class="ms-3 p-3 sendMessageBtn align-top" (click)="sendMessage()"><span data-feather="send" stroke="black"></span></button>
 		</div>
 	</div>
