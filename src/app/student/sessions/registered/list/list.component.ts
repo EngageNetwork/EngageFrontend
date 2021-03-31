@@ -44,7 +44,7 @@ export class ListComponent implements OnInit {
 		}
 		
 		cancelSession(id: string) {
-			const session = this.sessions.find(x => x.id === id);
+			const session = this.sessions.find(x => x._id === id);
 			if (confirm(`Cancel session?`)) {
 				session.isRemoving = true;
 				this.slateService.cancel(id)
@@ -53,7 +53,7 @@ export class ListComponent implements OnInit {
 					next: () => {
 						// Display success message to user
 						this.snackBar.open('Session cancelled successfully', 'Close', { duration: 10000 });
-						this.sessions = this.sessions.filter(x => x.id !== id);
+						this.sessions = this.sessions.filter(x => x._id !== id);
 					},
 					error: error => {
 						// Display error to user

@@ -44,7 +44,7 @@ export class OverviewComponent implements OnInit {
 	}
 	
 	deleteListing(id: string) {
-		const listing = this.listings.find(x => x.id === id);
+		const listing = this.listings.find(x => x._id === id);
 		if (confirm(`Are you sure you want to delete this listing? This action cannot be reversed.`)) {
 			listing.isDeleting = true;
 			this.slateService.delete(id)
@@ -53,7 +53,7 @@ export class OverviewComponent implements OnInit {
 				next: () => {
 					// Display success message to user
 					this.snackBar.open('Listing deleted successfully', 'Close', { duration: 10000 });
-					this.listings = this.listings.filter(x => x.id !== id);
+					this.listings = this.listings.filter(x => x._id !== id);
 				},
 				error: error => {
 					// Display error to user

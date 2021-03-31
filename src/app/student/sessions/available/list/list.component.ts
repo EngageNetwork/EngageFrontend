@@ -44,7 +44,7 @@ export class ListComponent implements OnInit {
 	}
 
 	registerSession(id: string) {
-		const listing = this.listings.find(x => x.id === id);
+		const listing = this.listings.find(x => x._id === id);
 		if (confirm(`Sign up for session?`)) {
 			listing.isRegistering = true;
 			this.slateService.register(id)
@@ -53,7 +53,7 @@ export class ListComponent implements OnInit {
 				next: () => {
 					// Display success message to user
 					this.snackBar.open('Registration successful', 'Close', { duration: 10000 });
-					this.listings = this.listings.filter(x => x.id !== id);
+					this.listings = this.listings.filter(x => x._id !== id);
 				},
 				error: error => {
 					// Display error to user

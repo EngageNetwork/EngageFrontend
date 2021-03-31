@@ -25,9 +25,9 @@
       <td><a *ngIf="!!listing.registered" routerLink="/profile/viewprofile/{{listing.registered}}">{{listing.registeredDetails.firstName}} {{listing.registeredDetails.lastName}}</a></td>
       <td>{{listing.subject}}</td>
       <td style="white-space: nowrap">
-        <a routerLink="details/{{listing.id}}" class="btn btn-sm btn-primary mr-1">Details</a>
-        <a routerLink="edit/{{listing.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
-        <button (click)="deleteListing(listing.id)" class="btn btn-sm btn-danger" [disabled]="listing.isDeleting">
+        <a routerLink="details/{{listing._id}}" class="btn btn-sm btn-primary mr-1">Details</a>
+        <a routerLink="edit/{{listing._id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+        <button (click)="deleteListing(listing._id)" class="btn btn-sm btn-danger" [disabled]="listing.isDeleting">
           <span *ngIf="listing.isDeleting" class="spinner-border spinner-border-sm"></span>
           <span *ngIf="!listing.isDeleting">Delete</span>
         </button>

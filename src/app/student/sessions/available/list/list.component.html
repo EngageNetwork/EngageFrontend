@@ -20,8 +20,8 @@
 			<td>{{listing.subject}}</td>
 			<td><h6 style="display:inline">{{listing.startDateTime}}</h6> to <h6>{{listing.endDateTime}}</h6></td>
 			<td style="white-space: nowrap">
-				<a routerLink="details/{{listing.id}}" class="btn btn-sm btn-secondary mr-2">Details</a>
-				<button (click)="registerSession(listing.id)" class="btn btn-sm btn-primary" [disabled]="listing.isRegistering">
+				<a routerLink="details/{{listing._id}}" class="btn btn-sm btn-secondary mr-2">Details</a>
+				<button (click)="registerSession(listing._id)" class="btn btn-sm btn-primary" [disabled]="listing.isRegistering">
 					<span *ngIf="listing.isRegistering" class="spinner-border spinner-border-sm"></span>
 					<span *ngIf="!listing.isRegistering">Register</span>
 				</button>
