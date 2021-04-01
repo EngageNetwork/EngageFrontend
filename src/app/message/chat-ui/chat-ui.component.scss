@@ -21,7 +21,7 @@
 }
 
 .inputArea {
-	width: 80%;
+	width: 93%;
 	resize: none;
 	padding: 10px;
 	line-height: 1.5;
@@ -29,6 +29,12 @@
 	border: 1px solid #000;
 }
 
+.sendBtnSpacer {
+	width: 2%;
+	display:inline
+}
+
 .sendMessageBtn {
+	width: 5%;
 	border-radius: 10px;
 }
