@@ -20,7 +20,6 @@ export class DetailsComponent implements OnInit {
 		private route: ActivatedRoute,
 		private router: Router,
 		private snackBar: MatSnackBar,
-		private accountService: AccountService, // Ignore "unused" warnings
 		private slateService: SlateService,
 		private title: Title
 	) { }

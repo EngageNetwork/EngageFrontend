@@ -16,7 +16,7 @@
 				<h6 class="mb-0">Tutor Name</h6>
 			</div>
 			<div class="col-sm-9 text-secondary">
-				<a routerLink="/profile/viewprofile/{{listing.account}}">{{listing.tutorName}}</a>
+				<a routerLink="/profile/viewprofile/{{listing.account}}">{{listing.accountDetails.firstName}} {{listing.accountDetails.lastName}}</a>
 				<a class="ms-5 btn btn-sm btn-outline-primary float-right" href="/message/{{listing.account}}">Message</a>
 			</div>
 		</div>

@@ -20,27 +20,20 @@ export class DetailsComponent implements OnInit {
 		private route: ActivatedRoute,
 		private router: Router,
 		private snackBar: MatSnackBar,
-		private accountService: AccountService, // Ignore "unused" warnings
 		private slateService: SlateService,
 		private title: Title
 	) { }
 	
 	ngOnInit(): void {
-		this.title.setTitle('Listing Details');
+		this.title.setTitle('Session Details');
 		
 		this.id = this.route.snapshot.params['id'];
 		
-		this.slateService.getListingById(this.id)
+		this.slateService.getSessionById(this.id)
 		.pipe(first())
 		.subscribe(listing => {
 			listing.startDateTime = moment(listing.startDateTime).format('LT MMMM Do[,] YYYY');
 			listing.endDateTime = moment(listing.endDateTime).format('LT MMMM Do[,] YYYY');
-
-			this.accountService.getByIdPublic(listing.account)
-			.pipe(first())
-			.subscribe(account => {
-				listing.tutorName = [account.firstName, account.lastName].join(' ');
-			});
 
 			this.listing = listing;
 		});
