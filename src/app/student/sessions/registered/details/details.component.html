@@ -8,6 +8,7 @@
 </nav>
 <!-- /Breadcrumb -->
 
+<!-- Header -->
 <div *ngIf="!!session">
 	<div *ngIf="!session.markedCompletedStudent || !session.markedCompletedTutor">
 		<h1>Session Details</h1>
@@ -19,8 +20,10 @@
 	</div>
 </div>
 
+<!-- Main Body -->
 <div class="card mb-3 mt-5">
 	<div *ngIf="!!session" class="card-body">
+		<!-- Displayed When One of Two Users Hasn't Marked as Complete -->
 		<div *ngIf="!session.markedCompletedStudent || !session.markedCompletedTutor">
 			<div class="row">
 				<div class="col-sm-3">
@@ -65,6 +68,7 @@
 				<a routerLink="../../" class="btn btn-sm btn-secondary float-right">Back</a>
 			</div>
 		</div>
+		<!-- Displayed When Both Users Have Marked as Complete -->
 		<div *ngIf="!!session.markedCompletedStudent && !!session.markedCompletedTutor">
 			<div class="row">
 				<div class="col-sm-4">
@@ -98,6 +102,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- Displayed When Details Don't Exist (During Loading & When API Server is Offline) -->
 	<div *ngIf="!session" class="card-body">
 		<div class="mt-5 mb-4 text-center">
 			<div class="stage">
