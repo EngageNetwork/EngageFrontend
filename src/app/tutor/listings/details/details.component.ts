@@ -36,12 +36,6 @@ export class DetailsComponent implements OnInit {
 			listing.startDateTime = moment(listing.startDateTime).format('LT MMMM Do[,] YYYY');
 			listing.endDateTime = moment(listing.endDateTime).format('LT MMMM Do[,] YYYY');
 			
-			this.accountService.getByIdPublic(listing.registered)
-			.pipe(first())
-			.subscribe(registered => {
-				listing.studentName = [registered.firstName, registered.lastName].join(' ');
-			});
-			
 			this.listing = listing;
 		});
 	}
