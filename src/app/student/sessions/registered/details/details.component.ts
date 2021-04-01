@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import * as moment from 'moment';
 
-import { AccountService, SlateService } from '@app/_services';
+import { SlateService } from '@app/_services';
 
 @Component({
 	templateUrl: './details.component.html',
@@ -20,7 +20,6 @@ export class DetailsComponent implements OnInit {
 		private route: ActivatedRoute,
 		private router: Router,
 		private snackBar: MatSnackBar,
-		private accountService: AccountService, // Ignore "unused" warnings
 		private slateService: SlateService,
 		private title: Title
 	) { }
@@ -35,12 +34,6 @@ export class DetailsComponent implements OnInit {
 		.subscribe(session => {
 			session.startDateTime = moment(session.startDateTime).format('LT MMMM Do[,] YYYY');
 			session.endDateTime = moment(session.endDateTime).format('LT MMMM Do[,] YYYY')
-
-			this.accountService.getByIdPublic(session.account)
-			.pipe(first())
-			.subscribe(account => {
-				session.tutorName = [account.firstName, account.lastName].join(' ');
-			})
 
 			this.session = session;
 		});
