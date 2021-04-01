@@ -8,50 +8,94 @@
 </nav>
 <!-- /Breadcrumb -->
 
-<h1>Session Details</h1>
+<div *ngIf="!!session">
+	<div *ngIf="!session.markedCompletedStudent || !session.markedCompletedTutor">
+		<h1>Session Details</h1>
+	</div>
+	<div *ngIf="!!session.markedCompletedStudent && !!session.markedCompletedTutor">
+		<h1>Session Complete!</h1>
+		<h6 class="mt-3">Congratulations on completing today's session!</h6>
+		<p class="mt-3">Please provide some feedback to help us improve our service.</p>
+	</div>
+</div>
+
 <div class="card mb-3 mt-5">
 	<div *ngIf="!!session" class="card-body">
-		<div class="row">
-			<div class="col-sm-3">
-				<h6 class="mb-0">Tutor Name</h6>
+		<div *ngIf="!session.markedCompletedStudent || !session.markedCompletedTutor">
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">Tutor Name</h6>
+				</div>
+				<div class="col-sm-9 text-secondary">
+					<a routerLink="/profile/viewprofile/{{session.account}}">{{session.accountDetails.firstName}} {{session.accountDetails.lastName}}</a>
+					<a class="ms-5 btn btn-sm btn-outline-primary float-right" href="/message/{{session.account}}">Message</a>
+				</div>
 			</div>
-			<div class="col-sm-9 text-secondary">
-				<a routerLink="/profile/viewprofile/{{session.account}}">{{session.accountDetails.firstName}} {{session.accountDetails.lastName}}</a>
-				<a class="ms-5 btn btn-sm btn-outline-primary float-right" href="/message/{{session.account}}">Message</a>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">Start of Time Range</h6>
+				</div>
+				<div class="col-sm-9 text-secondary">
+					{{session.startDateTime}}
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">End of Time Range</h6>
+				</div>
+				<div class="col-sm-9 text-secondary">
+					{{session.endDateTime}}
+				</div>
+			</div>
+			<div class="pt-4">
+				<button *ngIf="!session.markedCompletedStudent" (click)="markCompleted()" class="btn btn-sm btn-success mr-3" [disabled]="session.isMarkingComplete">
+					<span *ngIf="session.isMarkingComplete" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!session.isMarkingComplete">Mark Session As Complete</span>
+				</button>
+				<button *ngIf="!!session.markedCompletedStudent" (click)="markCompleted()" class="btn btn-sm btn-danger mr-3" [disabled]="session.isMarkingComplete">
+					<span *ngIf="session.isMarkingComplete" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!session.isMarkingComplete">Unmark Session As Complete</span>
+				</button>
+				<button (click)="cancelSession()" class="btn btn-sm btn-danger" [disabled]="session.isRemoving">
+					<span *ngIf="session.isRemoving" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!session.isRemoving">Cancel Session</span>
+				</button>
+				<a routerLink="../../" class="btn btn-sm btn-secondary float-right">Back</a>
 			</div>
 		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<h6 class="mb-0">Start of Time Range</h6>
+		<div *ngIf="!!session.markedCompletedStudent && !!session.markedCompletedTutor">
+			<div class="row">
+				<div class="col-sm-4">
+					<h6 class="mb-0">Tutor Name</h6>
+				</div>
+				<div class="col-sm-8 text-secondary">
+					<a routerLink="/profile/viewprofile/{{session.account}}">{{session.accountDetails.firstName}} {{session.accountDetails.lastName}}</a>
+					<a class="ms-5 btn btn-sm btn-outline-primary float-right" href="/message/{{session.account}}">Message</a>
+				</div>
 			</div>
-			<div class="col-sm-9 text-secondary">
-				{{session.startDateTime}}
+			<hr>
+			<div class="row">
+				<div class="col-sm-4">
+					<h6 class="mb-0">How would you rate your tutor's content?</h6>
+				</div>
+				<div class="col-sm-8 text-secondary">
+					[Rating Placeholder]
+				</div>
 			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<h6 class="mb-0">End of Time Range</h6>
+			<hr>
+			<div class="row">
+				<div class="col-sm-4">
+					<h6 class="mb-0">How would you rate your tutor's behaviour?</h6>
+				</div>
+				<div class="col-sm-8 text-secondary">
+					[Rating Placeholder]
+				</div>
 			</div>
-			<div class="col-sm-9 text-secondary">
-				{{session.endDateTime}}
+			<div class="pt-4">
+				<a routerLink="../../" class="btn btn-sm btn-secondary float-right">Back</a>
 			</div>
-		</div>
-		<div class="pt-4">
-			<button *ngIf="!session.markedCompletedStudent" (click)="markCompleted()" class="btn btn-sm btn-success mr-3" [disabled]="session.isMarkingComplete">
-				<span *ngIf="session.isMarkingComplete" class="spinner-border spinner-border-sm"></span>
-				<span *ngIf="!session.isMarkingComplete">Mark Session As Complete</span>
-			</button>
-			<button *ngIf="!!session.markedCompletedStudent" (click)="markCompleted()" class="btn btn-sm btn-danger mr-3" [disabled]="session.isMarkingComplete">
-				<span *ngIf="session.isMarkingComplete" class="spinner-border spinner-border-sm"></span>
-				<span *ngIf="!session.isMarkingComplete">Unmark Session As Complete</span>
-			</button>
-			<button (click)="cancelSession()" class="btn btn-sm btn-danger" [disabled]="session.isRemoving">
-				<span *ngIf="session.isRemoving" class="spinner-border spinner-border-sm"></span>
-				<span *ngIf="!session.isRemoving">Cancel Session</span>
-			</button>
-			<a routerLink="../../" class="btn btn-sm btn-secondary float-right">Back</a>
 		</div>
 	</div>
 	<div *ngIf="!session" class="card-body">

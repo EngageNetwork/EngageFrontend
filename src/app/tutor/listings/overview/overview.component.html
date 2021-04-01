@@ -1,9 +1,9 @@
 <!-- Breadcrumb -->
 <nav aria-label="breadcrumb" class="main-breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/tutor/home">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">My Listings</li>
-  </ol>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a routerLink="/tutor/home">Home</a></li>
+		<li class="breadcrumb-item active" aria-current="page">My Listings</li>
+	</ol>
 </nav>
 <!-- /Breadcrumb -->
 
@@ -11,32 +11,35 @@
 <p>All of your posted listings are shown below</p>
 <a routerLink="add" class="btn btn-sm btn-primary mb-3">Create New Listing</a>
 <table class="table table-hover">
-  <thead id="table-header" class="thead-dark">
-    <tr>
-      <th style="width: 45%">Date/Time Range</th>
-      <th style="width: 25%">Registered Student</th>
-      <th style="width: 15%">Subject</th>
-      <th style="width: 15%">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let listing of listings">
-      <td><h6 style="display:inline">{{listing.startDateTime}}</h6> to <h6 style="display:inline">{{listing.endDateTime}}</h6></td>
-      <td><a *ngIf="!!listing.registered" routerLink="/profile/viewprofile/{{listing.registered}}">{{listing.registeredDetails.firstName}} {{listing.registeredDetails.lastName}}</a></td>
-      <td>{{listing.subject}}</td>
-      <td style="white-space: nowrap">
-        <a routerLink="details/{{listing._id}}" class="btn btn-sm btn-primary mr-1">Details</a>
-        <a routerLink="edit/{{listing._id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
-        <button (click)="deleteListing(listing._id)" class="btn btn-sm btn-danger" [disabled]="listing.isDeleting">
-          <span *ngIf="listing.isDeleting" class="spinner-border spinner-border-sm"></span>
-          <span *ngIf="!listing.isDeleting">Delete</span>
-        </button>
-      </td>
-    </tr>
-    <tr *ngIf="!listings">
-      <td colspan="4" class="text-center">
-        <span class="spinner-border spinner-border-lg align-center"></span>
-      </td>
-    </tr>
-  </tbody>
+	<thead id="table-header" class="thead-dark">
+		<tr>
+			<th style="width: 45%">Date/Time Range</th>
+			<th style="width: 25%">Registered Student</th>
+			<th style="width: 15%">Subject</th>
+			<th style="width: 15%">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let listing of listings">
+			<td><h6 style="display:inline">{{listing.startDateTime}}</h6> to <h6 style="display:inline">{{listing.endDateTime}}</h6></td>
+			<td><a *ngIf="!!listing.registered" routerLink="/profile/viewprofile/{{listing.registered}}">{{listing.registeredDetails.firstName}} {{listing.registeredDetails.lastName}}</a></td>
+			<td>{{listing.subject}}</td>
+			<td style="white-space: nowrap">
+				<a *ngIf="!!listing.markedCompletedStudent && !!listing.markedCompletedTutor" routerLink="details/{{listing._id}}" class="btn btn-sm btn-success mr-1 finish-text">Complete Session</a>
+				<div *ngIf="!listing.markedCompletedStudent || !listing.markedCompletedTutor">
+					<a routerLink="details/{{listing._id}}" class="btn btn-sm btn-primary mr-1">Details</a>
+					<a routerLink="edit/{{listing._id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+					<button (click)="deleteListing(listing._id)" class="btn btn-sm btn-danger" [disabled]="listing.isDeleting">
+						<span *ngIf="listing.isDeleting" class="spinner-border spinner-border-sm"></span>
+						<span *ngIf="!listing.isDeleting">Delete</span>
+					</button>
+				</div>
+			</td>
+		</tr>
+		<tr *ngIf="!listings">
+			<td colspan="4" class="text-center">
+				<span class="spinner-border spinner-border-lg align-center"></span>
+			</td>
+		</tr>
+	</tbody>
 </table>
