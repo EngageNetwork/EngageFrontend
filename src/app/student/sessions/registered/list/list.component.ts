@@ -45,7 +45,7 @@ export class ListComponent implements OnInit {
 		
 		cancelSession(id: string) {
 			const session = this.sessions.find(x => x._id === id);
-			if (confirm(`Cancel session?`)) {
+			if (confirm(`Cancel session with ${session.accountDetails.firstName} ${session.accountDetails.lastName}?`)) {
 				session.isRemoving = true;
 				this.slateService.cancel(id)
 				.pipe(first())

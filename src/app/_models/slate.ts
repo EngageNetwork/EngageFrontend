@@ -12,8 +12,9 @@ export class Slate {
   registerDate: string;
   markedCompletedStudent: boolean;
   markedCompletedTutor: boolean;
-  tutorName: string;
-  studentName: string;
+  tutorContentRatingByStudent: number;
+  tutorBehaviourRatingByStudent: number;
+  studentBehaviourRatingByTutor: number;
   deleted: Boolean;
   deleteDate: string;
 }

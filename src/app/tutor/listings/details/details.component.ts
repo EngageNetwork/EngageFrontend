@@ -39,6 +39,48 @@ export class DetailsComponent implements OnInit {
 		});
 	}
 
+	markCompleted() {
+		const listing = this.listing;
+		if (!listing.markedCompletedTutor) {
+			if (confirm(`Mark session with ${listing.registeredDetails.firstName} ${listing.registeredDetails.lastName} as complete?`)) {
+				listing.isMarkingComplete = true;
+				this.slateService.markComplete(this.id)
+				.pipe(first())
+				.subscribe({
+					next: () => {
+						// Display success message to user
+						this.snackBar.open('Session marked as complete successfully', 'Close', { duration: 10000 });
+						this.router.navigate(['../../'], { relativeTo: this.route });
+					},
+					error: error => {
+						// Display error to user
+						this.snackBar.open(error, 'Close', { duration: 10000 });
+						listing.isMarkingComplete = false;
+					}
+				})
+			}
+		}
+		if (!!listing.markedCompletedTutor) {
+			if (confirm(`Unmark session with ${listing.registeredDetails.firstName} ${listing.registeredDetails.lastName} as complete?`)) {
+				listing.isMarkingComplete = true;
+				this.slateService.markComplete(this.id)
+				.pipe(first())
+				.subscribe({
+					next: () => {
+						// Display success message to user
+						this.snackBar.open('Session unmarked as complete', 'Close', { duration: 10000 });
+						this.router.navigate(['../../'], { relativeTo: this.route });
+					},
+					error: error => {
+						// Display error to user
+						this.snackBar.open(error, 'Close', { duration: 10000 });
+						listing.isMarkingComplete = false;
+					}
+				})
+			}
+		}
+	}
+
 	deleteListing(id: string) {
 		const listing = this.listing;
 		if (confirm(`Are you sure you want to delete this listing? This action cannot be reversed.`)) {

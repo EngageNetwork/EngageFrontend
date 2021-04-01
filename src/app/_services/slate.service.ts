@@ -65,6 +65,18 @@ export class SlateService {
 	update(id: string, slate: Slate) {
 		return this.http.put(`${baseUrl}/update/${id}`, slate);
 	}
+
+	markComplete(id: string) {
+		return this.http.put(`${baseUrl}/markcomplete/${id}`, null);
+	}
+
+	submitContentRating(id: string, contentRating: any) {
+		return this.http.put(`${baseUrl}/rating/content/${id}`, contentRating);
+	}
+
+	submitBehaviourRating(id: string, behaviourRating: any) {
+		return this.http.put(`${baseUrl}/rating/behaviour/${id}`, behaviourRating);
+	}
 	
 	delete(id: string) {
 		return this.http.delete(`${baseUrl}/delete/${id}`);

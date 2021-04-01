@@ -39,11 +39,53 @@ export class DetailsComponent implements OnInit {
 		});
 	}
 	
-	cancelSession(id: string) {
+	markCompleted() {
 		const session = this.session;
-		if (confirm(`Cancel session?`)) {
+		if (!session.markedCompletedStudent) {
+			if (confirm(`Mark session with ${session.accountDetails.firstName} ${session.accountDetails.lastName} as complete?`)) {
+				session.isMarkingComplete = true;
+				this.slateService.markComplete(this.id)
+				.pipe(first())
+				.subscribe({
+					next: () => {
+						// Display success message to user
+						this.snackBar.open('Session marked as complete successfully', 'Close', { duration: 10000 });
+						this.router.navigate(['../../'], { relativeTo: this.route });
+					},
+					error: error => {
+						// Display error to user
+						this.snackBar.open(error, 'Close', { duration: 10000 });
+						session.isMarkingComplete = false;
+					}
+				})
+			}
+		}
+		if (!!session.markedCompletedStudent) {
+			if (confirm(`Unmark session with ${session.accountDetails.firstName} ${session.accountDetails.lastName} as complete?`)) {
+				session.isMarkingComplete = true;
+				this.slateService.markComplete(this.id)
+				.pipe(first())
+				.subscribe({
+					next: () => {
+						// Display success message to user
+						this.snackBar.open('Session unmarked as complete', 'Close', { duration: 10000 });
+						this.router.navigate(['../../'], { relativeTo: this.route });
+					},
+					error: error => {
+						// Display error to user
+						this.snackBar.open(error, 'Close', { duration: 10000 });
+						session.isMarkingComplete = false;
+					}
+				})
+			}
+		}
+	}
+
+	cancelSession() {
+		const session = this.session;
+		if (confirm(`Cancel session with ${session.accountDetails.firstName} ${session.accountDetails.lastName}?`)) {
 			session.isRemoving = true;
-			this.slateService.cancel(id)
+			this.slateService.cancel(this.id)
 			.pipe(first())
 			.subscribe({
 				next: () => {
