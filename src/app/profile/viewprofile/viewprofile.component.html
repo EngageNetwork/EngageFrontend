@@ -1,5 +1,5 @@
 <div class="main-body mt-5">	
-	<div class="row gutters-sm">
+	<div *ngIf="!!account" class="row gutters-sm">
 		<div class="col-md-4 mb-3">
 			<div class="card h-100">
 				<div class="card-body">
@@ -22,26 +22,26 @@
 							<h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Content Rating</h6>
 							<div class="mb-2">
 								<small>Overall</small>
-								<mat-progress-bar mode="determinate" value="{{account.overallContentRating}}"></mat-progress-bar>
+								<mat-progress-bar mode="determinate" value="{{account.contentRatings.overallContentRating}}"></mat-progress-bar>
 							</div>
 							<div class="mb-2">
 								<small>Mathematics</small>
-								<mat-progress-bar mode="determinate" value="{{account.mathContentRating}}"></mat-progress-bar>
+								<mat-progress-bar mode="determinate" value="{{account.contentRatings.mathContentRating}}"></mat-progress-bar>
 							</div>
 							<div class="mb-2"><small>Science</small>
-								<mat-progress-bar mode="determinate" value="{{account.scienceContentRating}}"></mat-progress-bar>
+								<mat-progress-bar mode="determinate" value="{{account.contentRatings.scienceContentRating}}"></mat-progress-bar>
 							</div>
 							<div class="mb-2">
 								<small>Social Studies</small>
-								<mat-progress-bar mode="determinate" value="{{account.socialStudiesContentRating}}"></mat-progress-bar>
+								<mat-progress-bar mode="determinate" value="{{account.contentRatings.socialStudiesContentRating}}"></mat-progress-bar>
 							</div>
 							<div class="mb-2">
 								<small>Language Arts</small>
-								<mat-progress-bar mode="determinate" value="{{account.languageArtsContentRating}}"></mat-progress-bar>
+								<mat-progress-bar mode="determinate" value="{{account.contentRatings.languageArtsContentRating}}"></mat-progress-bar>
 							</div>
 							<div class="mb-2">
 								<small>Foreign Language Acquisition</small>
-								<mat-progress-bar mode="determinate" value="{{account.foreignLanguageAcquisitionContentRating}}"></mat-progress-bar>
+								<mat-progress-bar mode="determinate" value="{{account.contentRatings.foreignLanguageAcquisitionContentRating}}"></mat-progress-bar>
 							</div>
 						</div>
 					</div>
@@ -57,7 +57,17 @@
 						</div>
 					</div>
 				</div>
-				
+			</div>
+		</div>
+	</div>
+	<div *ngIf="!account" class="card">
+		<div class="card-body">
+			<div class="mt-5 mb-4 text-center">
+				<div class="stage">
+					<div class="dot-flashing align-center"></div>	
+				</div>
+				<p class="mt-4">Loading profile details</p>
+				<!-- <a routerLink="../../" class="btn btn-sm btn-secondary">Back</a> -->
 			</div>
 		</div>
 	</div>

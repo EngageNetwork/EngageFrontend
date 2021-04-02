@@ -7,11 +7,6 @@ export class Account {
   email: string;
   role: Role;
   behaviourRating: number;
-  overallContentRating: number;
-  mathContentRating: number;
-  scienceContentRating: number;
-  socialStudiesContentRating: number;
-  languageArtsContentRating: number;
-  ForeignLanguageAcquisitionContentRating: number;
+  contentRatings: Array<any>;
   jwtToken?: string;
 }
