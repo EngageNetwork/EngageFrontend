@@ -14,9 +14,11 @@
 	</thead>
 	<tbody>
 		<tr *ngFor="let listing of listings">
-			<td><a routerLink="/profile/viewprofile/{{listing.accountDetails._id}}">{{listing.accountDetails.firstName}} {{listing.accountDetails.lastName}}</a></td>
-			<td></td>
-			<td></td>
+			<td><a routerLink="/profile/viewprofile/{{listing.account}}">{{listing.accountDetails.firstName}} {{listing.accountDetails.lastName}}</a></td>
+			<td *ngIf="!!listing.accountDetails.contentRatings.overallContentRating" class="text-center">{{listing.accountDetails.contentRatings.overallContentRating}}/100</td>
+			<td *ngIf="!listing.accountDetails.contentRatings.overallContentRating" class="text-center">None Available</td>
+			<td *ngIf="!!listing.accountDetails.behaviourRating" class="text-center">{{listing.accountDetails.behaviourRating}}/100</td>
+			<td *ngIf="!listing.accountDetails.behaviourRating" class="text-center">None Available</td>
 			<td>{{listing.subject}}</td>
 			<td><h6 style="display:inline">{{listing.startDateTime}}</h6> to <h6>{{listing.endDateTime}}</h6></td>
 			<td style="white-space: nowrap">

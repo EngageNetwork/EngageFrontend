@@ -37,6 +37,30 @@
 			<hr>
 			<div class="row">
 				<div class="col-sm-3">
+					<h6 class="mb-0">Tutor Content Rating</h6>
+				</div>
+				<div *ngIf="!!session.accountDetails.contentRatings.overallContentRating" class="col-sm-9 text-secondary">
+					{{session.accountDetails.contentRatings.overallContentRating}}/100
+				</div>
+				<div *ngIf="!session.accountDetails.contentRatings.overallContentRating" class="col-sm-9 text-secondary">
+					None Available
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">Tutor Behaviour Rating</h6>
+				</div>
+				<div *ngIf="!!session.accountDetails.behaviourRating" class="col-sm-9 text-secondary">
+					{{session.accountDetails.behaviourRating}}/100
+				</div>
+				<div *ngIf="!session.accountDetails.behaviourRating" class="col-sm-9 text-secondary">
+					None Available
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
 					<h6 class="mb-0">Start of Time Range</h6>
 				</div>
 				<div class="col-sm-9 text-secondary">

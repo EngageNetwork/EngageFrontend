@@ -43,6 +43,18 @@
 			<hr>
 			<div class="row">
 				<div class="col-sm-3">
+					<h6 class="mb-0">Student Behaviour Rating</h6>
+				</div>
+				<div *ngIf="!!listing.registeredDetails.behaviourRating" class="col-sm-9 text-secondary">
+					{{listing.registeredDetails.behaviourRating}}/100
+				</div>
+				<div *ngIf="!listing.registeredDetails.behaviourRating" class="col-sm-9 text-secondary">
+					None Available
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
 					<h6 class="mb-0">Subject</h6>
 				</div>
 				<div class="col-sm-9 text-secondary">
