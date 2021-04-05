@@ -109,7 +109,7 @@
 					<h6 class="mb-0">How would you rate your tutor's content?</h6>
 				</div>
 				<div class="col-sm-8 text-secondary">
-					[Rating Placeholder]
+					<mat-slider color="primary" thumbLabel min="0" max="100" step="1" class="rating-slider w-50" (input)="updateContentRatingValue($event)"></mat-slider>
 				</div>
 			</div>
 			<hr>
@@ -118,10 +118,14 @@
 					<h6 class="mb-0">How would you rate your tutor's behaviour?</h6>
 				</div>
 				<div class="col-sm-8 text-secondary">
-					[Rating Placeholder]
+					<mat-slider color="primary" thumbLabel min="0" max="100" step="1" class="rating-slider w-50" (input)="updateBehaviourRatingValue($event)"></mat-slider>
 				</div>
 			</div>
 			<div class="pt-4">
+				<button (click)="submitRatings()" class="btn btn-sm btn-success" [disabled]="session.isSubmitting">
+					<span *ngIf="session.isSubmitting" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!session.isSubmitting">Finalize Ratings</span>
+				</button>
 				<a routerLink="../../" class="btn btn-sm btn-secondary float-right">Back</a>
 			</div>
 		</div>

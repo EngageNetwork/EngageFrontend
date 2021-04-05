@@ -15,6 +15,8 @@ import { SlateService } from '@app/_services';
 export class DetailsComponent implements OnInit {
 	id: string;
 	session: any;
+	contentRatingValue: number;
+	behaviourRatingValue: number;
 	
 	constructor(
 		private route: ActivatedRoute,
@@ -44,6 +46,7 @@ export class DetailsComponent implements OnInit {
 		if (!session.markedCompletedStudent) {
 			if (confirm(`Mark session with ${session.accountDetails.firstName} ${session.accountDetails.lastName} as complete?`)) {
 				session.isMarkingComplete = true;
+
 				this.slateService.markComplete(this.id)
 				.pipe(first())
 				.subscribe({
@@ -63,6 +66,7 @@ export class DetailsComponent implements OnInit {
 		if (!!session.markedCompletedStudent) {
 			if (confirm(`Unmark session with ${session.accountDetails.firstName} ${session.accountDetails.lastName} as complete?`)) {
 				session.isMarkingComplete = true;
+
 				this.slateService.markComplete(this.id)
 				.pipe(first())
 				.subscribe({
@@ -81,10 +85,62 @@ export class DetailsComponent implements OnInit {
 		}
 	}
 
+	updateContentRatingValue(event: any) {
+		this.contentRatingValue = event.value;
+	}
+
+	updateBehaviourRatingValue(event: any) {
+		this.behaviourRatingValue = event.value;
+	}
+
+	submitRatings() {
+		const session = this.session;
+		if (!this.contentRatingValue) {
+			// Display error to user
+			this.snackBar.open('No content rating provided', 'Close', { duration: 10000 });
+			return;
+		}
+		if (!this.behaviourRatingValue) {
+			// Display error to user
+			this.snackBar.open('No behaviour rating provided', 'Close', { duration: 10000 });
+			return;
+		}
+		if (confirm(`Submit ratings for ${session.accountDetails.firstName} ${session.accountDetails.lastName}?`)) {
+			session.isSubmitting = true;
+
+			this.slateService.submitContentRating(this.id, { contentRating: this.contentRatingValue })
+			.pipe(first())
+			.subscribe({
+				next: () => {
+					this.slateService.submitBehaviourRating(this.id, { behaviourRating: this.behaviourRatingValue })
+					.pipe(first())
+					.subscribe({
+						next: () =>  {
+							// Display success message to user
+							this.snackBar.open('Ratings submitted successfully', 'Close', { duration: 10000 });
+							this.router.navigate(['../../'], { relativeTo: this.route });
+						},
+						error: error => {
+							// Display error to user
+							this.snackBar.open(error, 'Close', { duration: 10000 });
+							session.isSubmitting = false;
+						}
+					});
+				},
+				error: error => {
+					// Display error to user
+					this.snackBar.open(error, 'Close', { duration: 10000 });
+					session.isSubmitting = false;
+				}
+			});
+		}
+	}
+
 	cancelSession() {
 		const session = this.session;
 		if (confirm(`Cancel session with ${session.accountDetails.firstName} ${session.accountDetails.lastName}?`)) {
 			session.isRemoving = true;
+
 			this.slateService.cancel(this.id)
 			.pipe(first())
 			.subscribe({
@@ -98,7 +154,7 @@ export class DetailsComponent implements OnInit {
 					this.snackBar.open(error, 'Close', { duration: 10000 });
 					session.isRemoving = false;
 				}
-			})
+			});
 		}
 	}
 }

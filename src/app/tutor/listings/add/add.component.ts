@@ -38,8 +38,6 @@ export class AddComponent implements OnInit {
 	
 	onSubmit() {
 		this.submitted = true;
-		
-		console.log(this.createListingForm.value);
 
 		// Stop code if form has anything invalid
 		if (this.createListingForm.invalid) {
