@@ -6,6 +6,7 @@ export class Account {
   lastName: string;
   email: string;
   role: Role;
+  approved: string;
   behaviourRating: number;
   contentRatings: Array<any>;
   jwtToken?: string;
