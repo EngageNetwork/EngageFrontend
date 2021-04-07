@@ -3,7 +3,10 @@ import { Title } from '@angular/platform-browser';
 
 import { AccountService } from '@app/_services';
 
-@Component({ templateUrl: 'home.component.html' })
+@Component({
+  templateUrl: 'home.component.html',
+  styleUrls: ['home.component.scss']
+})
 
 export class HomeComponent {
     account = this.accountService.accountValue;
