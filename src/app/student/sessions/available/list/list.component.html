@@ -15,8 +15,8 @@
 	<tbody>
 		<tr *ngFor="let listing of listings">
 			<td><a routerLink="/profile/viewprofile/{{listing.account}}">{{listing.accountDetails.firstName}} {{listing.accountDetails.lastName}}</a></td>
-			<td *ngIf="!!listing.accountDetails.contentRatings.overallContentRating" class="text-center">{{listing.accountDetails.contentRatings.overallContentRating}}/100</td>
-			<td *ngIf="!listing.accountDetails.contentRatings.overallContentRating" class="text-center">None Available</td>
+			<td *ngIf="!!listing.accountDetails.contentRatings && !!listing.accountDetails.contentRatings.overallContentRating" class="text-center">{{listing.accountDetails.contentRatings.overallContentRating}}/100</td>
+			<td *ngIf="!listing.accountDetails.contentRatings || !listing.accountDetails.contentRatings.overallContentRating" class="text-center">None Available</td>
 			<td *ngIf="!!listing.accountDetails.behaviourRating" class="text-center">{{listing.accountDetails.behaviourRating}}/100</td>
 			<td *ngIf="!listing.accountDetails.behaviourRating" class="text-center">None Available</td>
 			<td>{{listing.subject}}</td>
