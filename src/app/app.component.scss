@@ -1,86 +1,86 @@
 /* Header */ 
 #main-navbar a {
-    letter-spacing: 1px;
+	letter-spacing: 1px;
 }
 
 #main-navbar .nav-masthead .nav-link {
-    padding: .25rem 0;
-    font-weight: 700;
-    color: rgba(255, 255, 255, .5);
-    background-color: transparent;
-    border-bottom: .25rem solid transparent;
+	padding: .25rem 0;
+	font-weight: 700;
+	color: rgba(255, 255, 255, .5);
+	background-color: transparent;
+	border-bottom: .25rem solid transparent;
 }
-  
+
 #main-navbar .nav-masthead .nav-link:hover,
 #main-navbar .nav-masthead .nav-link:focus {
-    border-bottom-color: rgba(255, 255, 255, .25);
+	border-bottom-color: rgba(255, 255, 255, .25);
 }
-  
+
 #main-navbar .nav-masthead .nav-link {
-    margin-left: 1rem;
+	margin-left: 1rem;
 }
-  
+
 #main-navbar .nav-masthead .active {
-    color: #fff;
-    border-bottom-color: #fff;
+	color: #fff;
+	border-bottom-color: #fff;
 }
 
 #main-navbar .navbar-cursor {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 /* Footer */
 #global-footer div {
-    color: #515154;
-    font-size: 14px;
-    text-decoration: none;
+	color: #515154;
+	font-size: 14px;
+	text-decoration: none;
 }
 
 #global-footer a {
-    color: #515154;
-    font-size: 14px;
-    text-decoration: none;
+	color: #515154;
+	font-size: 14px;
+	text-decoration: none;
 }
 
 #global-footer .global-footer-content {
-    padding-left: calc(max(22px, env(safe-area-inset-left)));
-    padding-right: calc(max(22px, env(safe-area-inset-right)));
+	padding-left: calc(max(22px, env(safe-area-inset-left)));
+	padding-right: calc(max(22px, env(safe-area-inset-right)));
 }
 
 #global-footer .footer-legal {
-    margin-top: 7px;
-    padding-top: 8px;
-    border-top: 1px solid #d2d2d7;
+	margin-top: 7px;
+	padding-top: 8px;
+	border-top: 1px solid #d2d2d7;
 }
 
 #global-footer .footer-legal-copyright {
-    max-height: 9999px;
+	max-height: 9999px;
 }
 
 #global-footer .footer-legal-copyright, #global-footer .footer-legal-links {
-    margin-right: 60px;
-    float: left;
-    margin-top: 5px;
+	margin-right: 60px;
+	float: left;
+	margin-top: 5px;
 }
 
 #global-footer .footer-legal-links {
-    position: relative;
-    top: -5px;
-    z-index: 1;
+	position: relative;
+	top: -5px;
+	z-index: 1;
 }
 
 #global-footer .footer-legal-link {
-    border-right: 1px solid #d2d2d7;
-    margin-left: 6px;
-    margin-right: 7px;
-    padding-right: 10px;
-    display: inline-block;
-    margin-top: 5px;
-    white-space: nowrap;
+	border-right: 1px solid #d2d2d7;
+	margin-left: 6px;
+	margin-right: 7px;
+	padding-right: 10px;
+	display: inline-block;
+	margin-top: 5px;
+	white-space: nowrap;
 }
 
 #global-footer .footer-legal-link:last-child {
-    border: none;
-    margin: 0;
-    padding: 0;
+	border: none;
+	margin: 0;
+	padding: 0;
 }

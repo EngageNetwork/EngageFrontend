@@ -1,0 +1,188 @@
+<!-- Header -->
+<h1>Account Details</h1>
+
+<!-- Main Body -->
+<div class="card mb-3 mt-5">
+	<div *ngIf="!!account" class="card-body">
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Account Name</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				<a routerLink="/profile/viewprofile/{{account.id}}">{{account.firstName}} {{account.lastName}}</a>
+				<a class="ms-5 btn btn-sm btn-outline-primary float-right" href="/message/{{account.id}}">Message</a>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Account Email</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				<a href="mailto:{{account.email}}">{{account.email}}</a>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Role</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{account.role}}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Approved</h6>
+			</div>
+			<div *ngIf="!!account.approved" class="col-sm-9 text-secondary">
+				Yes
+			</div>
+			<div *ngIf="!account.approved" class="col-sm-9 text-secondary">
+				No
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Behaviour Rating</h6>
+			</div>
+			<div *ngIf="!!account.behaviourRating" class="col-sm-9 text-secondary">
+				{{account.behaviourRating}}
+			</div>
+			<div *ngIf="!account.behaviourRating" class="col-sm-9 text-secondary">
+				N/A
+			</div>
+		</div>
+		<hr>
+		<div *ngIf="account.role === Role.Admin || account.role === Role.Tutor" class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Content Rating</h6>
+			</div>
+			<div *ngIf="!!account.contentRatings && !!account.contentRatings.overallContentRating" class="col-sm-9 text-secondary">
+				{{account.contentRatings.overallContentRating}}
+			</div>
+			<div *ngIf="!account.contentRatings || !account.contentRatings.overallContentRating" class="col-sm-9 text-secondary">
+				N/A
+			</div>
+		</div>
+		<hr>
+		<div *ngIf="account.role === Role.Admin || account.role === Role.Tutor" class="row">
+			<div class="col-sm-3">
+				<h6 *ngIf="!!account.approvedSubjects && numOfApprovedSubjects > 1" class="mb-0">Approved Subjects</h6>
+				<h6 *ngIf="!!account.approvedSubjects && numOfApprovedSubjects == 1" class="mb-0">Approved Subject</h6>
+				<h6 *ngIf="!!account.approvedSubjects && numOfApprovedSubjects == 0" class="mb-0">Approved Subjects</h6>
+				<h6 *ngIf="!account.approvedSubjects" class="mb-0">Approved Subjects</h6>
+			</div>
+			<div *ngIf="!!account.approvedSubjects" id="approved-subjects" class="col-sm-9 text-secondary">
+				<p *ngIf="!!account.approvedSubjects.math" class="approved-subject-item">Math</p>
+				<p *ngIf="!!account.approvedSubjects.science" class="approved-subject-item">Science</p>
+				<p *ngIf="!!account.approvedSubjects.socialStudies" class="approved-subject-item">Social Studies</p>
+				<p *ngIf="!!account.approvedSubjects.languageArts" class="approved-subject-item">Language Arts</p>
+				<p *ngIf="!!account.approvedSubjects.foreignLanguageAcquisition" class="approved-subject-item">Foreign Language Acquisition</p>
+			</div>
+			<div *ngIf="!account.approvedSubjects" class="col-sm-9 text-secondary">
+				N/A
+			</div>
+		</div>
+		<hr>
+		<div class="row ms-1">
+			<div class="col-sm-2">
+				<h6 class="mb-0">Math</h6>
+				<button *ngIf="!account.approvedSubjects.math" (click)="approveSubject('Math')" class="btn btn-sm btn-primary mt-2" [disabled]="account.isApproving">
+					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!account.isApproving">Approve Math</span>
+				</button>
+				<button *ngIf="!!account.approvedSubjects.math" (click)="revokeSubject('Math')" class="btn btn-sm btn-danger mt-2" [disabled]="account.isApproving">
+					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!account.isApproving">Revoke Math</span>
+				</button>
+			</div>
+			<div class="col-sm-2">
+				<h6 class="mb-0">Science</h6>
+				<button *ngIf="!account.approvedSubjects.science" (click)="approveSubject('Science')" class="btn btn-sm btn-primary mt-2" [disabled]="account.isApproving">
+					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!account.isApproving">Approve Science</span>
+				</button>
+				<button *ngIf="!!account.approvedSubjects.science" (click)="revokeSubject('Science')" class="btn btn-sm btn-danger mt-2" [disabled]="account.isApproving">
+					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!account.isApproving">Revoke Science</span>
+				</button>
+			</div>
+			<div class="col-sm-2">
+				<h6 class="mb-0">Social Studies</h6>
+				<button *ngIf="!account.approvedSubjects.socialStudies" (click)="approveSubject('Social Studies')" class="btn btn-sm btn-primary mt-2" [disabled]="account.isApproving">
+					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!account.isApproving">Approve S.S.</span>
+				</button>
+				<button *ngIf="!!account.approvedSubjects.socialStudies" (click)="revokeSubject('Social Studies')" class="btn btn-sm btn-danger mt-2" [disabled]="account.isApproving">
+					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!account.isApproving">Revoke S.S.</span>
+				</button>
+			</div>
+			<div class="col-sm-2">
+				<h6 class="mb-0">Language Arts</h6>
+				<button *ngIf="!account.approvedSubjects.languageArts" (click)="approveSubject('Language Arts')" class="btn btn-sm btn-primary mt-2" [disabled]="account.isApproving">
+					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!account.isApproving">Approve L.A.</span>
+				</button>
+				<button *ngIf="!!account.approvedSubjects.languageArts" (click)="revokeSubject('Language Arts')" class="btn btn-sm btn-danger mt-2" [disabled]="account.isApproving">
+					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!account.isApproving">Revoke L.A.</span>
+				</button>
+			</div>
+			<div class="col-sm-3">
+				<h6 class="mb-0">Foreign Language Acquisition</h6>
+				<button *ngIf="!account.approvedSubjects.foreignLanguageAcquisition" (click)="approveSubject('Foreign Language Acquisition')" class="btn btn-sm btn-primary mt-2" [disabled]="account.isApproving">
+					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!account.isApproving">Approve F.L.A.</span>
+				</button>
+				<button *ngIf="!!account.approvedSubjects.foreignLanguageAcquisition" (click)="revokeSubject('Foreign Language Acquisition')" class="btn btn-sm btn-danger mt-2" [disabled]="account.isApproving">
+					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!account.isApproving">Revoke F.L.A.</span>
+				</button>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Verified Date</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{account.verified}} (<p class="tiny-info" style="display:inline">{{isoVerified}}</p>)
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Last Updated</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{account.updatedAt}} (<p class="tiny-info" style="display:inline">{{isoUpdated}}</p>)
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Created On</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{account.createdAt}} (<p class="tiny-info" style="display:inline">{{isoCreated}}</p>)
+			</div>
+		</div>
+		<div class="pt-4">
+			<a routerLink="../../" class="btn btn-sm btn-secondary float-right">Back</a>
+		</div>
+	</div>
+	<!-- Displayed When Details Don't Exist (During Loading & When API Server is Offline) -->
+	<div *ngIf="!account" class="card-body">
+		<div class="mt-5 mb-4 text-center">
+			<div class="stage">
+				<div class="dot-flashing align-center"></div>	
+			</div>
+			<p class="mt-4">Contacting API Endpoint</p>
+			<a routerLink="../../" class="btn btn-sm btn-secondary">Back</a>
+		</div>
+	</div>
+</div>

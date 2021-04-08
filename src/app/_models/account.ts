@@ -10,4 +10,8 @@ export class Account {
   behaviourRating: number;
   contentRatings: Array<any>;
   jwtToken?: string;
+  verified: string;
+	createdAt: string;
+  updatedAt: string;
+	approvedSubjects: Array<any>;
 }

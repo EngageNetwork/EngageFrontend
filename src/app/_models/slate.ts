@@ -3,8 +3,8 @@ import { Subject } from './subject';
 export class Slate {
   id: string;
   account: string;
-  created: string;
-  updated: string;
+  createdAt: string;
+  updatedAt: string;
   subject: Subject;
   startDateTime: string;
   endDateTime: string;

@@ -94,17 +94,21 @@ export class AccountService {
 		return this.http.post(`${baseUrl}/create`, params);
 	}
 	
-	update(id, params) {
+	update(id: string, params) {
 		return this.http.put(`${baseUrl}/${id}`, params).pipe(map((account: any) => {
-			// update the current account if it was updated
+			// Update the current account if it was updated
 			if (account.id === this.accountValue.id) {
-				// publish updated account to subscribers
+				// Publish updated account to subscribers
 				account = { ...this.accountValue, ...account };
 				this.accountSubject.next(account);
 			}
 			return account;
 		})
 		);
+	}
+
+	approveTutor(id: string, subject: any) {
+		return this.http.put(`${baseUrl}/${id}/approve-tutor`, subject);
 	}
 	
 	delete(id: string) {

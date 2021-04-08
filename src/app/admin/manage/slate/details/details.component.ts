@@ -38,10 +38,10 @@ export class DetailsComponent implements OnInit {
 		this.slateService.getSlateById(this.id)
 		.pipe(first())
 		.subscribe(slate => {
-			this.isoCreated = slate.created;
-			this.isoUpdated = slate.updated;
-			slate.created = moment(slate.created).format('LT MMMM Do[,] YYYY');
-			slate.updated = moment(slate.updated).format('LT MMMM Do[,] YYYY');
+			this.isoCreated = slate.createdAt;
+			this.isoUpdated = slate.updatedAt;
+			slate.createdAt = moment(slate.createdAt).format('LT MMMM Do[,] YYYY');
+			slate.updatedAt = moment(slate.updatedAt).format('LT MMMM Do[,] YYYY');
 			
 			this.isoStartDateTime = slate.startDateTime;
 			this.isoEndDateTime = slate.endDateTime;

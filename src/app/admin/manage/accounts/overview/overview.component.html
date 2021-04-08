@@ -6,18 +6,19 @@
 		<tr>
 			<th style="width: 30%">Name</th>
 			<th style="width: 30%">Email</th>
-			<th style="width: 30%">Role</th>
-			<th style="width: 10%">Actions</th>
+			<th style="width: 25%">Role</th>
+			<th style="width: 15%">Actions</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr *ngFor="let account of accounts">
-			<td>{{account.firstName}} {{account.lastName}}</td>
-			<td>{{account.email}}</td>
+			<td><a routerLink="/profile/viewprofile/{{account.id}}">{{account.firstName}} {{account.lastName}}</a></td>
+			<td><a href="mailto:{{account.email}}">{{account.email}}</a></td>
 			<td>{{account.role}}</td>
 			<td style="white-space: nowrap">
+				<a routerLink="details/{{account.id}}" class="btn btn-sm btn-primary mr-1">Details</a>
 				<a routerLink="edit/{{account.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
-				<button (click)="deleteAccount(account.id, account)" class="btn btn-sm btn-danger btn-delete-account" [disabled]="account.isDeleting">
+				<button (click)="deleteAccount(account.id)" class="btn btn-sm btn-danger btn-delete-account" [disabled]="account.isDeleting">
 					<span *ngIf="account.isDeleting" class="spinner-border spinner-border-sm"></span>
 					<span *ngIf="!account.isDeleting">Delete</span>
 				</button>
@@ -29,7 +30,7 @@
 					<div class="stage">
 						<div class="dot-flashing align-center"></div>	
 					</div>
-					<p class="mt-4">Contacting API endpoint</p>
+					<p class="mt-4">Contacting API Endpoint</p>
 				</div>
 			</td>
 		</tr>

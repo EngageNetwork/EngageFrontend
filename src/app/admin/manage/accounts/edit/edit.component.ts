@@ -23,55 +23,55 @@ export class EditComponent implements OnInit {
 		private snackBar: MatSnackBar,
 		private accountService: AccountService,
 		private title: Title
-		) { }
+	) { }
+	
+	ngOnInit() {
+		this.title.setTitle('Update User | Admin');
 		
-		ngOnInit() {
-			this.title.setTitle('Update User | Admin');
-			
-			this.id = this.route.snapshot.params['id'];
-			
-			this.updateAccountForm = this.formBuilder.group({
-				firstName: ['', Validators.required],
-				lastName: ['', Validators.required],
-				email: ['', [Validators.required, Validators.email]],
-				role: ['', Validators.required],
-				password: ['', [Validators.nullValidator, Validators.minLength(6)]],
-				confirmPassword: ['']
-			}, {
-				validator: MustMatch('password', 'confirmPassword')
-			});
-			
-			this.accountService.getById(this.id)
-			.pipe(first())
-			.subscribe(x => this.updateAccountForm.patchValue(x));
-		}
+		this.id = this.route.snapshot.params['id'];
 		
-		// Get form fields easily in code below and to call from angular template
-		get f() { return this.updateAccountForm.controls; }
+		this.updateAccountForm = this.formBuilder.group({
+			firstName: ['', Validators.required],
+			lastName: ['', Validators.required],
+			email: ['', [Validators.required, Validators.email]],
+			role: ['', Validators.required],
+			password: ['', [Validators.nullValidator, Validators.minLength(6)]],
+			confirmPassword: ['']
+		}, {
+			validator: MustMatch('password', 'confirmPassword')
+		});
 		
-		onSubmit() {
-			this.submitted = true;
-			
-			// Stop code if form has anything invalid
-			if (this.updateAccountForm.invalid) {
-				return;
-			}
-			
-			// Access API to send update request
-			this.loading = true;
-			this.accountService.update(this.id, this.updateAccountForm.value)
-			.pipe(first())
-			.subscribe({
-				next: () => {
-					// Display success message to admin and redirects to accounts list page
-					this.snackBar.open('Account details updated successfully', 'Close', { duration: 10000 });
-					this.router.navigate(['../'], { relativeTo: this.route });
-				},
-				error: error => {
-					// Display error to administrator
-					this.snackBar.open(error, 'Close', { duration: 10000 });
-					this.loading = false;
-				}
-			});
-		}
+		this.accountService.getById(this.id)
+		.pipe(first())
+		.subscribe(x => this.updateAccountForm.patchValue(x));
 	}
+	
+	// Get form fields easily in code below and to call from angular template
+	get f() { return this.updateAccountForm.controls; }
+	
+	onSubmit() {
+		this.submitted = true;
+		
+		// Stop code if form has anything invalid
+		if (this.updateAccountForm.invalid) {
+			return;
+		}
+		
+		// Access API to send update request
+		this.loading = true;
+		this.accountService.update(this.id, this.updateAccountForm.value)
+		.pipe(first())
+		.subscribe({
+			next: () => {
+				// Display success message to admin and redirects to accounts list page
+				this.snackBar.open('Account details updated successfully', 'Close', { duration: 10000 });
+				this.router.navigate(['../'], { relativeTo: this.route });
+			},
+			error: error => {
+				// Display error to administrator
+				this.snackBar.open(error, 'Close', { duration: 10000 });
+				this.loading = false;
+			}
+		});
+	}
+}
