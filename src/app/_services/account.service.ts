@@ -83,7 +83,7 @@ export class AccountService {
 	}
 	
 	getById(id: string) {
-		return this.http.get<Account>(`${baseUrl}/${id}`);
+		return this.http.get<Account>(`${baseUrl}/byId/${id}`);
 	}
 	
 	getByIdPublic(id: string) {
@@ -95,7 +95,7 @@ export class AccountService {
 	}
 	
 	update(id: string, params) {
-		return this.http.put(`${baseUrl}/${id}`, params).pipe(map((account: any) => {
+		return this.http.put(`${baseUrl}/update/${id}`, params).pipe(map((account: any) => {
 			// Update the current account if it was updated
 			if (account.id === this.accountValue.id) {
 				// Publish updated account to subscribers
@@ -103,12 +103,23 @@ export class AccountService {
 				this.accountSubject.next(account);
 			}
 			return account;
-		})
-		);
+		}));
 	}
 
-	approveTutor(id: string, subject: any) {
-		return this.http.put(`${baseUrl}/${id}/approve-tutor`, subject);
+	updateTranscript(params) {
+		return this.http.put(`${baseUrl}/update-transcript`, params).pipe(map((account: any) => {
+			// Update the current account if it was updated
+			if (account.id === this.accountValue.id) {
+				// Publish updated account to subscribers
+				account = { ...this.accountValue, ...account };
+				this.accountSubject.next(account);
+			}
+			return account;
+		}));
+	}
+
+	approveTutor(id: string, subject) {
+		return this.http.put(`${baseUrl}/approve-tutor/${id}`, subject);
 	}
 	
 	delete(id: string) {

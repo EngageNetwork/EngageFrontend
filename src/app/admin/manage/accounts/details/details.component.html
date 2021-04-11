@@ -56,95 +56,128 @@
 			</div>
 		</div>
 		<hr>
-		<div *ngIf="account.role === Role.Admin || account.role === Role.Tutor" class="row">
-			<div class="col-sm-3">
-				<h6 class="mb-0">Content Rating</h6>
+		<div *ngIf="account.role === Role.Admin || account.role === Role.Tutor">
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">Content Rating</h6>
+				</div>
+				<div *ngIf="!!account.contentRatings && !!account.contentRatings.overallContentRating" class="col-sm-9 text-secondary">
+					{{account.contentRatings.overallContentRating}}
+				</div>
+				<div *ngIf="!account.contentRatings || !account.contentRatings.overallContentRating" class="col-sm-9 text-secondary">
+					N/A
+				</div>
 			</div>
-			<div *ngIf="!!account.contentRatings && !!account.contentRatings.overallContentRating" class="col-sm-9 text-secondary">
-				{{account.contentRatings.overallContentRating}}
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 *ngIf="!!account.approvedSubjects && numOfApprovedSubjects > 1" class="mb-0">Approved Subjects</h6>
+					<h6 *ngIf="!!account.approvedSubjects && numOfApprovedSubjects == 1" class="mb-0">Approved Subject</h6>
+					<h6 *ngIf="!!account.approvedSubjects && numOfApprovedSubjects == 0" class="mb-0">Approved Subjects</h6>
+					<h6 *ngIf="!account.approvedSubjects" class="mb-0">Approved Subjects</h6>
+				</div>
+				<div *ngIf="!!account.approvedSubjects" id="approved-subjects" class="col-sm-9 text-secondary">
+					<p *ngIf="!!account.approvedSubjects.math" class="approved-subject-item">Math</p>
+					<p *ngIf="!!account.approvedSubjects.science" class="approved-subject-item">Science</p>
+					<p *ngIf="!!account.approvedSubjects.socialStudies" class="approved-subject-item">Social Studies</p>
+					<p *ngIf="!!account.approvedSubjects.languageArts" class="approved-subject-item">Language Arts</p>
+					<p *ngIf="!!account.approvedSubjects.foreignLanguageAcquisition" class="approved-subject-item">Foreign Language Acquisition</p>
+					<p *ngIf="!account.approvedSubjects.math && !account.approvedSubjects.science && !account.approvedSubjects.socialStudies && !account.approvedSubjects.languageArts && !account.approvedSubjects.foreignLanguageAcquisition" class="approved-subject-item">N/A</p>
+				</div>
+				<div *ngIf="!account.approvedSubjects" class="col-sm-9 text-secondary">
+					N/A
+				</div>
 			</div>
-			<div *ngIf="!account.contentRatings || !account.contentRatings.overallContentRating" class="col-sm-9 text-secondary">
-				N/A
+			<hr>
+			<div class="row ms-1">
+				<div class="col-sm-2">
+					<h6 class="mb-0">Math</h6>
+					<button *ngIf="!account.approvedSubjects.math" (click)="approveSubject('Math')" class="btn btn-sm btn-primary mt-2" [disabled]="account.isApproving">
+						<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+						<span *ngIf="!account.isApproving">Approve Math</span>
+					</button>
+					<button *ngIf="!!account.approvedSubjects.math" (click)="revokeSubject('Math')" class="btn btn-sm btn-danger mt-2" [disabled]="account.isApproving">
+						<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+						<span *ngIf="!account.isApproving">Revoke Math</span>
+					</button>
+				</div>
+				<div class="col-sm-2">
+					<h6 class="mb-0">Science</h6>
+					<button *ngIf="!account.approvedSubjects.science" (click)="approveSubject('Science')" class="btn btn-sm btn-primary mt-2" [disabled]="account.isApproving">
+						<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+						<span *ngIf="!account.isApproving">Approve Science</span>
+					</button>
+					<button *ngIf="!!account.approvedSubjects.science" (click)="revokeSubject('Science')" class="btn btn-sm btn-danger mt-2" [disabled]="account.isApproving">
+						<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+						<span *ngIf="!account.isApproving">Revoke Science</span>
+					</button>
+				</div>
+				<div class="col-sm-2">
+					<h6 class="mb-0">Social Studies</h6>
+					<button *ngIf="!account.approvedSubjects.socialStudies" (click)="approveSubject('Social Studies')" class="btn btn-sm btn-primary mt-2" [disabled]="account.isApproving">
+						<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+						<span *ngIf="!account.isApproving">Approve S.S.</span>
+					</button>
+					<button *ngIf="!!account.approvedSubjects.socialStudies" (click)="revokeSubject('Social Studies')" class="btn btn-sm btn-danger mt-2" [disabled]="account.isApproving">
+						<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+						<span *ngIf="!account.isApproving">Revoke S.S.</span>
+					</button>
+				</div>
+				<div class="col-sm-2">
+					<h6 class="mb-0">Language Arts</h6>
+					<button *ngIf="!account.approvedSubjects.languageArts" (click)="approveSubject('Language Arts')" class="btn btn-sm btn-primary mt-2" [disabled]="account.isApproving">
+						<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+						<span *ngIf="!account.isApproving">Approve L.A.</span>
+					</button>
+					<button *ngIf="!!account.approvedSubjects.languageArts" (click)="revokeSubject('Language Arts')" class="btn btn-sm btn-danger mt-2" [disabled]="account.isApproving">
+						<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+						<span *ngIf="!account.isApproving">Revoke L.A.</span>
+					</button>
+				</div>
+				<div class="col-sm-3">
+					<h6 class="mb-0">Foreign Language Acquisition</h6>
+					<button *ngIf="!account.approvedSubjects.foreignLanguageAcquisition" (click)="approveSubject('Foreign Language Acquisition')" class="btn btn-sm btn-primary mt-2" [disabled]="account.isApproving">
+						<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+						<span *ngIf="!account.isApproving">Approve F.L.A.</span>
+					</button>
+					<button *ngIf="!!account.approvedSubjects.foreignLanguageAcquisition" (click)="revokeSubject('Foreign Language Acquisition')" class="btn btn-sm btn-danger mt-2" [disabled]="account.isApproving">
+						<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
+						<span *ngIf="!account.isApproving">Revoke F.L.A.</span>
+					</button>
+				</div>
 			</div>
+			<hr>
 		</div>
-		<hr>
-		<div *ngIf="account.role === Role.Admin || account.role === Role.Tutor" class="row">
-			<div class="col-sm-3">
-				<h6 *ngIf="!!account.approvedSubjects && numOfApprovedSubjects > 1" class="mb-0">Approved Subjects</h6>
-				<h6 *ngIf="!!account.approvedSubjects && numOfApprovedSubjects == 1" class="mb-0">Approved Subject</h6>
-				<h6 *ngIf="!!account.approvedSubjects && numOfApprovedSubjects == 0" class="mb-0">Approved Subjects</h6>
-				<h6 *ngIf="!account.approvedSubjects" class="mb-0">Approved Subjects</h6>
+		<div *ngIf="account.role === Role.Admin || account.role === Role.Student">
+			<div class="row ms-1">
+				<div class="col-sm-2">
+					<h6 class="mb-0">Math</h6>
+					<p *ngIf="!!account.transcript && !!account.transcript.math">{{account.transcript.math}}</p>
+					<p *ngIf="!account.transcript || !account.transcript.math">N/A</p>
+				</div>
+				<div class="col-sm-2">
+					<h6 class="mb-0">Science</h6>
+					<p *ngIf="!!account.transcript && !!account.transcript.science">{{account.transcript.science}}</p>
+					<p *ngIf="!account.transcript || !account.transcript.science">N/A</p>
+				</div>
+				<div class="col-sm-2">
+					<h6 class="mb-0">Social Studies</h6>
+					<p *ngIf="!!account.transcript && !!account.transcript.socialStudies">{{account.transcript.socialStudies}}</p>
+					<p *ngIf="!account.transcript || !account.transcript.socialStudies">N/A</p>
+				</div>
+				<div class="col-sm-2">
+					<h6 class="mb-0">Language Arts</h6>
+					<p *ngIf="!!account.transcript && !!account.transcript.languageArts">{{account.transcript.languageArts}}</p>
+					<p *ngIf="!account.transcript || !account.transcript.languageArts">N/A</p>
+				</div>
+				<div class="col-sm-3">
+					<h6 class="mb-0">Foreign Language Acquisition</h6>
+					<p *ngIf="!!account.transcript && !!account.transcript.foreignLanguageAcquisition">{{account.transcript.foreignLanguageAcquisition}}</p>
+					<p *ngIf="!account.transcript || !account.transcript.foreignLanguageAcquisition">N/A</p>
+				</div>
 			</div>
-			<div *ngIf="!!account.approvedSubjects" id="approved-subjects" class="col-sm-9 text-secondary">
-				<p *ngIf="!!account.approvedSubjects.math" class="approved-subject-item">Math</p>
-				<p *ngIf="!!account.approvedSubjects.science" class="approved-subject-item">Science</p>
-				<p *ngIf="!!account.approvedSubjects.socialStudies" class="approved-subject-item">Social Studies</p>
-				<p *ngIf="!!account.approvedSubjects.languageArts" class="approved-subject-item">Language Arts</p>
-				<p *ngIf="!!account.approvedSubjects.foreignLanguageAcquisition" class="approved-subject-item">Foreign Language Acquisition</p>
-			</div>
-			<div *ngIf="!account.approvedSubjects" class="col-sm-9 text-secondary">
-				N/A
-			</div>
+			<hr>
 		</div>
-		<hr>
-		<div class="row ms-1">
-			<div class="col-sm-2">
-				<h6 class="mb-0">Math</h6>
-				<button *ngIf="!account.approvedSubjects.math" (click)="approveSubject('Math')" class="btn btn-sm btn-primary mt-2" [disabled]="account.isApproving">
-					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
-					<span *ngIf="!account.isApproving">Approve Math</span>
-				</button>
-				<button *ngIf="!!account.approvedSubjects.math" (click)="revokeSubject('Math')" class="btn btn-sm btn-danger mt-2" [disabled]="account.isApproving">
-					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
-					<span *ngIf="!account.isApproving">Revoke Math</span>
-				</button>
-			</div>
-			<div class="col-sm-2">
-				<h6 class="mb-0">Science</h6>
-				<button *ngIf="!account.approvedSubjects.science" (click)="approveSubject('Science')" class="btn btn-sm btn-primary mt-2" [disabled]="account.isApproving">
-					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
-					<span *ngIf="!account.isApproving">Approve Science</span>
-				</button>
-				<button *ngIf="!!account.approvedSubjects.science" (click)="revokeSubject('Science')" class="btn btn-sm btn-danger mt-2" [disabled]="account.isApproving">
-					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
-					<span *ngIf="!account.isApproving">Revoke Science</span>
-				</button>
-			</div>
-			<div class="col-sm-2">
-				<h6 class="mb-0">Social Studies</h6>
-				<button *ngIf="!account.approvedSubjects.socialStudies" (click)="approveSubject('Social Studies')" class="btn btn-sm btn-primary mt-2" [disabled]="account.isApproving">
-					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
-					<span *ngIf="!account.isApproving">Approve S.S.</span>
-				</button>
-				<button *ngIf="!!account.approvedSubjects.socialStudies" (click)="revokeSubject('Social Studies')" class="btn btn-sm btn-danger mt-2" [disabled]="account.isApproving">
-					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
-					<span *ngIf="!account.isApproving">Revoke S.S.</span>
-				</button>
-			</div>
-			<div class="col-sm-2">
-				<h6 class="mb-0">Language Arts</h6>
-				<button *ngIf="!account.approvedSubjects.languageArts" (click)="approveSubject('Language Arts')" class="btn btn-sm btn-primary mt-2" [disabled]="account.isApproving">
-					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
-					<span *ngIf="!account.isApproving">Approve L.A.</span>
-				</button>
-				<button *ngIf="!!account.approvedSubjects.languageArts" (click)="revokeSubject('Language Arts')" class="btn btn-sm btn-danger mt-2" [disabled]="account.isApproving">
-					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
-					<span *ngIf="!account.isApproving">Revoke L.A.</span>
-				</button>
-			</div>
-			<div class="col-sm-3">
-				<h6 class="mb-0">Foreign Language Acquisition</h6>
-				<button *ngIf="!account.approvedSubjects.foreignLanguageAcquisition" (click)="approveSubject('Foreign Language Acquisition')" class="btn btn-sm btn-primary mt-2" [disabled]="account.isApproving">
-					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
-					<span *ngIf="!account.isApproving">Approve F.L.A.</span>
-				</button>
-				<button *ngIf="!!account.approvedSubjects.foreignLanguageAcquisition" (click)="revokeSubject('Foreign Language Acquisition')" class="btn btn-sm btn-danger mt-2" [disabled]="account.isApproving">
-					<span *ngIf="account.isApproving" class="spinner-border spinner-border-sm"></span>
-					<span *ngIf="!account.isApproving">Revoke F.L.A.</span>
-				</button>
-			</div>
-		</div>
-		<hr>
 		<div class="row">
 			<div class="col-sm-3">
 				<h6 class="mb-0">Verified Date</h6>
