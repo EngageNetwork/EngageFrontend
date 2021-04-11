@@ -63,12 +63,12 @@ export class UpdateTranscriptComponent {
 		.pipe(first())
 		.subscribe({
 			next: () => {
-				// Display success message to admin and redirects to accounts list page
+				// Display success message to user and redirects to previous page
 				this.snackBar.open('Transcript updated successfully', 'Close', { duration: 10000 });
 				this.router.navigate(['../'], { relativeTo: this.route });
 			},
 			error: error => {
-				// Display error to administrator
+				// Display error to user
 				this.snackBar.open(error, 'Close', { duration: 10000 });
 				this.loading = false;
 			}
