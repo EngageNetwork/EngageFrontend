@@ -26,11 +26,11 @@ export class MessageService {
         this.message = this.messageSubject.asObservable();
     }
     
-    initiateChat(userIds: any) {
+    initiateChat(userIds) {
         return this.http.post<Chat>(`${baseUrl}/initiate`, userIds)
     }
     
-    postMsg(id: string, msgPayload: any) {
+    postMsg(id: string, msgPayload) {
         return this.http.post<any>(`${baseUrl}/${id}/message`, msgPayload)
     }
 

@@ -70,11 +70,11 @@ export class SlateService {
 		return this.http.put(`${baseUrl}/markcomplete/${id}`, null);
 	}
 
-	submitContentRating(id: string, contentRating: any) {
+	submitContentRating(id: string, contentRating) {
 		return this.http.put(`${baseUrl}/rating/content/${id}`, contentRating);
 	}
 
-	submitBehaviourRating(id: string, behaviourRating: any) {
+	submitBehaviourRating(id: string, behaviourRating) {
 		return this.http.put(`${baseUrl}/rating/behaviour/${id}`, behaviourRating);
 	}
 	
