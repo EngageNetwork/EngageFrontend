@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
@@ -12,7 +12,7 @@ import { AccountService } from '@app/_services';
 	styleUrls: ['./update-transcript.component.scss']
 })
 
-export class UpdateTranscriptComponent implements OnInit {
+export class UpdateTranscriptComponent {
 	updateTranscriptForm: FormGroup;
 	account = this.accountService.accountValue;
 	transcript = [];
