@@ -148,4 +148,3 @@ export class AccountService {
 		clearTimeout(this.refreshTokenTimeout);
 	}
 }
-		
