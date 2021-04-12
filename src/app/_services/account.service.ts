@@ -10,6 +10,7 @@ import { Account } from '@app/_models';
 const baseUrl = `${environment.apiUrl}/accounts`;
 
 @Injectable({ providedIn: 'root' })
+
 export class AccountService {
 	private accountSubject: BehaviorSubject<Account>;
 	public account: Observable<Account>;
