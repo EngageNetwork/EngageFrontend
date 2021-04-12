@@ -39,10 +39,10 @@
 				<div class="col-sm-3">
 					<h6 class="mb-0">Tutor Content Rating</h6>
 				</div>
-				<div *ngIf="!!listing.accountDetails.contentRatings && !!listing.accountDetails.contentRatings.overallContentRating" class="col-sm-9 text-secondary">
+				<div *ngIf="!!session.accountDetails.contentRatings && !!session.accountDetails.contentRatings.overallContentRating" class="col-sm-9 text-secondary">
 					{{session.accountDetails.contentRatings.overallContentRating}}/100
 				</div>
-				<div *ngIf="!listing.accountDetails.contentRatings || !listing.accountDetails.contentRatings.overallContentRating" class="col-sm-9 text-secondary">
+				<div *ngIf="!session.accountDetails.contentRatings || !session.accountDetails.contentRatings.overallContentRating" class="col-sm-9 text-secondary">
 					None Available
 				</div>
 			</div>
