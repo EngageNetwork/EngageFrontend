@@ -105,7 +105,7 @@
 					<span *ngIf="session.isMarkingComplete" class="spinner-border spinner-border-sm"></span>
 					<span *ngIf="!session.isMarkingComplete">Unmark Session As Complete</span>
 				</button>
-				<button (click)="cancelSession()" class="btn btn-sm btn-outline-danger" [disabled]="session.isRemoving">
+				<button (click)="cancelSession()" class="btn btn-sm btn-danger" [disabled]="session.isRemoving">
 					<span *ngIf="session.isRemoving" class="spinner-border spinner-border-sm"></span>
 					<span *ngIf="!session.isRemoving">Cancel Session</span>
 				</button>
