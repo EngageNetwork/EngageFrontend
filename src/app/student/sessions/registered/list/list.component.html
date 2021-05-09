@@ -19,7 +19,7 @@
 				<a *ngIf="!!session.markedCompletedStudent && !!session.markedCompletedTutor" routerLink="details/{{session._id}}" class="btn btn-sm btn-success mr-1 finish-text">Complete Session</a>
 				<div *ngIf="!session.markedCompletedStudent || !session.markedCompletedTutor">
 					<a routerLink="details/{{session._id}}" class="btn btn-sm btn-primary mr-1">Details</a>
-					<button (click)="cancelSession(session._id)" class="btn btn-sm btn-danger" [disabled]="session.isRemoving">
+					<button (click)="cancelSession(session._id)" class="btn btn-sm btn-outline-danger" [disabled]="session.isRemoving">
 						<span *ngIf="session.isRemoving" class="spinner-border spinner-border-sm"></span>
 						<span *ngIf="!session.isRemoving">Cancel</span>
 					</button>

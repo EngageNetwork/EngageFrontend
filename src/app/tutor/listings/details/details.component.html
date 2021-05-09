@@ -102,7 +102,7 @@
 					</button>
 				</div>
 				<a routerLink="../../edit/{{listing.id}}" class="btn btn-sm btn-primary mr-2">Edit Listing</a>
-				<button (click)="deleteListing(listing.id)" class="btn btn-sm btn-danger mr-2" [disabled]="listing.isDeleting || !!listing.registered">
+				<button (click)="deleteListing(listing.id)" class="btn btn-sm btn-outline-danger mr-2" [disabled]="listing.isDeleting || !!listing.registered">
 					<span *ngIf="listing.isDeleting" class="spinner-border spinner-border-sm"></span>
 					<span *ngIf="!listing.isDeleting">Delete Listing</span>
 				</button>
