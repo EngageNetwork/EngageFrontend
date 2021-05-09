@@ -14,6 +14,7 @@ export class EditComponent implements OnInit {
 	id: string;
 	loading = false;
 	submitted = false;
+	selectedSubjectFLA = false;
 	
 	constructor(
 		private formBuilder: FormBuilder,
@@ -24,20 +25,24 @@ export class EditComponent implements OnInit {
 		private title: Title
 		) { }
 		
-		ngOnInit(): void {
+		ngOnInit() {
 			this.title.setTitle('Update Listing');
 			
 			this.id = this.route.snapshot.params['id'];
 			
 			this.updateListingForm = this.formBuilder.group({
 				subject: ['', Validators.required],
+				details: [''],
 				startDateTime: ['', Validators.required],
 				endDateTime: ['', Validators.required]
 			});
 			
 			this.slateService.getListingById(this.id)
 			.pipe(first())
-			.subscribe(x => this.updateListingForm.patchValue(x));
+			.subscribe(x => this.updateListingForm.patchValue({
+				subject: x.subject,
+				details: x.details
+			}));
 		}
 		
 		// Get form fields easily in code below and to call from angular template
@@ -51,6 +56,25 @@ export class EditComponent implements OnInit {
 				return;
 			}
 			
+			// Ensure time range is specified
+			if (!this.updateListingForm.value.startDateTime || !this.updateListingForm.value.endDateTime) {
+				this.snackBar.open('Specify Time Range', 'Close', { duration: 10000 });
+				return;
+			}
+
+			// Check for specific language if subject is FLA
+			if (this.updateListingForm.value.subject == 'Foreign Language Acquisition') {
+				if (!this.updateListingForm.value.details) {
+					this.snackBar.open('Specify Language', 'Close', { duration: 10000 });
+					return;
+				}
+			}
+
+			// If subject is not set to FLA, clear details
+			if (this.updateListingForm.value.subject != 'Foreign Language Acquisition') {
+				this.updateListingForm.value.details = null;
+			}
+
 			// Access API to update edit
 			this.loading = true;
 			this.slateService.update(this.id, this.updateListingForm.value)

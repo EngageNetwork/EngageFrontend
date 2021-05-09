@@ -6,6 +6,7 @@ export class Slate {
   createdAt: string;
   updatedAt: string;
   subject: Subject;
+  details: string;
   startDateTime: string;
   endDateTime: string;
   registered: string;
