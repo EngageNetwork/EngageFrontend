@@ -15,6 +15,7 @@ import { SlateService } from '@app/_services';
 export class DetailsComponent implements OnInit {
 	id: string;
 	listing: any;
+	behaviourRatingValue: number;
 	
 	constructor(
 		private route: ActivatedRoute,
@@ -78,6 +79,38 @@ export class DetailsComponent implements OnInit {
 					}
 				})
 			}
+		}
+	}
+
+	updateBehaviourRatingValue(event: any) {
+		this.behaviourRatingValue = event.value;
+	}
+
+	submitRatings() {
+		const listing = this.listing;
+
+		if (!this.behaviourRatingValue) {
+			// Display error to user
+			this.snackBar.open('No behaviour rating provided', 'Close', { duration: 10000 });
+			return;
+		}
+		if (confirm(`Submit behaviour rating for ${listing.registeredDetails.firstName} ${listing.registeredDetails.lastName}?`)) {
+			listing.isSubmitting = true;
+			
+			this.slateService.submitBehaviourRating(this.id, { behaviourRating: this.behaviourRatingValue })
+			.pipe(first())
+			.subscribe({
+				next: () =>  {
+					// Display success message to user
+					this.snackBar.open('Behaviour rating submitted successfully', 'Close', { duration: 10000 });
+					this.router.navigate(['../../'], { relativeTo: this.route });
+				},
+				error: error => {
+					// Display error to user
+					this.snackBar.open(error, 'Close', { duration: 10000 });
+					listing.isSubmitting = false;
+				}
+			});
 		}
 	}
 
