@@ -8,20 +8,24 @@ import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
 
 const routes: Routes = [
-  {
-    path: '', component: LayoutComponent,
-    children: [
-      { path: '', component: OverviewComponent },
-      { path: 'add', component: AddComponent },
-      { path: 'details/:id', component: DetailsComponent },
-      { path: 'edit/:id', component: EditComponent }
-    ]
-  }
+	{
+		path: '', component: LayoutComponent,
+		children: [
+			{ path: '', component: OverviewComponent },
+			{
+				path: 'history',
+				loadChildren: () => import('./history/history.module').then(m => m.HistoryModule)
+			},
+			{ path: 'add', component: AddComponent },
+			{ path: 'details/:id', component: DetailsComponent },
+			{ path: 'edit/:id', component: EditComponent }
+		]
+	}
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
 
 export class ListingsRoutingModule { }
