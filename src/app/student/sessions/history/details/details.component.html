@@ -1,0 +1,165 @@
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="main-breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a routerLink="/student">Home</a></li>
+		<li class="breadcrumb-item"><a routerLink="/student/sessions/registered">My Sessions</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Session Details</li>
+	</ol>
+</nav>
+<!-- /Breadcrumb -->
+
+<!-- Header -->
+<div *ngIf="!!session">
+	<div *ngIf="!session.markedCompletedStudent || !session.markedCompletedTutor">
+		<h1>Session Details</h1>
+	</div>
+	<div *ngIf="!!session.markedCompletedStudent && !!session.markedCompletedTutor">
+		<h1>Session Complete!</h1>
+		<h6 class="mt-3">Congratulations on completing today's session!</h6>
+		<p class="mt-3">Please provide some feedback to help us improve our service.</p>
+	</div>
+</div>
+
+<!-- Main Body -->
+<div class="card mb-3 mt-5">
+	<div *ngIf="!!session" class="card-body">
+		<!-- Displayed When One of Two Users Hasn't Marked as Complete -->
+		<div *ngIf="!session.markedCompletedStudent || !session.markedCompletedTutor">
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">Tutor Name</h6>
+				</div>
+				<div class="col-sm-9 text-secondary">
+					<a routerLink="/profile/viewprofile/{{session.account}}">{{session.accountDetails.firstName}} {{session.accountDetails.lastName}}</a>
+					<a class="ms-5 btn btn-sm btn-outline-primary float-right" href="/message/{{session.account}}">Message</a>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">Tutor Content Rating</h6>
+				</div>
+				<div *ngIf="!!session.accountDetails.contentRatings && !!session.accountDetails.contentRatings.overallContentRating" class="col-sm-9 text-secondary">
+					{{session.accountDetails.contentRatings.overallContentRating}}/100
+				</div>
+				<div *ngIf="!session.accountDetails.contentRatings || !session.accountDetails.contentRatings.overallContentRating" class="col-sm-9 text-secondary">
+					None Available
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">Tutor Behaviour Rating</h6>
+				</div>
+				<div *ngIf="!!session.accountDetails.behaviourRating" class="col-sm-9 text-secondary">
+					{{session.accountDetails.behaviourRating}}/100
+				</div>
+				<div *ngIf="!session.accountDetails.behaviourRating" class="col-sm-9 text-secondary">
+					None Available
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">Subject</h6>
+				</div>
+				<div class="col-sm-9 text-secondary">
+					{{session.subject}}
+				</div>
+			</div>
+			<hr>
+			<div *ngIf="!!session.details">
+				<div class="row">
+					<div class="col-sm-3">
+						<h6 class="mb-0">Details</h6>
+					</div>
+					<div class="col-sm-9 text-secondary">
+						{{session.details}}
+					</div>
+				</div>
+				<hr>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">Start of Time Range</h6>
+				</div>
+				<div class="col-sm-9 text-secondary">
+					{{session.startDateTime}}
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">End of Time Range</h6>
+				</div>
+				<div class="col-sm-9 text-secondary">
+					{{session.endDateTime}}
+				</div>
+			</div>
+			<div class="pt-4">
+				<button *ngIf="!session.markedCompletedStudent" (click)="markCompleted()" class="btn btn-sm btn-success mr-3" [disabled]="session.isMarkingComplete">
+					<span *ngIf="session.isMarkingComplete" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!session.isMarkingComplete">Mark Session As Complete</span>
+				</button>
+				<button *ngIf="!!session.markedCompletedStudent" (click)="markCompleted()" class="btn btn-sm btn-danger mr-3" [disabled]="session.isMarkingComplete">
+					<span *ngIf="session.isMarkingComplete" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!session.isMarkingComplete">Unmark Session As Complete</span>
+				</button>
+				<button (click)="cancelSession()" class="btn btn-sm btn-danger" [disabled]="session.isRemoving">
+					<span *ngIf="session.isRemoving" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!session.isRemoving">Cancel Session</span>
+				</button>
+				<a routerLink="../../" class="btn btn-sm btn-secondary float-right">Back</a>
+			</div>
+		</div>
+		<!-- Displayed When Both Users Have Marked as Complete -->
+		<div *ngIf="!!session.markedCompletedStudent && !!session.markedCompletedTutor">
+			<div class="row">
+				<div class="col-sm-4">
+					<h6 class="mb-0">Tutor Name</h6>
+				</div>
+				<div class="col-sm-8 text-secondary">
+					<a routerLink="/profile/viewprofile/{{session.account}}">{{session.accountDetails.firstName}} {{session.accountDetails.lastName}}</a>
+					<a class="ms-5 btn btn-sm btn-outline-primary float-right" href="/message/{{session.account}}">Message</a>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-4">
+					<h6 class="mb-0">How would you rate your tutor's content?</h6>
+				</div>
+				<div class="col-sm-8 text-secondary">
+					<mat-slider color="primary" thumbLabel min="0" max="100" step="1" class="rating-slider w-50" (input)="updateContentRatingValue($event)"></mat-slider>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-4">
+					<h6 class="mb-0">How would you rate your tutor's behaviour?</h6>
+				</div>
+				<div class="col-sm-8 text-secondary">
+					<mat-slider color="primary" thumbLabel min="0" max="100" step="1" class="rating-slider w-50" (input)="updateBehaviourRatingValue($event)"></mat-slider>
+				</div>
+			</div>
+			<div class="pt-4">
+				<button (click)="submitRatings()" class="btn btn-sm btn-success" [disabled]="session.isSubmitting">
+					<span *ngIf="session.isSubmitting" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!session.isSubmitting">Finalize Ratings</span>
+				</button>
+				<a routerLink="../../" class="btn btn-sm btn-secondary float-right">Back</a>
+			</div>
+		</div>
+	</div>
+	<!-- Displayed When Details Don't Exist (During Loading & When API Server is Offline) -->
+	<div *ngIf="!session" class="card-body">
+		<div class="mt-5 mb-4 text-center">
+			<div class="stage">
+				<div class="dot-flashing align-center"></div>	
+			</div>
+			<p class="mt-4">Loading session details</p>
+			<a routerLink="../../" class="btn btn-sm btn-secondary">Back</a>
+		</div>
+	</div>
+</div>
+
+

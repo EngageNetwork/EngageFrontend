@@ -61,6 +61,10 @@ export class SlateService {
 	getMySessions() {
 		return this.http.get<Slate[]>(`${baseUrl}/mysessions`);
 	}
+
+	getMyFinishedSessions() {
+		return this.http.get<Slate[]>(`${baseUrl}/myfinishedsessions`);
+	}
 	
 	getSessionById(id: string) {
 		return this.http.get<Slate>(`${baseUrl}/session/${id}`);

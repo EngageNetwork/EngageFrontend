@@ -1,0 +1,29 @@
+<h1>Past Sessions</h1>
+<p class="big-info-text">All of your past sessions are shown below</p>
+<p class="fw-light small-linker-text">Looking for your current registered sessions? Click <a routerLink="../registered">here</a> to view them.</p>
+<table class="table table-hover">
+	<thead id="table-header" class="thead-dark">
+		<tr>
+			<th style="width: 25%">Tutor Name</th>
+			<th style="width: 25%">Subject</th>
+			<th style="width: 45%">Date/Time Range</th>
+			<th style="width: 5%">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let session of sessions">
+			<td><a routerLink="/profile/viewprofile/{{session.account}}">{{session.accountDetails.firstName}} {{session.accountDetails.lastName}}</a></td>
+			<td>{{session.subject}} <p *ngIf="!!session.details" style="display:inline"> ({{session.details}})</p></td>
+			<td><h6 style="display:inline">{{session.startDateTime}}</h6> to <h6 style="display:inline">{{session.endDateTime}}</h6></td>
+			<td style="white-space: nowrap">
+				<a routerLink="details/{{session._id}}" class="btn btn-sm btn-primary mr-1">Details</a>
+			</td>
+		</tr>
+		<tr *ngIf="!sessions?.length">
+			<td colspan="4" class="text-center">
+				<span class="spinner-border spinner-border-lg align-center mt-3"></span>
+				<p class="text-center mt-4">You have no past sessions. Click <a routerLink="../registered">here</a> to see your current sessions.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>

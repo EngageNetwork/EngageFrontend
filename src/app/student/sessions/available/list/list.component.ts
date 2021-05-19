@@ -22,7 +22,7 @@ export class ListComponent implements OnInit {
 	) { }
 	
 	ngOnInit(): void {
-		this.title.setTitle('Available Positions');
+		this.title.setTitle('Available Sessions');
 
 		this.fetchData();
 		this.interval = setInterval(() => {
