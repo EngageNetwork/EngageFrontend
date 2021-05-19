@@ -49,6 +49,10 @@ export class SlateService {
 	getMyListings() {
 		return this.http.get<Slate[]>(`${baseUrl}/mylistings`);
 	}
+
+	getMyFinishedListings() {
+		return this.http.get<Slate[]>(`${baseUrl}/myfinishedlistings`);
+	}
 	
 	getListingById(id: string) {
 		return this.http.get<Slate>(`${baseUrl}/listing/${id}`);

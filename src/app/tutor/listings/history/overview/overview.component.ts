@@ -26,7 +26,7 @@ export class OverviewComponent implements OnInit {
 	}
 	
 	fetchData() {
-		this.slateService.getMyListings()
+		this.slateService.getMyFinishedListings()
 		.pipe(first())
 		.subscribe(listings => {
 			listings.forEach(function(item) {
