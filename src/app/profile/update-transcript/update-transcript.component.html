@@ -1,0 +1,40 @@
+<h1>Update Transcript</h1>
+<form [formGroup]="updateTranscriptForm" (ngSubmit)="onSubmit()" class="mt-5">
+	<div class="form-row">
+		<mat-form-field appearance="fill" class="col-5">
+			<mat-label>Math</mat-label>
+			<input matInput type="text" formControlName="math" />
+		</mat-form-field>
+	</div>
+	<div class="form-row">
+		<mat-form-field appearance="fill" class="col-5">
+			<mat-label>Science</mat-label>
+			<input matInput type="text" formControlName="science" />
+		</mat-form-field>
+	</div>
+	<div class="form-row">
+		<mat-form-field appearance="fill" class="col-5">
+			<mat-label>Social Studies</mat-label>
+			<input matInput type="text" formControlName="socialStudies" />
+		</mat-form-field>
+	</div>
+	<div class="form-row">
+		<mat-form-field appearance="fill" class="col-5">
+			<mat-label>Language Arts</mat-label>
+			<input matInput type="text" formControlName="languageArts" />
+		</mat-form-field>
+	</div>
+	<div class="form-row">
+		<mat-form-field appearance="fill" class="col-5">
+			<mat-label>Foreign Language Acquisition</mat-label>
+			<input matInput type="text" formControlName="foreignLanguageAcquisition" />
+		</mat-form-field>
+	</div>
+	<div class="form-group mt-3">
+		<button [disabled]="loading" class="btn btn-primary mr-2">
+			<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+			Save Changes
+		</button>
+		<a routerLink="../" class="btn btn-link">Cancel</a>
+	</div>
+</form>

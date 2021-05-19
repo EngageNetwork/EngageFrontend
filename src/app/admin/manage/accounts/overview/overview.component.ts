@@ -25,9 +25,9 @@ export class OverviewComponent implements OnInit {
 		.subscribe(accounts => this.accounts = accounts);
 	}
 	
-	deleteAccount(id: string, acnt) {
+	deleteAccount(id: string) {
 		const account = this.accounts.find(x => x.id === id);
-		if (confirm(`Are you sure you want to delete the account with email: "${acnt.email}"? This action cannot be reversed.`)) {
+		if (confirm(`Are you sure you want to delete the account with email: "${account.email}"? This action cannot be reversed.`)) {
 			account.isDeleting = true;
 			this.accountService.delete(id)
 			.pipe(first())

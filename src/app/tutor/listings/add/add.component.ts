@@ -28,6 +28,7 @@ export class AddComponent implements OnInit {
 		
 		this.createListingForm = this.formBuilder.group({
 			subject: ['', Validators.required],
+			details: [''],
 			startDateTime: ['', Validators.required],
 			endDateTime: ['', Validators.required]
 		});
@@ -38,12 +39,29 @@ export class AddComponent implements OnInit {
 	
 	onSubmit() {
 		this.submitted = true;
-		
-		console.log(this.createListingForm.value);
 
 		// Stop code if form has anything invalid
 		if (this.createListingForm.invalid) {
 			return;
+		}
+
+		// Ensure time range is specified
+		if (!this.createListingForm.value.startDateTime || !this.createListingForm.value.endDateTime) {
+			this.snackBar.open('Specify Time Range', 'Close', { duration: 10000 });
+			return;
+		}
+
+		// Check for specific language if subject is FLA
+		if (this.createListingForm.value.subject == 'Foreign Language Acquisition') {
+			if (!this.createListingForm.value.details) {
+				this.snackBar.open('Specify Language', 'Close', { duration: 10000 });
+				return;
+			}
+		}
+
+		// If subject is not set to FLA, clear details
+		if (this.createListingForm.value.subject != 'Foreign Language Acquisition') {
+			this.createListingForm.value.details = null;
 		}
 		
 		// Access API to send listing creation request

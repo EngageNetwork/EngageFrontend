@@ -8,7 +8,10 @@
 </nav>
 <!-- /Breadcrumb -->
 
+<!-- Header -->
 <h1>Session Details</h1>
+
+<!-- Main Body -->
 <div class="card mb-3 mt-5">
 	<div *ngIf="!!listing" class="card-body">
 		<div class="row">
@@ -16,10 +19,55 @@
 				<h6 class="mb-0">Tutor Name</h6>
 			</div>
 			<div class="col-sm-9 text-secondary">
-				<a routerLink="/profile/viewprofile/{{listing.account}}">{{listing.tutorName}}</a>
+				<a routerLink="/profile/viewprofile/{{listing.account}}">{{listing.accountDetails.firstName}} {{listing.accountDetails.lastName}}</a>
+				<a class="ms-5 btn btn-sm btn-outline-primary float-right" href="/message/{{listing.account}}">Message</a>
 			</div>
 		</div>
 		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Tutor Content Rating</h6>
+			</div>
+			<div *ngIf="!!listing.accountDetails.contentRatings && !!listing.accountDetails.contentRatings.overallContentRating" class="col-sm-9 text-secondary">
+				{{listing.accountDetails.contentRatings.overallContentRating}}/100
+			</div>
+			<div *ngIf="!listing.accountDetails.contentRatings || !listing.accountDetails.contentRatings.overallContentRating" class="col-sm-9 text-secondary">
+				None Available
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Tutor Behaviour Rating</h6>
+			</div>
+			<div *ngIf="!!listing.accountDetails.behaviourRating" class="col-sm-9 text-secondary">
+				{{listing.accountDetails.behaviourRating}}/100
+			</div>
+			<div *ngIf="!listing.accountDetails.behaviourRating" class="col-sm-9 text-secondary">
+				None Available
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Subject</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{listing.subject}}
+			</div>
+		</div>
+		<hr>
+		<div *ngIf="!!listing.details">
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">Details</h6>
+				</div>
+				<div class="col-sm-9 text-secondary">
+					{{listing.details}}
+				</div>
+			</div>
+			<hr>
+		</div>
 		<div class="row">
 			<div class="col-sm-3">
 				<h6 class="mb-0">Start of Time Range</h6>
@@ -45,15 +93,14 @@
 			<a routerLink="../../" class="btn btn-sm btn-secondary float-right">Back</a>
 		</div>
 	</div>
+	<!-- Displayed When Details Don't Exist (During Loading & When API Server is Offline) -->
 	<div *ngIf="!listing" class="card-body">
 		<div class="mt-5 mb-4 text-center">
 			<div class="stage">
 				<div class="dot-flashing align-center"></div>	
 			</div>
-			<p class="mt-4">Loading details</p>
+			<p class="mt-4">Loading session details</p>
 			<a routerLink="../../" class="btn btn-sm btn-secondary">Back</a>
 		</div>
 	</div>
 </div>
-
-

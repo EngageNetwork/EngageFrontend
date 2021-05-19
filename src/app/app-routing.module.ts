@@ -29,6 +29,11 @@ const routes: Routes = [
 		loadChildren: () => import('./message/message.module').then(m => m.MessageModule),
 		canActivate: [AuthGuard]
 	},
+	{
+		path: 'video',
+		loadChildren: () => import('./video/video.module').then(m => m.VideoModule),
+		canActivate: [AuthGuard]
+	},
 	
 	// Different Base Routes for Admin, Tutor, and Students
 	{

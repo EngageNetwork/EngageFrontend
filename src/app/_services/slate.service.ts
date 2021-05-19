@@ -49,6 +49,10 @@ export class SlateService {
 	getMyListings() {
 		return this.http.get<Slate[]>(`${baseUrl}/mylistings`);
 	}
+
+	getMyFinishedListings() {
+		return this.http.get<Slate[]>(`${baseUrl}/myfinishedlistings`);
+	}
 	
 	getListingById(id: string) {
 		return this.http.get<Slate>(`${baseUrl}/listing/${id}`);
@@ -57,6 +61,10 @@ export class SlateService {
 	getMySessions() {
 		return this.http.get<Slate[]>(`${baseUrl}/mysessions`);
 	}
+
+	getMyFinishedSessions() {
+		return this.http.get<Slate[]>(`${baseUrl}/myfinishedsessions`);
+	}
 	
 	getSessionById(id: string) {
 		return this.http.get<Slate>(`${baseUrl}/session/${id}`);
@@ -64,6 +72,18 @@ export class SlateService {
 	
 	update(id: string, slate: Slate) {
 		return this.http.put(`${baseUrl}/update/${id}`, slate);
+	}
+
+	markComplete(id: string) {
+		return this.http.put(`${baseUrl}/markcomplete/${id}`, null);
+	}
+
+	submitContentRating(id: string, contentRating) {
+		return this.http.put(`${baseUrl}/rating/content/${id}`, contentRating);
+	}
+
+	submitBehaviourRating(id: string, behaviourRating) {
+		return this.http.put(`${baseUrl}/rating/behaviour/${id}`, behaviourRating);
 	}
 	
 	delete(id: string) {

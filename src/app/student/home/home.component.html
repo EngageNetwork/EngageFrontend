@@ -1,6 +1,11 @@
 <div class="p-4">
-  <div class="container">
-      <h1>Hi {{account.firstName}}!</h1>
-      <p>You are logged into your Engage Network account.</p>
-  </div>
+	<div class="container card mt-3">
+		<div class="card-body">
+			<h1>Hi {{account.firstName}}!</h1>
+			<p>You are logged into your Engage Network account.</p>
+		</div>
+		<div *ngIf="!account.approved" class="card-body">
+			<p class="mb-0">You have not been approved yet to use the Engage Network. Please fill out your transcript details <a routerLink="/profile/update-transcript">here</a></p>
+		</div>
+	</div>
 </div>

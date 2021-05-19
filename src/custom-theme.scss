@@ -28,8 +28,18 @@ $EngageFrontend-theme: mat-light-theme((
   )
 ));
 
+// Slider Theme
+$EngageSlider-primary: mat-palette($mat-blue, A700);
+$EngageSlider-accent: mat-palette($mat-gray, A200, A100, A400);
+$EngageSlider-theme: mat-light-theme((
+  color: (
+    primary: $EngageSlider-primary,
+    accent: $EngageSlider-accent
+  )
+));
+
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($EngageFrontend-theme);
-
+@include mat-slider-theme($EngageSlider-theme);

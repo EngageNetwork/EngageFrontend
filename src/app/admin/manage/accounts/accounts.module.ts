@@ -6,9 +6,10 @@ import { AccountsRoutingModule } from './accounts-routing.module';
 import { OverviewComponent } from './overview/overview.component';
 import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
+import { DetailsComponent } from './details/details.component';
 
 @NgModule({
-  declarations: [ OverviewComponent, AddComponent, EditComponent ] ,
+  declarations: [ OverviewComponent, AddComponent, EditComponent, DetailsComponent ] ,
   imports: [
     CommonModule,
     ReactiveFormsModule,

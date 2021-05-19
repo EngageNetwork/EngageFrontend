@@ -1,0 +1,89 @@
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="main-breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a routerLink="/student">Home</a></li>
+		<li class="breadcrumb-item"><a routerLink="/student/sessions/registered">My Sessions</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Session Details</li>
+	</ol>
+</nav>
+<!-- /Breadcrumb -->
+
+<!-- Header -->
+<h1>Session Details</h1>
+
+<!-- Main Body -->
+<div class="card mb-3 mt-5">
+	<div *ngIf="!!session" class="card-body">
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Tutor Name</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				<a routerLink="/profile/viewprofile/{{session.account}}">{{session.accountDetails.firstName}} {{session.accountDetails.lastName}}</a>
+				<a class="ms-5 btn btn-sm btn-outline-primary float-right" href="/message/{{session.account}}">Message</a>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Subject</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{session.subject}}
+			</div>
+		</div>
+		<hr>
+		<div *ngIf="!!session.details">
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">Details</h6>
+				</div>
+				<div class="col-sm-9 text-secondary">
+					{{session.details}}
+				</div>
+			</div>
+			<hr>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Start of Time Range</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{session.startDateTime}}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">End of Time Range</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{session.endDateTime}}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Session Finalized</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{session.updatedAt}}
+			</div>
+		</div>
+		<div class="pt-4">
+			<a routerLink="../../" class="btn btn-sm btn-secondary float-right">Back</a>
+		</div>
+	</div>
+	<!-- Displayed When Details Don't Exist (During Loading & When API Server is Offline) -->
+	<div *ngIf="!session" class="card-body">
+		<div class="mt-5 mb-4 text-center">
+			<div class="stage">
+				<div class="dot-flashing align-center"></div>	
+			</div>
+			<p class="mt-4">Loading session details</p>
+			<a routerLink="../../" class="btn btn-sm btn-secondary">Back</a>
+		</div>
+	</div>
+</div>
+
+

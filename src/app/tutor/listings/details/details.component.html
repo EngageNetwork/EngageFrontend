@@ -6,62 +6,145 @@
 		<li class="breadcrumb-item active" aria-current="page">Listing Details</li>
 	</ol>
 </nav>
-<!-- /Breadcrumb -->
+<!-- Breadcrumb -->
 
-<h1>Listing Details</h1>
-<div class="card mb-3 mt-5">
-	<div *ngIf="!!listing" class="card-body">
-		<div class="row">
-			<div class="col-sm-3">
-				<h6 class="mb-0">Student Name</h6>
-			</div>
-			<div class="col-sm-9 text-secondary">
-				<a *ngIf="!!listing.studentName" routerLink="/profile/viewprofile/{{listing.registered}}">{{listing.studentName}}</a>
-				<a *ngIf="!listing.studentName">N/A</a>
-			</div>
+<!-- Header -->
+<div *ngIf="!!listing">
+	<div *ngIf="!listing.markedCompletedStudent || !listing.markedCompletedTutor">
+		<div *ngIf="!listing.registered">
+			<h1>Listing Details</h1>
 		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<h6 class="mb-0">Subject</h6>
-			</div>
-			<div class="col-sm-9 text-secondary">
-				{{listing.subject}}
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<h6 class="mb-0">Start of Time Range</h6>
-			</div>
-			<div class="col-sm-9 text-secondary">
-				{{listing.startDateTime}}
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<h6 class="mb-0">End of Time Range</h6>
-			</div>
-			<div class="col-sm-9 text-secondary">
-				{{listing.endDateTime}}
-			</div>
-		</div>
-		<div class="pt-4">
-			<a routerLink="../../edit/{{listing.id}}" class="btn btn-sm btn-primary mr-2">Edit Listing</a>
-			<button (click)="deleteListing(listing.id)" class="btn btn-sm btn-danger mr-2" [disabled]="listing.isDeleting || !!listing.registered">
-				<span *ngIf="listing.isDeleting" class="spinner-border spinner-border-sm"></span>
-				<span *ngIf="!listing.isDeleting">Delete Listing</span>
-			</button>
-			<a routerLink="../../" class="btn btn-sm btn-secondary float-right">Back</a>
+		<div *ngIf="!!listing.registered">
+			<h1>Session Details</h1>
 		</div>
 	</div>
+	<div *ngIf="!!listing.markedCompletedStudent && !!listing.markedCompletedTutor">
+		<h1>Session Complete!</h1>
+		<h6 class="mt-3">Congratulations on completing today's session!</h6>
+		<p class="mt-3">Please provide some feedback to help us improve our service.</p>
+	</div>
+</div>
+
+<!-- Main Body -->
+<div class="card mb-3 mt-5">
+	<div *ngIf="!!listing" class="card-body">
+		<!-- Displayed When One of Two Users Hasn't Marked as Complete -->
+		<div *ngIf="!listing.markedCompletedStudent || !listing.markedCompletedTutor">
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">Student Name</h6>
+				</div>
+				<div class="col-sm-9 text-secondary">
+					<a *ngIf="!!listing.registered" routerLink="/profile/viewprofile/{{listing.registered}}">{{listing.registeredDetails.firstName}} {{listing.registeredDetails.lastName}}</a>
+					<a *ngIf="!listing.registered">N/A</a>
+					<a *ngIf="!!listing.registered" class="ms-5 btn btn-sm btn-outline-primary float-right" href="/message/{{listing.registered}}">Message</a>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">Student Behaviour Rating</h6>
+				</div>
+				<div *ngIf="!!listing.registered && !!listing.registeredDetails.behaviourRating" class="col-sm-9 text-secondary">
+					{{listing.registeredDetails.behaviourRating}}/100
+				</div>
+				<div *ngIf="!listing.registered || !listing.registeredDetails.behaviourRating" class="col-sm-9 text-secondary">
+					None Available
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">Subject</h6>
+				</div>
+				<div class="col-sm-9 text-secondary">
+					{{listing.subject}}
+				</div>
+			</div>
+			<hr>
+			<div *ngIf="!!listing.details">
+				<div class="row">
+					<div class="col-sm-3">
+						<h6 class="mb-0">Details</h6>
+					</div>
+					<div class="col-sm-9 text-secondary">
+						{{listing.details}}
+					</div>
+				</div>
+				<hr>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">Start of Time Range</h6>
+				</div>
+				<div class="col-sm-9 text-secondary">
+					{{listing.startDateTime}}
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<h6 class="mb-0">End of Time Range</h6>
+				</div>
+				<div class="col-sm-9 text-secondary">
+					{{listing.endDateTime}}
+				</div>
+			</div>
+			<div class="pt-4">
+				<div *ngIf="!!listing.registered" class="mr-3" style="display:inline">
+					<button *ngIf="!listing.markedCompletedTutor" (click)="markCompleted()" class="btn btn-sm btn-success" [disabled]="listing.isMarkingComplete">
+						<span *ngIf="listing.isMarkingComplete" class="spinner-border spinner-border-sm"></span>
+						<span *ngIf="!listing.isMarkingComplete">Mark Session As Complete</span>
+					</button>
+					<button *ngIf="!!listing.markedCompletedTutor" (click)="markCompleted()" class="btn btn-sm btn-danger" [disabled]="listing.isMarkingComplete">
+						<span *ngIf="listing.isMarkingComplete" class="spinner-border spinner-border-sm"></span>
+						<span *ngIf="!listing.isMarkingComplete">Unmark Session As Complete</span>
+					</button>
+				</div>
+				<a routerLink="../../edit/{{listing.id}}" class="btn btn-sm btn-primary mr-2">Edit Listing</a>
+				<button (click)="deleteListing(listing.id)" class="btn btn-sm btn-danger mr-2" [disabled]="listing.isDeleting || !!listing.registered">
+					<span *ngIf="listing.isDeleting" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!listing.isDeleting">Delete Listing</span>
+				</button>
+				<a routerLink="../../" class="btn btn-sm btn-secondary float-right">Back</a>
+			</div>
+		</div>
+		<!-- Displayed When Both Users Have Marked as Complete -->
+		<div *ngIf="!!listing.markedCompletedStudent && !!listing.markedCompletedTutor">
+			<div class="row">
+				<div class="col-sm-4">
+					<h6 class="mb-0">Student Name</h6>
+				</div>
+				<div class="col-sm-8 text-secondary">
+					<a routerLink="/profile/viewprofile/{{listing.registered}}">{{listing.registeredDetails.firstName}} {{listing.registeredDetails.lastName}}</a>
+					<a class="ms-5 btn btn-sm btn-outline-primary float-right" href="/message/{{listing.registered}}">Message</a>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-4">
+					<h6 class="mb-0">How would you rate your student's behaviour?</h6>
+				</div>
+				<div class="col-sm-8 text-secondary">
+					<mat-slider color="primary" thumbLabel min="0" max="100" step="1" class="rating-slider w-50" (input)="updateBehaviourRatingValue($event)"></mat-slider>
+				</div>
+			</div>
+			<div class="pt-4">
+				<button (click)="submitRatings()" class="btn btn-sm btn-success" [disabled]="listing.isSubmitting">
+					<span *ngIf="listing.isSubmitting" class="spinner-border spinner-border-sm"></span>
+					<span *ngIf="!listing.isSubmitting">Finalize Ratings</span>
+				</button>
+				<a routerLink="../../" class="btn btn-sm btn-secondary float-right">Back</a>
+			</div>
+		</div>
+	</div>
+	<!-- Displayed When Details Don't Exist (During Loading & When API Server is Offline) -->
 	<div *ngIf="!listing" class="card-body">
 		<div class="mt-5 mb-4 text-center">
 			<div class="stage">
 				<div class="dot-flashing align-center"></div>	
 			</div>
-			<p class="mt-4">Loading details</p>
+			<p class="mt-4">Loading listing details</p>
 			<a routerLink="../../" class="btn btn-sm btn-secondary">Back</a>
 		</div>
 	</div>

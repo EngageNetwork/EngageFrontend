@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import * as moment from 'moment';
 
-import { AccountService, SlateService } from '@app/_services';
+import { SlateService } from '@app/_services';
 
 @Component({
 	templateUrl: './list.component.html',
@@ -17,7 +17,6 @@ export class ListComponent implements OnInit {
 	
 	constructor(
 		private snackBar: MatSnackBar,
-		private accountService: AccountService, // Ignore "unused" warnings
 		private slateService: SlateService,
 		private title: Title
 		) { }
@@ -38,21 +37,15 @@ export class ListComponent implements OnInit {
 				sessions.forEach(function(item) {
 					item.startDateTime = moment(item.startDateTime).format("LT MMMM Do[,] YYYY");
 					item.endDateTime = moment(item.endDateTime).format("LT MMMM Do[,] YYYY");
-					
-					this.accountService.getByIdPublic(item.account)
-					.pipe(first())
-					.subscribe(account => {
-						item.tutorName = [account.firstName, account.lastName].join(' ');
-					});
-				}.bind(this));
+				});
 
 				this.sessions = sessions;
 			});
 		}
 		
 		cancelSession(id: string) {
-			const session = this.sessions.find(x => x.id === id);
-			if (confirm(`Cancel session?`)) {
+			const session = this.sessions.find(x => x._id === id);
+			if (confirm(`Cancel session with ${session.accountDetails.firstName} ${session.accountDetails.lastName}?`)) {
 				session.isRemoving = true;
 				this.slateService.cancel(id)
 				.pipe(first())
@@ -60,7 +53,7 @@ export class ListComponent implements OnInit {
 					next: () => {
 						// Display success message to user
 						this.snackBar.open('Session cancelled successfully', 'Close', { duration: 10000 });
-						this.sessions = this.sessions.filter(x => x.id !== id);
+						this.sessions = this.sessions.filter(x => x._id !== id);
 					},
 					error: error => {
 						// Display error to user

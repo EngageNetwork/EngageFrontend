@@ -3,10 +3,10 @@
 	<div id="main-navbar" class="navbar navbar-expand-lg px-5 py-3 text-white navbar-dark bg-dark">
 		<header class="mb-auto w-100">
 			<div>
-				<h1 *ngIf="account && account.role === Role.Admin" routerLink="/admin/home" class="navbar-brand float-md-start mb-0">Engage Network</h1>
-				<h1 *ngIf="account && account.role === Role.Tutor" routerLink="/tutor/home" class="navbar-brand float-md-start mb-0">Engage Network</h1>
-				<h1 *ngIf="account && account.role === Role.Student" routerLink="/student/home" class="navbar-brand float-md-start mb-0">Engage Network</h1>
-				<h1 *ngIf="!account" routerLink="/" class="navbar-brand float-md-start mb-0">Engage Network</h1>
+				<h1 *ngIf="account && account.role === Role.Admin" routerLink="/admin/home" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1>
+				<h1 *ngIf="account && account.role === Role.Tutor" routerLink="/tutor/home" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1>
+				<h1 *ngIf="account && account.role === Role.Student" routerLink="/student/home" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1>
+				<h1 *ngIf="!account" routerLink="/" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1>
 				
 				<button class="navbar-toggler float-right" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed">
 					<span class="navbar-toggler-icon"></span>
@@ -15,15 +15,15 @@
 				<div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse float-right">
 					<!-- Logged In -->
 					<nav *ngIf="account" class="nav nav-masthead justify-content-center navbar-expand-lg float-md-end">
-						<a *ngIf="account.role === Role.Admin" routerLink="/admin/home" routerLinkActive="active" class="nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Home</a>
-						<a *ngIf="account.role === Role.Tutor" routerLink="/tutor/home" routerLinkActive="active" class="nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Home</a>
-						<a *ngIf="account.role === Role.Student" routerLink="/student/home" routerLinkActive="active" class="nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Home</a>
-						<a *ngIf="account.role === Role.Admin" routerLink="/admin/manage" routerLinkActive="active" class="nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Admin</a>
-						<a *ngIf="account.role === Role.Admin" routerLink="/tutor/listings" routerLinkActive="active" class="nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Listings</a>
-						<a *ngIf="account.role === Role.Tutor" routerLink="/tutor/listings" routerLinkActive="active" class="nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Listings</a>
-						<a *ngIf="account.role === Role.Admin" routerLink="/student/sessions" routerLinkActive="active" class="nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Sessions</a>
-						<a *ngIf="account.role === Role.Student" routerLink="/student/sessions" routerLinkActive="active" class="nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Sessions</a>
-						<a routerLink="/about" routerLinkActive="active" class="nav-item nav-link px-3" (click)="isNavbarCollapsed = true">About Us</a>
+						<a *ngIf="account.role === Role.Admin" routerLink="/admin/home" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Home</a>
+						<a *ngIf="account.role === Role.Tutor" routerLink="/tutor/home" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Home</a>
+						<a *ngIf="account.role === Role.Student" routerLink="/student/home" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Home</a>
+						<a *ngIf="account.role === Role.Admin" routerLink="/admin/manage" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Admin</a>
+						<a *ngIf="account.role === Role.Admin" routerLink="/tutor/listings" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Listings</a>
+						<a *ngIf="account.role === Role.Tutor && account.approved" routerLink="/tutor/listings" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Listings</a>
+						<a *ngIf="account.role === Role.Admin" routerLink="/student/sessions" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Sessions</a>
+						<a *ngIf="account.role === Role.Student && account.approved" routerLink="/student/sessions" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Sessions</a>
+						<a routerLink="/about" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">About Us</a>
 						<!-- User Dropdown Menu -->
 						<div class="ms-4 d-inline-block" ngbDropdown #myDrop="ngbDropdown">
 							<a class="nav-item nav-link" id="userDropdown" tabindex="0" ngbDropdownToggle role="button">{{account.firstName}} {{account.lastName}}</a>
@@ -36,10 +36,10 @@
 
 					<!-- Not Logged In -->
 					<nav *ngIf="!account" class="nav nav-masthead justify-content-center float-md-end">
-						<a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Home</a>
-						<a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3" (click)="isNavbarCollapsed = true">About Us</a>
-						<a routerLink="/account/register" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Register</a>
-						<a routerLink="/account/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Login</a>
+						<a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Home</a>
+						<a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">About Us</a>
+						<a routerLink="/account/register" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Register</a>
+						<a routerLink="/account/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Login</a>
 					</nav>
 				</div>	
 			</div>

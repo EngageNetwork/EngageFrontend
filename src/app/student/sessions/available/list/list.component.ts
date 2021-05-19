@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import * as moment from 'moment';
 
-import { AccountService, SlateService } from '@app/_services';
+import { SlateService } from '@app/_services';
 
 @Component({
 	templateUrl: './list.component.html',
@@ -17,18 +17,17 @@ export class ListComponent implements OnInit {
 	
 	constructor(
 		private snackBar: MatSnackBar,
-		private accountService: AccountService, // Ignore "unused" warnings
 		private slateService: SlateService,
 		private title: Title
 	) { }
 	
 	ngOnInit(): void {
-		this.title.setTitle('Available Positions');
+		this.title.setTitle('Available Sessions');
 
 		this.fetchData();
 		this.interval = setInterval(() => {
 			this.fetchData();
-		}, 30000);
+		}, 60000);
 	}
 	
 	fetchData() {
@@ -38,20 +37,14 @@ export class ListComponent implements OnInit {
 			listings.forEach(function(item) {
 				item.startDateTime = moment(item.startDateTime).format('LT MMMM Do[,] YYYY');
 				item.endDateTime = moment(item.endDateTime).format('LT MMMM Do[,] YYYY');
-
-				this.accountService.getByIdPublic(item.account)
-				.pipe(first())
-				.subscribe(account => {
-					item.tutorName = [account.firstName, account.lastName].join(' ');
-				});
-			}.bind(this));
+			})
 
 			this.listings = listings;
 		});
 	}
 
 	registerSession(id: string) {
-		const listing = this.listings.find(x => x.id === id);
+		const listing = this.listings.find(x => x._id === id);
 		if (confirm(`Sign up for session?`)) {
 			listing.isRegistering = true;
 			this.slateService.register(id)
@@ -60,7 +53,7 @@ export class ListComponent implements OnInit {
 				next: () => {
 					// Display success message to user
 					this.snackBar.open('Registration successful', 'Close', { duration: 10000 });
-					this.listings = this.listings.filter(x => x.id !== id);
+					this.listings = this.listings.filter(x => x._id !== id);
 				},
 				error: error => {
 					// Display error to user

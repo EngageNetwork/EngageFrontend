@@ -17,7 +17,8 @@
 				<h6 class="mb-0">Tutor Name</h6>
 			</div>
 			<div class="col-sm-9 text-secondary">
-				<a routerLink="/viewprofile/{{slate.account}}">{{slate.tutorName}}</a>
+				<a routerLink="/viewprofile/{{slate.account}}">{{slate.accountDetails.firstName}} {{slate.accountDetails.lastName}}</a>
+				<a class="ms-5 btn btn-sm btn-outline-primary float-right" href="/message/{{slate.account}}">Message</a>
 			</div>
 		</div>
 		<hr>
@@ -26,8 +27,9 @@
 				<h6 class="mb-0">Student Name</h6>
 			</div>
 			<div class="col-sm-9 text-secondary">
-				<a *ngIf="!!slate.registered" routerLink="/viewprofile/{{slate.registered}}">{{slate.studentName}}</a>
+				<a *ngIf="!!slate.registered" routerLink="/viewprofile/{{slate.registered}}">{{slate.registeredDetails.firstName}} {{slate.registeredDetails.lastName}}</a>
 				<a *ngIf="!slate.registered">N/A</a>
+				<a *ngIf="!!slate.registered" class="ms-5 btn btn-sm btn-outline-primary float-right" href="/message/{{slate.registered}}">Message</a>
 			</div>
 		</div>
 		<hr>

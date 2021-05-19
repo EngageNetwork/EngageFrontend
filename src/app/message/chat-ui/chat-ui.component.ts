@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import * as moment from 'moment';
 import * as Feather from 'feather-icons';
 
 import { AccountService, MessageService } from '@app/_services';
@@ -77,6 +78,9 @@ export class ChatUIComponent implements OnInit, AfterViewInit {
 		.pipe(first())
 		.subscribe({
 			next: conversations => {
+				conversations.conversation.forEach(function(item) {
+					item.createdAt = moment(item.createdAt).format('LT MMMM Do[,] YYYY');
+				})
 				this.messages = conversations.conversation;
 			},
 			error: error => {
@@ -100,5 +104,12 @@ export class ChatUIComponent implements OnInit, AfterViewInit {
 				this.snackBar.open(error, 'Close', { duration: 10000 });
 			}
 		})
+	}
+	
+	triggerFunction(event) {
+		if (event.key === 'Enter') {
+			event.preventDefault();
+			this.sendMessage();
+		}
 	}
 }

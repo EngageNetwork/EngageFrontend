@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import * as moment from 'moment';
 
-import { AccountService, SlateService } from '@app/_services';
+import { SlateService } from '@app/_services';
 
 @Component({
 	templateUrl: './overview.component.html',
@@ -17,18 +17,17 @@ export class OverviewComponent implements OnInit {
 	
 	constructor(
 		private snackBar: MatSnackBar,
-		private accountService: AccountService, // Ignore "unused" warnings
 		private slateService: SlateService,
 		private title: Title
 	) { }
 		
 	ngOnInit() {
-		this.title.setTitle('Listings Overview')
+		this.title.setTitle('Listings Overview');
 		
 		this.fetchData();
 		this.interval = setInterval(() => {
 			this.fetchData();
-		}, 30000);
+		}, 60000);
 	}
 
 	fetchData() {
@@ -38,22 +37,14 @@ export class OverviewComponent implements OnInit {
 			listings.forEach(function(item) {
 				item.startDateTime = moment(item.startDateTime).format("LT MMMM Do[,] YYYY");
 				item.endDateTime = moment(item.endDateTime).format("LT MMMM Do[,] YYYY");
-
-				if (!!item.registered) {
-					this.accountService.getByIdPublic(item.registered)
-					.pipe(first())
-					.subscribe(account => {
-						item.studentName = [account.firstName, account.lastName].join(' ');
-					});
-				}
-			}.bind(this));
+			});
 			
 			this.listings = listings;
 		});
 	}
 	
 	deleteListing(id: string) {
-		const listing = this.listings.find(x => x.id === id);
+		const listing = this.listings.find(x => x._id === id);
 		if (confirm(`Are you sure you want to delete this listing? This action cannot be reversed.`)) {
 			listing.isDeleting = true;
 			this.slateService.delete(id)
@@ -62,7 +53,7 @@ export class OverviewComponent implements OnInit {
 				next: () => {
 					// Display success message to user
 					this.snackBar.open('Listing deleted successfully', 'Close', { duration: 10000 });
-					this.listings = this.listings.filter(x => x.id !== id);
+					this.listings = this.listings.filter(x => x._id !== id);
 				},
 				error: error => {
 					// Display error to user
