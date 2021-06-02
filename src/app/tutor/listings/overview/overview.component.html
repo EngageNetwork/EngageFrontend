@@ -24,7 +24,7 @@
 		<tr *ngFor="let listing of listings">
 			<td><h6 style="display:inline">{{listing.startDateTime}}</h6> to <h6 style="display:inline">{{listing.endDateTime}}</h6></td>
 			<td><a *ngIf="!!listing.registered" routerLink="/profile/viewprofile/{{listing.registered}}">{{listing.registeredDetails.firstName}} {{listing.registeredDetails.lastName}}</a></td>
-			<td>{{listing.subject}} <p *ngIf="!!listing.details" style="display:inline"> ({{listing.details}})</p></td>
+			<td><p *ngIf="listing.subject !== 'Foreign Language Acquisition'">{{listing.subject}}</p><p *ngIf="listing.subject === 'Foreign Language Acquisition'" style="display:inline">FLA</p><p *ngIf="!!listing.details" style="display:inline"> ({{listing.details}})</p></td>
 			<td style="white-space: nowrap">
 				<a *ngIf="!!listing.markedCompletedStudent && !!listing.markedCompletedTutor" routerLink="details/{{listing._id}}" class="btn btn-sm btn-success mr-1 finish-text">Complete Session</a>
 				<div *ngIf="!listing.markedCompletedStudent || !listing.markedCompletedTutor">

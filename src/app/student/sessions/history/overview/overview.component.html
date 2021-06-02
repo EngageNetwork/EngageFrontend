@@ -13,7 +13,7 @@
 	<tbody>
 		<tr *ngFor="let session of sessions">
 			<td><a routerLink="/profile/viewprofile/{{session.account}}">{{session.accountDetails.firstName}} {{session.accountDetails.lastName}}</a></td>
-			<td>{{session.subject}} <p *ngIf="!!session.details" style="display:inline"> ({{session.details}})</p></td>
+			<td><p *ngIf="session.subject !== 'Foreign Language Acquisition'">{{session.subject}}</p><p *ngIf="session.subject === 'Foreign Language Acquisition'" style="display:inline">FLA</p><p *ngIf="!!session.details" style="display:inline"> ({{session.details}})</p></td>
 			<td><h6 style="display:inline">{{session.startDateTime}}</h6> to <h6 style="display:inline">{{session.endDateTime}}</h6></td>
 			<td style="white-space: nowrap">
 				<a routerLink="details/{{session._id}}" class="btn btn-sm btn-primary mr-1">Details</a>

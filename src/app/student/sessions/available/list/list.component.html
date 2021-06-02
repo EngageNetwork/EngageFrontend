@@ -19,7 +19,7 @@
 			<td *ngIf="!listing.accountDetails.contentRatings || !listing.accountDetails.contentRatings.overallContentRating" class="text-center">None Available</td>
 			<td *ngIf="!!listing.accountDetails.behaviourRating" class="text-center">{{listing.accountDetails.behaviourRating}}/100</td>
 			<td *ngIf="!listing.accountDetails.behaviourRating" class="text-center">None Available</td>
-			<td>{{listing.subject}} <p *ngIf="!!listing.details" style="display:inline"> ({{listing.details}})</p></td>
+			<td><p *ngIf="listing.subject !== 'Foreign Language Acquisition'">{{listing.subject}}</p><p *ngIf="listing.subject === 'Foreign Language Acquisition'" style="display:inline">FLA</p><p *ngIf="!!listing.details" style="display:inline"> ({{listing.details}})</p></td>
 			<td><h6 style="display:inline">{{listing.startDateTime}}</h6> to <h6>{{listing.endDateTime}}</h6></td>
 			<td style="white-space: nowrap">
 				<a routerLink="details/{{listing._id}}" class="btn btn-sm btn-secondary mr-2">Details</a>
