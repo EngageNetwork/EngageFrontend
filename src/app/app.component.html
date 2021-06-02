@@ -23,7 +23,7 @@
 						<a *ngIf="account.role === Role.Tutor && account.approved" routerLink="/tutor/listings" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Listings</a>
 						<a *ngIf="account.role === Role.Admin" routerLink="/student/sessions" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Sessions</a>
 						<a *ngIf="account.role === Role.Student && account.approved" routerLink="/student/sessions" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Sessions</a>
-						<a routerLink="/about" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">About Us</a>
+						<!-- <a routerLink="/about" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">About Us</a> --> <!--ENABLE THIS WHEN ABOUT PAGE EXISTS-->
 						<!-- User Dropdown Menu -->
 						<div class="ms-4 d-inline-block" ngbDropdown #myDrop="ngbDropdown">
 							<a class="nav-item nav-link" id="userDropdown" tabindex="0" ngbDropdownToggle role="button">{{account.firstName}} {{account.lastName}}</a>
@@ -37,7 +37,7 @@
 					<!-- Not Logged In -->
 					<nav *ngIf="!account" class="nav nav-masthead justify-content-center float-md-end">
 						<a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Home</a>
-						<a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">About Us</a>
+						<!-- <a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">About Us</a> --> <!--ENABLE THIS WHEN ABOUT PAGE EXISTS-->
 						<a routerLink="/account/register" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Register</a>
 						<a routerLink="/account/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Login</a>
 					</nav>
@@ -64,7 +64,7 @@
 					<a class="footer-legal-link" routerLink="/legal/privacy/cookies" routerLinkActive="active" >Use of Cookies</a>
 					<a class="footer-legal-link" routerLink="/legal/terms" routerLinkActive="active" >Terms of Service</a>
 					<a class="footer-legal-link" routerLink="/legal" routerLinkActive="active" >Legal</a>
-					<a class="footer-legal-link" routerLink="/sitemap" routerLinkActive="active" >Sitemap</a>
+					<!-- <a class="footer-legal-link" routerLink="/sitemap" routerLinkActive="active" >Sitemap</a> --> <!--ENABLE THIS WHEN SITEMAP EXISTS-->
 				</div>
 			</div>
 		</div>
