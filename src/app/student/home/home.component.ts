@@ -13,6 +13,6 @@ export class HomeComponent {
     constructor(private accountService: AccountService, private title: Title) { }
 
     ngOnInit() {
-      this.title.setTitle('Home | Student');
+      this.title.setTitle('Engage Network');
     }
 }
