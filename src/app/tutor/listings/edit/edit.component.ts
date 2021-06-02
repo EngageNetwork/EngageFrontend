@@ -26,7 +26,7 @@ export class EditComponent implements OnInit {
 		) { }
 		
 		ngOnInit() {
-			this.title.setTitle('Update Listing');
+			this.title.setTitle('Update Listing | Engage Network');
 			
 			this.id = this.route.snapshot.params['id'];
 			

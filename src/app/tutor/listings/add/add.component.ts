@@ -24,7 +24,7 @@ export class AddComponent implements OnInit {
 	) { }
 	
 	ngOnInit() {
-		this.title.setTitle('Creating New Listing');
+		this.title.setTitle('Create Listing | Engage Network');
 		
 		this.createListingForm = this.formBuilder.group({
 			subject: ['', Validators.required],

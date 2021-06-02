@@ -22,7 +22,7 @@ export class OverviewComponent implements OnInit {
 	) { }
 		
 	ngOnInit() {
-		this.title.setTitle('Listings Overview');
+		this.title.setTitle('Active Listings | Engage Network');
 		
 		this.fetchData();
 		this.interval = setInterval(() => {

@@ -20,7 +20,7 @@ export class OverviewComponent implements OnInit {
 	) { }
 	
 	ngOnInit() {
-		this.title.setTitle('Listings Overview');
+		this.title.setTitle('Past Sessions | Engage Network');
 
 		this.fetchData();
 	}
