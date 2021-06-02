@@ -65,7 +65,7 @@ export class EditComponent implements OnInit {
 			next: () => {
 				// Display success message to admin and redirects to accounts list page
 				this.snackBar.open('Account details updated successfully', 'Close', { duration: 10000 });
-				this.router.navigate(['../'], { relativeTo: this.route });
+				this.router.navigate(['../../'], { relativeTo: this.route });
 			},
 			error: error => {
 				// Display error to administrator
