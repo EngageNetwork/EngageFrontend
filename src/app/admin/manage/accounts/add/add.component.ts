@@ -25,7 +25,7 @@ export class AddComponent implements OnInit {
 		) { }
 		
 		ngOnInit() {
-			this.title.setTitle('Create User | Admin');
+			this.title.setTitle('Create New User | Admin');
 			
 			this.createAccountForm = this.formBuilder.group({
 				firstName: ['', Validators.required],

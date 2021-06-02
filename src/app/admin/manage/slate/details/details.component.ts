@@ -31,7 +31,7 @@ export class DetailsComponent implements OnInit {
 	) { }
 	
 	ngOnInit(): void {
-		this.title.setTitle('Slate Details');
+		this.title.setTitle('Slate Details | Admin');
 		
 		this.id = this.route.snapshot.params['id'];
 		
