@@ -21,7 +21,7 @@ export class OverviewComponent implements OnInit {
 		) { }
 		
 		ngOnInit(): void {
-			this.title.setTitle('Past Sessions');
+			this.title.setTitle('Past Sessions | Engage Network');
 			
 			this.fetchData();
 		}

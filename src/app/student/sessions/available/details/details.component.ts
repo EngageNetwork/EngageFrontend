@@ -25,7 +25,7 @@ export class DetailsComponent implements OnInit {
 	) { }
 	
 	ngOnInit(): void {
-		this.title.setTitle('Session Details');
+		this.title.setTitle('Session Details | Engage Network');
 		
 		this.id = this.route.snapshot.params['id'];
 		

@@ -11,7 +11,7 @@ export class OverviewComponent {
 	constructor(private title: Title) { }
 	
 	ngOnInit() {
-		this.title.setTitle('Student Session Menu')
+		this.title.setTitle('Sessions | Engage Network')
 	}
 	
 }
