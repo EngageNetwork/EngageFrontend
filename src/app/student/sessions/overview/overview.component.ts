@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
-@Component({ templateUrl: './overview.component.html' })
+@Component({
+	templateUrl: './overview.component.html',
+	styleUrls: ['./overview.component.scss']
+})
 
 export class OverviewComponent {
-
-  constructor(private title: Title) { }
-
-  ngOnInit() {
-    this.title.setTitle('Student Session Menu')
-  }
-
+	
+	constructor(private title: Title) { }
+	
+	ngOnInit() {
+		this.title.setTitle('Student Session Menu')
+	}
+	
 }
