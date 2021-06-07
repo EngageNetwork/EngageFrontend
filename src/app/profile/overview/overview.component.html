@@ -1,8 +1,8 @@
-<h1>Profile Overview</h1>
+<h1 class="mt-4">Profile Overview</h1>
 
 <div class="main-body mt-5">	
 	<div *ngIf="!!account" class="row gutters-sm">
-		<div class="col-md-4 mb-3">
+		<div class="col-md-4 mb-4">
 			<div class="card h-100">
 				<div class="card-body">
 					<div class="d-flex flex-column align-items-center text-center">
@@ -24,7 +24,7 @@
 		</div>
 		<div class="col-md-8">
 			<div class="row gutters-sm">
-				<div *ngIf="account.role === Role.Admin || account.role === Role.Tutor" class="col-sm-6 mb-3">
+				<div *ngIf="account.role === Role.Admin || account.role === Role.Tutor" class="col-sm-6 mb-4">
 					<div class="card h-100">
 						<div class="card-body">
 							<h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Content Rating</h6>
@@ -54,7 +54,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6 mb-3">
+				<div class="col-sm-6 mb-4">
 					<div class="card h-100">
 						<div class="card-body">
 							<h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Behaviour Rating</h6>
@@ -64,6 +64,17 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="account.role === Role.Admin || account.role === Role.Tutor" class="col">
+			<div class="card h-100">
+				<div class="card-body">
+					<h4 class="mb-4">Your Hours</h4>
+					<h5>Total Time: </h5>
+					<h6 class="mb-3">{{totalDays}} Days, {{totalHours}} Hours, {{totalMinutes}} Minutes, {{totalSeconds}} Seconds</h6>
+					<h5>Lifetime Hours: </h5>
+					<h6>{{totalHours + fractionalHours}}</h6>
 				</div>
 			</div>
 		</div>

@@ -9,6 +9,7 @@ export class Account {
 	approved: string;
 	behaviourRating: number;
 	contentRatings: ContentRatings;
+	totalDuration: number;
 	jwtToken?: string;
 	verified: string;
 	createdAt: string;
