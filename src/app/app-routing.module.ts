@@ -5,12 +5,18 @@ import { AuthGuard } from './_helpers';
 import { Role } from './_models';
 
 import { GlobalHomeComponent } from './global-home/global-home.component';
-import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
 	// Temporary until real global home page setup
 	{ path: '', component: GlobalHomeComponent },
-	{ path: 'about', component: AboutComponent },
+	{
+		path: 'about',
+		loadChildren: () => import('./about/about.module').then(m => m.AboutModule)
+	},
+	{
+		path: 'newsroom',
+		loadChildren: () => import('./newsroom/newsroom.module').then(m => m.NewsroomModule)
+	},
 	{
 		path: 'legal',
 		loadChildren: () => import('./legal/legal.module').then(m => m.LegalModule)
