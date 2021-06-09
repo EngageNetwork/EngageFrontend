@@ -9,10 +9,10 @@ const routes: Routes = [
 		path: '', component: LayoutComponent,
 		children: [
 			{ path: '', component: OverviewComponent },
-			// {
-			// 	path: 'sessions',
-			// 	loadChildren: () => import ('./sessions/sessions.module').then(x => x.SessionsModule)
-			// }
+			{
+				path: 'leadership',
+				loadChildren: (() => import ('./leadership/leadership.module').then(x => x.LeadershipModule))
+			}
 		]
 	}
 ];

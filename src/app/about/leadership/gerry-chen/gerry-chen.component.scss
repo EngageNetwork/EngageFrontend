@@ -1,0 +1,86 @@
+.section-hero .image-hero {
+	height: 450px;
+	background: {
+		image: url(/assets/favicons/apple-touch-icon.png);
+		position: right bottom;
+		repeat: no-repeat;
+		size: 50%;
+	}
+	position: relative;
+	max-width: 1020px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.section-hero .titles {
+	display: block;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	max-width: 500px;
+}
+
+.section-hero .titles .titles-role {
+	font-size: 24px;
+}
+
+.section-bio {
+	padding: 0 20px;
+	max-width: 1020px;
+	margin: 0 auto;
+}
+
+.section-bio .mobile-name-title {
+	display: none;
+}
+
+.section-bio .person-details {
+	margin-top: 40px;
+}
+
+.section-bio .bio-left-column {
+	width: 45%;
+}
+
+.section-bio .bio-right-column {
+	width: calc(44% - 4px);
+	margin-left: 10%;
+}
+
+.section-bio .bio-left-column, .section-bio .bio-right-column {
+	display: inline-block;
+	vertical-align: top;
+}
+
+@media screen and (max-width: 768px) {
+	.section-hero .image-hero {
+		height: 300px;
+		background: {
+			size: 48%;
+			position: center bottom;
+			repeat: no-repeat;
+		}
+	}
+	.section-hero .titles {
+		display: none;
+	}
+	.section-bio {
+		margin-top: 0;
+	}
+	.section-bio .mobile-name-title {
+		display: block;
+		margin-top: 40px;
+		width: 100%
+	}
+	.section-bio .mobile-name-title .titles-name {
+		font-size: 28px;
+		margin-bottom: 0;
+	}
+	.section-bio .mobile-name-title .titles-role {
+		font-size: 24px;
+	}
+	.section-bio .bio-left-column, .section-bio .bio-right-column {
+		width: 100%;
+		margin: 0;
+	}
+}
