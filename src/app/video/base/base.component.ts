@@ -34,25 +34,6 @@ export class BaseComponent implements OnInit, AfterViewInit {
 		this.title.setTitle('Video Call');
 		
 		this.id = this.route.snapshot.params['id'];
-
-		// // Initiate Room
-		// this.videoConferenceService.initiateRoom(this.id)
-		// .pipe(first())
-		// .subscribe(sessionDetails => {
-		// 	// Generate Auth Token
-		// 	this.videoConferenceService.getToken(this.id)
-		// 	.pipe(first())
-		// 	.subscribe(async authDetails => {
-		// 		// Connect to room
-		// 		const room = await connect(authDetails.token);
-
-		// 		// Save LocalVideoTrack
-		// 		let localVideoTrack = Array.from(room.localParticipant.videoTracks.values())[0].track;
-
-		// 		// Handle LocalParticipant media
-				
-		// 	})
-		// });
 	}
 	
 	ngAfterViewInit() {
@@ -74,7 +55,7 @@ export class BaseComponent implements OnInit, AfterViewInit {
 			.pipe(first())
 			.subscribe(authDetails => {
 				this.authToken = authDetails.token;
-				const options = { name: authDetails.sid, audio: true };
+				const options = { name: authDetails.sid, audio: true, video: true };
 
 				// Call Connect through service
 				this.videoConferenceService.connectRoom(
@@ -83,6 +64,8 @@ export class BaseComponent implements OnInit, AfterViewInit {
 					// On participant connected
 					(participant) => {
 						console.log('Participant "%s" connected', participant.identity);
+
+						var div = this.remoteVideo;
 
 						// When user connected
 						participant.on('trackSubscribed', (track) => {

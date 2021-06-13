@@ -18,7 +18,7 @@ export class VideoConferenceService {
 	previewing: boolean;
 	localVideo: ElementRef;
 	remoteVideo: ElementRef;
-	room: any;
+	videoRoom: any;
 	
 	constructor(
 		private http: HttpClient
@@ -38,25 +38,23 @@ export class VideoConferenceService {
 
 		// Connect to room with specified token and options
 		connect(authToken, options).then(room => {
-			this.room = room;
+			this.videoRoom = room;
 			console.log(':: room', room);
 
 			// Get video and audio from already connected participants
-			room.participants.forEach((participant) => {
-				onParticipantConnected(participant);
-			});
+			room.participants.forEach(onParticipantConnected);
 
 			room.on('participantConnected', onParticipantConnected);
 			room.on('participantDisconnected', onParticipantDisconnected);
-			room.on('disconnected', error => room.participants.forEach(onParticipantDisconnected));
+			room.on('disconnected', (error) => room.participants.forEach(onParticipantDisconnected));
 		})
 	}
 
 	disconnectRoom() {
-		this.room.disconnect();
+		this.videoRoom.disconnect();
 	}
 
-	startLocalVideo(): void {
+	startLocalVideo() {
 		createLocalVideoTrack().then(track => {
 			console.log(':: local Track', track);
 			if (!!this.localVideo) {
@@ -68,40 +66,45 @@ export class VideoConferenceService {
 		});
 	}
 
-	// Handle room events
-	participantConnected(participant) {
-		console.log('Participant "%s" connected', participant.identify);
-		const div = this.remoteVideo;
+	trackSubscribed(track) {
+		console.log('test');
+		this.remoteVideo.nativeElement.appendChild(track.attach());
+		return;
+	}
 
-		participant.on('trackSubscribed', (track) => {
-			// Attach track to remote div
-			console.log(':: remoteVideoElement', this.remoteVideo);
-			div.nativeElement.appendChild(track.attach());
-		});
-		participant.on('trackUnsubscribed', (track)=>{
-			// Remove track from remote div
-			track.detach().forEach(element => element.remove());
-		});
-		// Handling publications
+	trackUnsubscribed(track) {
+		track.detach().forEach(element => element.remove());
+		return;
+	}
+
+	participantConnected(participant) {
+		console.log('Participant "%s" connected', participant.identity);
+
+		participant.on('trackSubscribed', track => this.trackSubscribed(track));
+		participant.on('trackUnsubscribed', track => this.trackUnsubscribed(track));
+
 		participant.tracks.forEach(publication => {
 			if (publication.isSubscribed) {
-				this.trackSubscribed(div, publication.track);
+				this.trackSubscribed(publication.track);
 			}
 		});
 	}
 
 	participantDisconnected(participant) {
-		console.log('Participant "%s" disconnected', participant.identify);
+		console.log('Participant "%s" disconnected', participant.identity);
 		this.remoteVideo.nativeElement.remove();
 	}
 
-	trackSubscribed(div, track) {
-		console.log(':: track Subscribed');
-		div.appendChild(track.attach());
-	}
 
-	trackUnsubscribed(track) {
-		console.log(':: track Unsubscribed');
-		track.detach().forEach(element => element.remove());
-	}
+
+
+
+
+
+
+
+
+
+
+
 }
