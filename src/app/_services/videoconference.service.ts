@@ -65,46 +65,4 @@ export class VideoConferenceService {
 			}
 		});
 	}
-
-	trackSubscribed(track) {
-		console.log('test');
-		this.remoteVideo.nativeElement.appendChild(track.attach());
-		return;
-	}
-
-	trackUnsubscribed(track) {
-		track.detach().forEach(element => element.remove());
-		return;
-	}
-
-	participantConnected(participant) {
-		console.log('Participant "%s" connected', participant.identity);
-
-		participant.on('trackSubscribed', track => this.trackSubscribed(track));
-		participant.on('trackUnsubscribed', track => this.trackUnsubscribed(track));
-
-		participant.tracks.forEach(publication => {
-			if (publication.isSubscribed) {
-				this.trackSubscribed(publication.track);
-			}
-		});
-	}
-
-	participantDisconnected(participant) {
-		console.log('Participant "%s" disconnected', participant.identity);
-		this.remoteVideo.nativeElement.remove();
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
