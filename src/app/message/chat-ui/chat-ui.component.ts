@@ -3,8 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import * as moment from 'moment';
-import * as Feather from 'feather-icons';
+import moment from 'moment';
+import Feather from 'feather-icons';
 
 import { AccountService, MessageService } from '@app/_services';
 import { Account } from '@app/_models';
