@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 import { VideoRoutingModule } from './video-routing.module';
 import { BaseComponent } from './base/base.component';
@@ -11,7 +13,9 @@ import { BaseComponent } from './base/base.component';
 	],
 	imports: [
 		CommonModule,
-		VideoRoutingModule
+		VideoRoutingModule,
+		MatButtonModule,
+		MatIconModule
 	]
 })
 

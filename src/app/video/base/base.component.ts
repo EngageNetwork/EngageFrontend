@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -6,21 +6,22 @@ import { Title } from '@angular/platform-browser';
 
 import { VideoConferenceService } from '@app/_services/videoconference.service';
 
-
-
 @Component({
-	selector: 'app-base',
 	templateUrl: './base.component.html',
 	styleUrls: ['./base.component.scss']
 })
 
 export class BaseComponent implements OnInit, AfterViewInit {
-	@ViewChild('localVideo') localVideo: ElementRef;
-	@ViewChild('remoteVideo') remoteVideo: ElementRef;
 
 	id: string;
 	sessionDetails: any;
 	authToken: string;
+
+	audioActive: boolean;
+	videoActive: boolean;
+	isScreenSharing: boolean;
+
+	mainParticipant: string;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -31,18 +32,58 @@ export class BaseComponent implements OnInit, AfterViewInit {
 	) { }
 	
 	ngOnInit() {
+		this.videoConferenceService.initializeService();
+
 		this.title.setTitle('Video Call');
 		
 		this.id = this.route.snapshot.params['id'];
+
+		this.audioActive = true;
+		this.videoActive = true;
+		this.isScreenSharing = false;
 	}
 	
 	ngAfterViewInit() {
-		this.videoConferenceService.localVideo = this.localVideo;
-		this.videoConferenceService.remoteVideo = this.remoteVideo;
-		console.log(':: localVideo updated', this.videoConferenceService.localVideo);
-		console.log(':: remoteVideo updated', this.videoConferenceService.remoteVideo);
+		
 
-		this.connectVideoConference();
+		// this.connectVideoConference();
+	}
+	
+	toggleAudio() {
+		switch(this.audioActive) {
+			case true:
+				this.audioActive = false
+				break
+			case false:
+				this.audioActive = true
+				break
+		}
+	}
+
+	toggleVideo() {
+		switch(this.videoActive) {
+			case true:
+				this.videoActive = false
+				break
+			case false:
+				this.videoActive = true
+				break
+		}
+	}
+
+	toggleScreenShare() {
+		switch(this.isScreenSharing) {
+			case true:
+				this.isScreenSharing = false
+				break
+			case false:
+				this.isScreenSharing = true
+				break
+		}
+	}
+
+	disconnectFromMeeting() {
+		// this.videoConferenceService.disconnectRoom();
 	}
 
 	connectVideoConference() {
@@ -58,44 +99,41 @@ export class BaseComponent implements OnInit, AfterViewInit {
 				const options = { name: authDetails.sid, audio: true, video: true };
 
 				// Call Connect through service
-				this.videoConferenceService.connectRoom(
-					this.authToken,
-					options,
-					// On participant connected
-					(participant) => {
-						console.log('Participant "%s" connected', participant.identity);
+				// this.videoConferenceService.connectRoom(
+				// 	this.authToken,
+				// 	options,
+				// 	// On participant connected
+				// 	(participant) => {
+				// 		console.log('Participant "%s" connected', participant.identity);
 
-						var div = this.remoteVideo;
+				// 		var div = this.remoteVideo;
 
-						// When user connected
-						participant.on('trackSubscribed', (track) => {
-							console.log(':: remoteVideoElement', this.remoteVideo);
-							this.remoteVideo.nativeElement.appendChild(track.attach());
-						});
-						// When user disconnected
-						participant.on('trackUnsubscribed', (track) => {
-							track.detach().forEach(element => element.remove());
-						});
-						// Check for present participants
-						console.log(':: checking present participants', participant.tracks);
-						participant.tracks.forEach(publication => {
-							if (publication.isSubscribed) {
-								this.remoteVideo.nativeElement.appendChild(publication.track.attach());
-							}
-						});
-					},
-					// On participant disconnected
-					(participant) => {
-						console.log('Participant "%s" disconnected', participant.identity);
-						this.remoteVideo.nativeElement.remove();
-					}
-				);
+				// 		// When user connected
+				// 		participant.on('trackSubscribed', (track) => {
+				// 			console.log(':: remoteVideoElement', this.remoteVideo);
+				// 			this.remoteVideo.nativeElement.appendChild(track.attach());
+				// 		});
+				// 		// When user disconnected
+				// 		participant.on('trackUnsubscribed', (track) => {
+				// 			track.detach().forEach(element => element.remove());
+				// 		});
+				// 		// Check for present participants
+				// 		console.log(':: checking present participants', participant.tracks);
+				// 		participant.tracks.forEach(publication => {
+				// 			if (publication.isSubscribed) {
+				// 				this.remoteVideo.nativeElement.appendChild(publication.track.attach());
+				// 			}
+				// 		});
+				// 	},
+				// 	// On participant disconnected
+				// 	(participant) => {
+				// 		console.log('Participant "%s" disconnected', participant.identity);
+				// 		this.remoteVideo.nativeElement.remove();
+				// 	}
+				// );
 			}, error => {
 				console.log('Error connecting video conference room', error);
 			});
-
-			// Start local video view
-			this.videoConferenceService.startLocalVideo();
 		});
 	}
 }
