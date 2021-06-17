@@ -25,6 +25,8 @@ const routes: Routes = [
 		path: 'account',
 		loadChildren: () => import('./account/account.module').then(m => m.AccountModule)
 	},
+
+	// Auth required to activate all routes below
 	{
 		path: 'profile',
 		loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule),
