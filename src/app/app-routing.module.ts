@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthGuard } from './_helpers';
+import { AuthGuard, DevGuard, ProdGuard } from './_helpers';
 import { Role } from './_models';
 
 import { GlobalHomeComponent } from './global-home/global-home.component';
 
 const routes: Routes = [
-	// Temporary until real global home page setup
 	{ path: '', component: GlobalHomeComponent },
 	{
 		path: 'about',
@@ -15,7 +14,8 @@ const routes: Routes = [
 	},
 	{
 		path: 'newsroom',
-		loadChildren: () => import('./newsroom/newsroom.module').then(m => m.NewsroomModule)
+		loadChildren: () => import('./newsroom/newsroom.module').then(m => m.NewsroomModule),
+		canActivate: [DevGuard]
 	},
 	{
 		path: 'legal',
@@ -38,7 +38,7 @@ const routes: Routes = [
 	{
 		path: 'video',
 		loadChildren: () => import('./video/video.module').then(m => m.VideoModule),
-		canActivate: [AuthGuard]
+		canActivate: [AuthGuard, DevGuard]
 	},
 	
 	// Different Base Routes for Admin, Tutor, and Students
