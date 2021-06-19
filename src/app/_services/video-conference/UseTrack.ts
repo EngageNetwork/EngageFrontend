@@ -1,6 +1,6 @@
 import { LocalTrackPublication, RemoteTrackPublication } from "twilio-video";
 
-export default function UseTracks(publication: LocalTrackPublication | RemoteTrackPublication | undefined) {
+export default function UseTrack(publication: LocalTrackPublication | RemoteTrackPublication | undefined) {
 	let track = publication && publication.track;
 	
 	//// Helper Methods
@@ -14,6 +14,12 @@ export default function UseTracks(publication: LocalTrackPublication | RemoteTra
 	if (publication) {
 		const removeTrack = () => setTrack(null);
 
-		publication.on('subscribed', setTrack)
+		publication.on('subscribed', setTrack); // Possible issue
+		publication.on('unsubscribed', removeTrack);
+
+		// publication.off('subscribed', setTrack);
+		// publication.off('unsubscribed', removeTrack);
 	}
+
+	return track;
 }

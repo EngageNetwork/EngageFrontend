@@ -1,4 +1,5 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -12,10 +13,11 @@ import { VideoConferenceService } from '@app/_services/videoconference.service';
 })
 
 export class BaseComponent implements OnInit, AfterViewInit {
-
 	id: string;
 	sessionDetails: any;
 	authToken: string;
+
+	documentBody: any;
 
 	audioActive: boolean;
 	videoActive: boolean;
@@ -24,6 +26,7 @@ export class BaseComponent implements OnInit, AfterViewInit {
 	mainParticipant: string;
 
 	constructor(
+		@Inject(DOCUMENT) private document: Document,
 		private route: ActivatedRoute,
 		private router: Router,
 		private snackBar: MatSnackBar,
@@ -32,6 +35,9 @@ export class BaseComponent implements OnInit, AfterViewInit {
 	) { }
 	
 	ngOnInit() {
+		this.documentBody = this.document.body;
+		this.documentBody.appendChild()
+
 		this.videoConferenceService.initializeService();
 
 		this.title.setTitle('Video Call');
