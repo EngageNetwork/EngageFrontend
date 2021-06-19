@@ -88,3 +88,47 @@
 	margin: 0;
 	padding: 0;
 }
+
+#global-footer .social-links {
+	margin-top: 4px;
+}
+
+#global-footer .link-container {
+	position: relative;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+#global-footer .link-container:last-child {
+	margin-right: 0;
+}
+
+#global-footer .link-tooltip {
+	visibility: hidden;
+	width: 200px;
+	background-color: black;
+	color: white;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+
+	position: absolute;
+	z-index: 1;
+	bottom: 5%;
+	right: 120%;
+}
+
+#global-footer .link-container:hover {
+	.link-tooltip {
+		visibility: visible;
+	}
+}
+
+#global-footer .follow-msg {
+	display: inline;
+	font-size: 14px;
+}
+
+#global-footer .follow-msg:last-child {
+	margin-right: 0;
+}

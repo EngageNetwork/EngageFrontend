@@ -1,12 +1,12 @@
 <div class="p-4">
-	<div class="container card mt-3">
-		<div class="card-body">
-			<h1 class="mt-5">Hi {{account.firstName}}!</h1>
-			<p>You are logged into your Engage Network account.</p>
+	<div class="container mt-3">
+		<h1 class="pt-5">Hi {{account.firstName}}!</h1>
+		<p>You are logged into your Engage Network account.</p>
+
+		<div *ngIf="!account.approved" class="pt-3 mt-4 alert alert-info">
+			<p class="mb-1">You have not been approved yet to tutor on Engage. Please fill out the tutor application below. If approved, your account will then be unlocked for you to use.</p>
 		</div>
-		<div *ngIf="!account.approved" class="card-body">
-			<p class="mb-0">You have not been approved yet to tutor on Engage. Please fill out the tutor application below. If approved, your account will then be unlocked for you to use.</p>
-			<iframe id="tutorApplication" src="https://m5pegi7it8n.typeform.com/to/A0k4vgkA"></iframe>
-		</div>
+
+		<iframe *ngIf="!account.approved" id="tutorApplication" src="https://m5pegi7it8n.typeform.com/to/A0k4vgkA"></iframe>
 	</div>
 </div>
