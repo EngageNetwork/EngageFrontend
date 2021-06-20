@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ProdGuard } from '@app/_helpers';
-
 import { LayoutComponent } from './layout/layout.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -15,10 +13,10 @@ const routes: Routes = [
 		path: '', component: LayoutComponent,
 		children: [
 			{ path: 'login', component: LoginComponent },
-			{ path: 'register', component: RegisterComponent, canActivate: [ProdGuard] },
-			{ path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [ProdGuard] },
-			{ path: 'reset-password', component: ResetPasswordComponent, canActivate: [ProdGuard] },
-			{ path: 'verify-email', component: VerifyEmailComponent, canActivate: [ProdGuard] }
+			{ path: 'register', component: RegisterComponent },
+			{ path: 'forgot-password', component: ForgotPasswordComponent },
+			{ path: 'reset-password', component: ResetPasswordComponent },
+			{ path: 'verify-email', component: VerifyEmailComponent }
 		]
 	}
 ];
