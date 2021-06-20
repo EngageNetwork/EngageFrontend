@@ -28,7 +28,13 @@ export class OverviewComponent implements OnInit {
 		this.fetchData(true);
 		this.interval = setInterval(() => {
 			this.fetchData(false);
-		}, 60000);
+		}, 30000);
+	}
+
+	ngOnDestroy(): void {
+		if (this.interval) {
+			clearInterval(this.interval);
+		}
 	}
 
 	fetchData(isInitial: boolean) {

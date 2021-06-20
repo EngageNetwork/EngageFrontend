@@ -31,6 +31,12 @@ export class ListComponent implements OnInit {
 			}, 30000);
 		}
 
+		ngOnDestroy(): void {
+			if (this.interval) {
+				clearInterval(this.interval);
+			}
+		}
+
 		fetchData(isInitial: boolean) {
 			if (isInitial) this.isLoading = true;
 
