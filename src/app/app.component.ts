@@ -46,6 +46,6 @@ export class AppComponent {
 	logout() {
 		this.accountService.logout();
 		this.router.navigate(['/']);
-		this.snackBar.open('You have been logged out', 'Close', { duration: 10000 });
+		this.snackBar.open('You have been logged out', 'Close', { duration: 4000 });
 	}
 }

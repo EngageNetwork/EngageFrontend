@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import Feather from 'feather-icons';
 
 @Component({
 	templateUrl: './overview.component.html',
@@ -13,4 +14,7 @@ export class OverviewComponent implements OnInit {
 		this.title.setTitle('About Us | Engage Network');
 	}
 	
+	ngAfterViewInit() {
+		Feather.replace();
+	}
 }
