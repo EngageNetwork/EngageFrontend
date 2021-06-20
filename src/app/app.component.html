@@ -1,6 +1,6 @@
 <div class="app-container d-flex flex-column h-100 w-100">
 	<!-- Main Navbar -->
-	<div id="main-navbar" class="navbar navbar-expand-lg px-5 py-3 text-white navbar-dark bg-dark">
+	<div id="main-navbar" class="main-navbar-bg navbar navbar-expand-lg px-5 py-3 text-white navbar-dark">
 		<header class="mb-auto w-100">
 			<div>
 				<h1 *ngIf="account && account.role === Role.Admin" routerLink="/admin/home" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1>
@@ -23,9 +23,9 @@
 						<a *ngIf="account.role === Role.Tutor && account.approved" routerLink="/tutor/listings" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Listings</a>
 						<a *ngIf="account.role === Role.Admin" routerLink="/student/sessions" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Sessions</a>
 						<a *ngIf="account.role === Role.Student && account.approved" routerLink="/student/sessions" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Sessions</a>
-						<a routerLink="/about" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">About Us</a>
+						<a routerLink="/about" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">About</a>
 						<!-- User Dropdown Menu -->
-						<div class="ms-4 d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+						<div class="pl-3 d-inline-block" ngbDropdown #myDrop="ngbDropdown">
 							<a class="nav-item nav-link" id="userDropdown" tabindex="0" ngbDropdownToggle role="button">{{account.firstName}} {{account.lastName}}</a>
 							<div ngbDropdownMenu aria-labelledby="userDropdown">
 								<button ngbDropdownItem routerLink="/profile" (click)="isNavbarCollapsed = true">Profile</button>
@@ -37,7 +37,7 @@
 					<!-- Not Logged In -->
 					<nav *ngIf="!account" class="nav nav-masthead justify-content-center float-md-end">
 						<a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Home</a>
-						<a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">About Us</a>
+						<a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">About</a>
 						<a routerLink="/account/register" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Register</a>
 						<a routerLink="/account/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Login</a>
 					</nav>
@@ -51,7 +51,7 @@
 	
 	<!-- Main Router Outlet -->
 	<router-outlet></router-outlet>
-	
+
 	<!-- Webpage Footer -->
 	<footer id="global-footer" class="mt-auto mb-1">
 		<div class="global-footer-content">
@@ -64,9 +64,24 @@
 					<a class="footer-legal-link" routerLink="/legal/privacy/cookies" routerLinkActive="active" >Use of Cookies</a>
 					<a class="footer-legal-link" routerLink="/legal/terms" routerLinkActive="active" >Terms of Service</a>
 					<a class="footer-legal-link" routerLink="/legal" routerLinkActive="active" >Legal</a>
-					<a class="footer-legal-link" routerLink="/sitemap" routerLinkActive="active" >Sitemap</a>
+					<!-- <a class="footer-legal-link" routerLink="/sitemap" routerLinkActive="active" >Sitemap</a> --> <!--ENABLE THIS WHEN SITEMAP EXISTS-->
+				</div>
+			</div>
+			<div class="social-links ml-auto float-right">
+				<p class="link-container follow-msg">Follow Engage Network</p>
+				<div class="link-container">
+					<a class="follow-msg" href="https://twitter.com/EngageNet" target="_blank" rel="noopener noreferrer"><span data-feather="twitter" width="25" height="25" stroke="black"></span></a>
+					<span class="link-tooltip">Follow Engage Network on Twitter, opens in a new tab</span>
+				</div>
+				<div class="link-container">
+					<a class="follow-msg" href="https://instagram.com/engage.network" target="_blank" rel="noopener noreferrer"><span data-feather="instagram" width="25" height="25" stroke="black"></span></a>
+					<span class="link-tooltip">Follow Engage Network on Instagram, opens in a new tab</span>
+				</div>
+				<div class="link-container">
+					<a class="follow-msg" href="https://www.youtube.com/channel/UCZfr4JVUMK4WskiTzI6xrZw" target="_blank" rel="noopener noreferrer"><span data-feather="youtube" width="25" height="25" stroke="black"></span></a>
+					<span class="link-tooltip">Follow Engage Network on YouTube, opens in a new tab</span>
 				</div>
 			</div>
 		</div>
-	</footer>  
+	</footer>
 </div>

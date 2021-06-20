@@ -4,24 +4,24 @@
 <table class="table table-hover">
 	<thead id="table-header" class="thead-dark">
 		<tr>
-			<th style="width: 15%">Tutor Name</th>
-			<th style="width: 15%">Content Rating</th>
-			<th style="width: 15%">Behaviour Rating</th>
-			<th style="width: 15%">Subject</th>
-			<th style="width: 25%">Date/Time Range</th>
-			<th style="width: 15%">Actions</th>
+			<th class="text-center" style="width: 15%">Tutor Name</th>
+			<th class="text-center" style="width: 15%">Content Rating</th>
+			<th class="text-center" style="width: 15%">Behaviour Rating</th>
+			<th class="text-center" style="width: 15%">Subject</th>
+			<th class="text-center" style="width: 25%">Date/Time Range</th>
+			<th class="text-center" style="width: 15%">Actions</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr *ngFor="let listing of listings">
-			<td><a routerLink="/profile/viewprofile/{{listing.account}}">{{listing.accountDetails.firstName}} {{listing.accountDetails.lastName}}</a></td>
+			<td class="text-center"><a routerLink="/profile/viewprofile/{{listing.account}}">{{listing.accountDetails.firstName}} {{listing.accountDetails.lastName}}</a></td>
 			<td *ngIf="!!listing.accountDetails.contentRatings && !!listing.accountDetails.contentRatings.overallContentRating" class="text-center">{{listing.accountDetails.contentRatings.overallContentRating}}/100</td>
 			<td *ngIf="!listing.accountDetails.contentRatings || !listing.accountDetails.contentRatings.overallContentRating" class="text-center">None Available</td>
 			<td *ngIf="!!listing.accountDetails.behaviourRating" class="text-center">{{listing.accountDetails.behaviourRating}}/100</td>
 			<td *ngIf="!listing.accountDetails.behaviourRating" class="text-center">None Available</td>
-			<td>{{listing.subject}} <p *ngIf="!!listing.details" style="display:inline"> ({{listing.details}})</p></td>
-			<td><h6 style="display:inline">{{listing.startDateTime}}</h6> to <h6>{{listing.endDateTime}}</h6></td>
-			<td style="white-space: nowrap">
+			<td class="text-center"><p *ngIf="listing.subject !== 'Foreign Language Acquisition'">{{listing.subject}}</p><p *ngIf="listing.subject === 'Foreign Language Acquisition'" style="display:inline">FLA</p><p *ngIf="!!listing.details" style="display:inline"> ({{listing.details}})</p></td>
+			<td class="text-center"><h6 style="display:inline">{{listing.startDateTime}}</h6> to <h6>{{listing.endDateTime}}</h6></td>
+			<td style="white-space: nowrap" class="text-center">
 				<a routerLink="details/{{listing._id}}" class="btn btn-sm btn-secondary mr-2">Details</a>
 				<button (click)="registerSession(listing._id)" class="btn btn-sm btn-primary" [disabled]="listing.isRegistering">
 					<span *ngIf="listing.isRegistering" class="spinner-border spinner-border-sm"></span>
@@ -29,10 +29,10 @@
 				</button>
 			</td>
 		</tr>
-		<tr *ngIf="!listings?.length">
+		<tr *ngIf="isLoading || !listings?.length">
 			<td colspan="6" class="text-center">
-				<span class="spinner-border spinner-border-lg align-center mt-3"></span>
-				<p class="text-center mt-4">There are currently no available sessions. Come back in a bit to check again!</p>
+				<span *ngIf="isLoading" class="spinner-border spinner-border-lg align-center mt-3"></span>
+				<p *ngIf="!isLoading && !listings?.length" class="text-center mt-3">There are currently no available sessions. Come back in a bit to check again!</p>
 			</td>
 		</tr>
 	</tbody>

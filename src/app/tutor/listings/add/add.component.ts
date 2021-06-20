@@ -24,7 +24,7 @@ export class AddComponent implements OnInit {
 	) { }
 	
 	ngOnInit() {
-		this.title.setTitle('Creating New Listing');
+		this.title.setTitle('Create Listing | Engage Network');
 		
 		this.createListingForm = this.formBuilder.group({
 			subject: ['', Validators.required],
@@ -51,6 +51,19 @@ export class AddComponent implements OnInit {
 			return;
 		}
 
+		// Ensure time range starts after current time
+		var currentDateTime = new Date();
+		if (this.createListingForm.value.startDateTime < currentDateTime) {
+			this.snackBar.open('Check Start Time', 'Close', { duration: 10000 });
+			return;
+		}
+
+		// Ensure time range is in correct oder
+		if (this.createListingForm.value.startDateTime > this.createListingForm.value.endDateTime) {
+			this.snackBar.open('Check Time Range', 'Close', { duration: 10000 });
+			return;
+		}
+		
 		// Check for specific language if subject is FLA
 		if (this.createListingForm.value.subject == 'Foreign Language Acquisition') {
 			if (!this.createListingForm.value.details) {

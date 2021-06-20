@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { SlateService } from '@app/_services';
 
@@ -14,6 +14,7 @@ import { SlateService } from '@app/_services';
 export class OverviewComponent implements OnInit {
 	listings: any[];
 	interval: any;
+	isLoading: boolean;
 	
 	constructor(
 		private snackBar: MatSnackBar,
@@ -22,15 +23,17 @@ export class OverviewComponent implements OnInit {
 	) { }
 		
 	ngOnInit() {
-		this.title.setTitle('Listings Overview');
+		this.title.setTitle('Active Listings | Engage Network');
 		
-		this.fetchData();
+		this.fetchData(true);
 		this.interval = setInterval(() => {
-			this.fetchData();
+			this.fetchData(false);
 		}, 60000);
 	}
 
-	fetchData() {
+	fetchData(isInitial: boolean) {
+		if (isInitial) this.isLoading = true;
+
 		this.slateService.getMyListings()
 		.pipe(first())
 		.subscribe(listings => {
@@ -40,6 +43,7 @@ export class OverviewComponent implements OnInit {
 			});
 			
 			this.listings = listings;
+			if (isInitial) this.isLoading = false;
 		});
 	}
 	

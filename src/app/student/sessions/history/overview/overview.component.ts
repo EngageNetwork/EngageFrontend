@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { SlateService } from '@app/_services';
 
@@ -13,6 +13,7 @@ import { SlateService } from '@app/_services';
 
 export class OverviewComponent implements OnInit {
 	sessions: any[];
+	isLoading: boolean;
 	
 	constructor(
 		private snackBar: MatSnackBar,
@@ -21,12 +22,14 @@ export class OverviewComponent implements OnInit {
 		) { }
 		
 		ngOnInit(): void {
-			this.title.setTitle('Past Sessions');
+			this.title.setTitle('Past Sessions | Engage Network');
 			
-			this.fetchData();
+			this.fetchData(true);
 		}
 
-		fetchData() {
+		fetchData(isInitial: boolean) {
+			if (isInitial) this.isLoading = true;
+
 			this.slateService.getMyFinishedSessions()
 			.pipe(first())
 			.subscribe(sessions => {
@@ -36,6 +39,7 @@ export class OverviewComponent implements OnInit {
 				});
 
 				this.sessions = sessions;
+				if (isInitial) this.isLoading = false;
 			});
 		}
 	}

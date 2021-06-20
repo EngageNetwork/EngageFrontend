@@ -1,0 +1,136 @@
+.center-spacing {
+	gap: 50px
+}
+
+.center-text {
+	text-align: center;
+}
+
+// Profile Card Formatting
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+.profile-card {
+	// Colours
+	--clr-neutral-900: hsl(207, 19%, 9%);
+	--clr-neutral-100: hsl(0, 0%, 100%);
+	--clr-accent-400: hsl(219, 95%, 40%);
+	--clr-accent-500: hsl(219, 95%, 30%);
+
+	color: var(--clr-neutral-100);
+	background: {
+		image: url(/assets/favicons/apple-touch-icon.png);
+		size: cover;
+		position: center;
+	}
+
+	padding: 10rem 0 0;
+	max-width: 35ch;
+	border-radius: 0.5rem;
+	overflow: hidden;
+
+	transition: transform 350ms ease;
+}
+
+.profile-card:hover, .card:focus-within {
+	transform: scale(1.05);
+}
+
+.profile-card-content {
+	--padding: 1.5rem;
+	padding: var(--padding);
+	background: linear-gradient(
+		hsla(0, 0%, 0%, 0),
+		hsla(0, 0%, 0%, 0.3) 15%,
+		hsla(0, 0%, 0%, 1)
+	);
+}
+
+.profile-card-title {
+	position: relative;
+	width: max-content;
+	max-width: 100%;
+}
+
+.profile-card-title::after {
+	content: '';
+	position: absolute;
+	height: 4px;
+	width: calc(101% + var(--padding));
+	left: calc(var(--padding) * -1);
+	bottom: -18%;
+	background: var(--clr-accent-400);
+
+	transform-origin: left;
+	transition: transform 350ms ease;
+}
+
+.profile-card-body  {
+	color: hsla(0, 0%, 100%, 0.85)
+}
+
+.profile-card-button {
+	cursor: pointer;
+	display: inline;
+	text-decoration: none;
+	color: var(--clr-neutral-100);
+	background-color: var(--clr-accent-400);
+	padding: 0.4em 1em;
+	border-radius: 0.25em;
+}
+
+.profile-card-button:hover,
+.profile-card-button:focus {
+	background-color: var(--clr-accent-500);
+}
+
+@media (hover) {
+	.profile-card-content {
+		transform: translateY(60%);
+
+		transition: transform 350ms ease;
+	}
+	.profile-card:hover .profile-card-content, .profile-card:focus-within .profile-card-content {
+		transform: translateY(0);
+		transition-delay: 350ms;
+	}
+	
+	.profile-card:focus-within .profile-card-content {
+		transition-duration: 0ms;
+	}
+	
+	.profile-card-content > *:not(.profile-card-title) {
+		opacity: 0;
+		transition: opacity 350ms linear;
+	}
+	
+	.profile-card:hover .profile-card-content > *:not(.profile-card-title),
+	.profile-card:focus-within .profile-card-content > *:not(.profile-card-title) {
+		opacity: 1;
+		transition-delay: 350ms;
+	}
+	
+	.profile-card:focus-within .profile-card-content > *:not(.profile-card-title) {
+		transition-delay: 0ms;
+	}
+
+	.profile-card-title::after {
+		transform: scaleX(0);
+	}
+
+	.profile-card:hover .profile-card-title::after,
+	.profile-card:focus-within .profile-card-title::after {
+		transform: scaleX(1);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+		transition-delay: 0ms !important;
+	}
+}

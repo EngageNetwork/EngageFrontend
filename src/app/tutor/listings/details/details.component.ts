@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { SlateService } from '@app/_services';
 
@@ -26,16 +26,18 @@ export class DetailsComponent implements OnInit {
 	) { }
 	
 	ngOnInit(): void {
-		this.title.setTitle('Listing Details');
+		this.title.setTitle('Listing Details | Engage Network');
 		
 		this.id = this.route.snapshot.params['id'];
 		
 		this.slateService.getListingById(this.id)
 		.pipe(first())
-		.subscribe(listing => {
+		.subscribe((listing: any) => {
 			listing.startDateTime = moment(listing.startDateTime).format('LT MMMM Do[,] YYYY');
 			listing.endDateTime = moment(listing.endDateTime).format('LT MMMM Do[,] YYYY');
-			
+
+			listing.registeredDetails.behaviourRating = Math.round(listing.registeredDetails.behaviourRating);
+
 			this.listing = listing;
 		});
 	}

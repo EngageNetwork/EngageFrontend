@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { SlateService } from '@app/_services';
 
@@ -31,7 +31,7 @@ export class DetailsComponent implements OnInit {
 	) { }
 	
 	ngOnInit(): void {
-		this.title.setTitle('Slate Details');
+		this.title.setTitle('Slate Details | Admin');
 		
 		this.id = this.route.snapshot.params['id'];
 		

@@ -13,16 +13,16 @@
 	<tbody>
 		<tr *ngFor="let session of sessions">
 			<td><a routerLink="/profile/viewprofile/{{session.account}}">{{session.accountDetails.firstName}} {{session.accountDetails.lastName}}</a></td>
-			<td>{{session.subject}} <p *ngIf="!!session.details" style="display:inline"> ({{session.details}})</p></td>
+			<td><p *ngIf="session.subject !== 'Foreign Language Acquisition'">{{session.subject}}</p><p *ngIf="session.subject === 'Foreign Language Acquisition'" style="display:inline">FLA</p><p *ngIf="!!session.details" style="display:inline"> ({{session.details}})</p></td>
 			<td><h6 style="display:inline">{{session.startDateTime}}</h6> to <h6 style="display:inline">{{session.endDateTime}}</h6></td>
 			<td style="white-space: nowrap">
 				<a routerLink="details/{{session._id}}" class="btn btn-sm btn-primary mr-1">Details</a>
 			</td>
 		</tr>
-		<tr *ngIf="!sessions?.length">
+		<tr *ngIf="isLoading || !sessions?.length">
 			<td colspan="4" class="text-center">
-				<span class="spinner-border spinner-border-lg align-center mt-3"></span>
-				<p class="text-center mt-4">You have no past sessions. Click <a routerLink="../registered">here</a> to see your current sessions.</p>
+				<span *ngIf="isLoading" class="spinner-border spinner-border-lg align-center mt-3"></span>
+				<p *ngIf="!isLoading && !sessions?.length" class="text-center mt-3">You have no past sessions. Click <a routerLink="../registered">here</a> to see your current sessions.</p>
 			</td>
 		</tr>
 	</tbody>

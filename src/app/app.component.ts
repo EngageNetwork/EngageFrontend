@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import Feather from 'feather-icons';
 
 import { AccountService } from '@app/_services';
 import { Account, Role } from '@app/_models';
@@ -14,7 +15,7 @@ import { Account, Role } from '@app/_models';
 export class AppComponent {
 	public isNavbarCollapsed = true;
 
-	title = 'ConnectionWebApp';
+	title = 'EngageNetwork';
 	
 	Role = Role;
 	account: Account;
@@ -25,6 +26,10 @@ export class AppComponent {
 		private accountService: AccountService
 	) {
 		this.accountService.account.subscribe(a => this.account = a);
+	}
+
+	ngAfterViewInit() {
+		Feather.replace();
 	}
 	
 	logout() {

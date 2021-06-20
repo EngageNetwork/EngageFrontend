@@ -3,8 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import * as moment from 'moment';
-import * as Feather from 'feather-icons';
+import moment from 'moment';
+import Feather from 'feather-icons';
+import { Role } from '@app/_models';
 
 import { AccountService, MessageService } from '@app/_services';
 import { Account } from '@app/_models';
@@ -39,6 +40,18 @@ export class ChatUIComponent implements OnInit, AfterViewInit {
 		
 		this.id = this.route.snapshot.params['id'];
 		
+		// Check for if user is chatting with self
+		if (this.account.id === this.id) {
+			const role = this.accountService.accountValue.role;
+			if (role == Role.Admin) {
+				this.router.navigate(['/admin/home']);
+			} else if (role == Role.Tutor) {
+				this.router.navigate(['/tutor/home']);
+			} else if (role == Role.Student) {
+				this.router.navigate(['/student/home']);
+			}
+		}
+
 		this.accountService.getByIdPublic(this.id)
 		.pipe(first())
 		.subscribe({
@@ -91,7 +104,13 @@ export class ChatUIComponent implements OnInit, AfterViewInit {
 	}
 
 	sendMessage() {
-		this.messageService.postMsg(this.chatId, { messageText: this.msgPayload })
+		if (!this.msgPayload || !this.msgPayload.trim()) {
+			// Display error to user
+			this.snackBar.open('Message cannot be empty', 'Close', { duration: 10000 });
+			return;
+		}
+
+		this.messageService.postMsg(this.chatId, this.msgPayload)
 		.pipe(first())
 		.subscribe({
 			next: response => {

@@ -1,7 +1,7 @@
 <div class="chatWindow">
 	<div id="otherUserName" class="d-flex w-100 px-5 py-3">
 		<h5 class="mb-0 d-flex align-items-center float-start">{{otherUserName}}</h5>
-		<a class="ms-auto float-end" href="/profile/viewprofile/{{id}}"><span data-feather="info" width="30" height="30" stroke="black"></span></a>
+		<a class="ml-auto float-right" href="/profile/viewprofile/{{id}}"><span data-feather="info" width="30" height="30" stroke="black"></span></a>
 	</div>
 	<div class="p-2 keyline keyline-top-all"></div>
 	<div class="main-content-area">
@@ -18,7 +18,7 @@
 						<p style="display:inline"> @ {{message.createdAt}}</p>
 					</div>
 					
-					<p>{{message.message.messageText}}</p>
+					<p>{{message.message}}</p>
 				</li>
 			</ul>
 		</div>

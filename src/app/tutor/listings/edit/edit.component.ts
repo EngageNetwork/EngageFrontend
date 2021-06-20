@@ -26,7 +26,7 @@ export class EditComponent implements OnInit {
 		) { }
 		
 		ngOnInit() {
-			this.title.setTitle('Update Listing');
+			this.title.setTitle('Update Listing | Engage Network');
 			
 			this.id = this.route.snapshot.params['id'];
 			
@@ -59,6 +59,19 @@ export class EditComponent implements OnInit {
 			// Ensure time range is specified
 			if (!this.updateListingForm.value.startDateTime || !this.updateListingForm.value.endDateTime) {
 				this.snackBar.open('Specify Time Range', 'Close', { duration: 10000 });
+				return;
+			}
+
+			// Ensure time range starts after current time
+			var currentDateTime = new Date();
+			if (this.updateListingForm.value.startDateTime < currentDateTime) {
+				this.snackBar.open('Check Start Time', 'Close', { duration: 10000 });
+				return;
+			}
+
+			// Ensure time range is in correct oder
+			if (this.updateListingForm.value.startDateTime > this.updateListingForm.value.endDateTime) {
+				this.snackBar.open('Check Time Range', 'Close', { duration: 10000 });
 				return;
 			}
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { SlateService } from '@app/_services';
 
@@ -14,6 +14,7 @@ import { SlateService } from '@app/_services';
 export class ListComponent implements OnInit {
 	sessions: any[];
 	interval: any;
+	isLoading: boolean;
 	
 	constructor(
 		private snackBar: MatSnackBar,
@@ -22,24 +23,27 @@ export class ListComponent implements OnInit {
 		) { }
 		
 		ngOnInit(): void {
-			this.title.setTitle('My Sessions');
+			this.title.setTitle('My Sessions | Engage Network');
 			
-			this.fetchData();
+			this.fetchData(true);
 			this.interval = setInterval(() => {
-				this.fetchData();
+				this.fetchData(false);
 			}, 30000);
 		}
 
-		fetchData() {
+		fetchData(isInitial: boolean) {
+			if (isInitial) this.isLoading = true;
+
 			this.slateService.getMySessions()
 			.pipe(first())
 			.subscribe(sessions => {
-				sessions.forEach(function(item) {
+				sessions.forEach(function(item: any) {
 					item.startDateTime = moment(item.startDateTime).format("LT MMMM Do[,] YYYY");
 					item.endDateTime = moment(item.endDateTime).format("LT MMMM Do[,] YYYY");
 				});
 
 				this.sessions = sessions;
+				if (isInitial) this.isLoading = false;
 			});
 		}
 		

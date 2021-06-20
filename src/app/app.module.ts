@@ -13,13 +13,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccountService } from './_services';
 
 import { GlobalHomeComponent } from './global-home/global-home.component';
-import { AboutComponent } from './about/about.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		GlobalHomeComponent,
-		AboutComponent
+		GlobalHomeComponent
 	],
 	imports: [
 		BrowserModule,

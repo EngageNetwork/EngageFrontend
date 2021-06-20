@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { SlateService } from '@app/_services';
 
@@ -14,6 +14,7 @@ import { SlateService } from '@app/_services';
 export class ListComponent implements OnInit {
 	listings: any[];
 	interval: any;
+	isLoading: boolean;
 	
 	constructor(
 		private snackBar: MatSnackBar,
@@ -22,24 +23,36 @@ export class ListComponent implements OnInit {
 	) { }
 	
 	ngOnInit(): void {
-		this.title.setTitle('Available Sessions');
+		this.title.setTitle('Available Sessions | Engage Network');
 
-		this.fetchData();
+		this.fetchData(true);
 		this.interval = setInterval(() => {
-			this.fetchData();
+			this.fetchData(false);
 		}, 60000);
 	}
 	
-	fetchData() {
+	fetchData(isInitial: boolean) {
+		if (isInitial) this.isLoading = true;
+
 		this.slateService.getAllListings()
 		.pipe(first())
 		.subscribe(listings => {
-			listings.forEach(function(item) {
+			listings.forEach(function(item: any) {
 				item.startDateTime = moment(item.startDateTime).format('LT MMMM Do[,] YYYY');
 				item.endDateTime = moment(item.endDateTime).format('LT MMMM Do[,] YYYY');
+
+				console.log(item);
+
+				if (!!item.accountDetails?.contentRatings?.overallContentRating) {
+					item.accountDetails.contentRatings.overallContentRating = Math.round(item.accountDetails.contentRatings.overallContentRating);
+				}
+				if (!!item.accountDetails?.behaviourRating) {
+					item.accountDetails.behaviourRating = Math.round(item.accountDetails.behaviourRating);
+				}
 			})
 
 			this.listings = listings;
+			if (isInitial) this.isLoading = false;
 		});
 	}
 
