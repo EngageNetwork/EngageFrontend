@@ -52,19 +52,20 @@
 }
 
 #global-footer .footer-legal {
-	margin-top: 7px;
-	padding-top: 8px;
+	padding-top: 7px;
+	padding-bottom: 8px;
 	border-top: 1px solid #d2d2d7;
 }
 
 #global-footer .footer-legal-copyright {
+	margin-top: 0;
 	max-height: 9999px;
 }
 
 #global-footer .footer-legal-copyright, #global-footer .footer-legal-links {
 	margin-right: 60px;
 	float: left;
-	margin-top: 5px;
+	margin-top: 2px;
 }
 
 #global-footer .footer-legal-links {
@@ -90,7 +91,7 @@
 }
 
 #global-footer .social-links {
-	margin-top: 4px;
+	margin-top: 2px;
 }
 
 #global-footer .link-container {

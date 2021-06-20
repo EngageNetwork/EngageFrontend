@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
 		.subscribe({
 			next: () => {
 				// Display success message
-				this.snackBar.open('Logged in as: ' + this.accountService.accountValue.firstName + ' ' + this.accountService.accountValue.lastName, 'Close', { duration: 10000 });
+				this.snackBar.open('Logged in as: ' + this.accountService.accountValue.firstName + ' ' + this.accountService.accountValue.lastName, 'Close', { duration: 4000 });
 				this.redirectUser();
 			},
 			error: error => {

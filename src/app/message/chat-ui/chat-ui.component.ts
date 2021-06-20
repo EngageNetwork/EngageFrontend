@@ -35,7 +35,7 @@ export class ChatUIComponent implements OnInit, AfterViewInit {
 		this.accountService.account.subscribe(a => this.account = a);
 	}
 	
-	ngOnInit() {
+	ngOnInit(): void {
 		this.title.setTitle('Chat');
 		
 		this.id = this.route.snapshot.params['id'];
@@ -81,10 +81,15 @@ export class ChatUIComponent implements OnInit, AfterViewInit {
 		});
 	}
 	
-	ngAfterViewInit() {
+	ngAfterViewInit(): void {
 		Feather.replace();
 	}
-	
+
+	ngOnDestroy(): void {
+		if (this.interval) {
+			clearInterval(this.interval);
+		}
+	}
 
 	getConversation(chatId) {
 		this.messageService.getConversationByChatId(chatId)

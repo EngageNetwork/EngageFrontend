@@ -3,9 +3,9 @@
 	<div id="main-navbar" class="main-navbar-bg navbar navbar-expand-lg px-5 py-3 text-white navbar-dark">
 		<header class="mb-auto w-100">
 			<div>
-				<h1 *ngIf="account && account.role === Role.Admin" routerLink="/admin/home" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1>
-				<h1 *ngIf="account && account.role === Role.Tutor" routerLink="/tutor/home" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1>
-				<h1 *ngIf="account && account.role === Role.Student" routerLink="/student/home" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1>
+				<h1 *ngIf="account" (click)="redirectHome()" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1>
+				<!-- <h1 *ngIf="account && account.role === Role.Tutor" routerLink="/tutor/home" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1>
+				<h1 *ngIf="account && account.role === Role.Student" routerLink="/student/home" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1> -->
 				<h1 *ngIf="!account" routerLink="/" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1>
 				
 				<button class="navbar-toggler float-right" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed">
@@ -18,11 +18,15 @@
 						<a *ngIf="account.role === Role.Admin" routerLink="/admin/home" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Home</a>
 						<a *ngIf="account.role === Role.Tutor" routerLink="/tutor/home" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Home</a>
 						<a *ngIf="account.role === Role.Student" routerLink="/student/home" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Home</a>
+
 						<a *ngIf="account.role === Role.Admin" routerLink="/admin/manage" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Admin</a>
+
 						<a *ngIf="account.role === Role.Admin" routerLink="/tutor/listings" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Listings</a>
 						<a *ngIf="account.role === Role.Tutor && account.approved" routerLink="/tutor/listings" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Listings</a>
+
 						<a *ngIf="account.role === Role.Admin" routerLink="/student/sessions" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Sessions</a>
 						<a *ngIf="account.role === Role.Student && account.approved" routerLink="/student/sessions" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Sessions</a>
+						
 						<a routerLink="/about" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">About</a>
 						<!-- User Dropdown Menu -->
 						<div class="pl-3 d-inline-block" ngbDropdown #myDrop="ngbDropdown">
@@ -57,7 +61,7 @@
 		<div class="global-footer-content">
 			<div class="footer-legal">
 				<div class="footer-legal-copyright">
-					Copyright © 2021 Engage Network Organization. All rights reserved.
+					Copyright &copy; 2021 Engage Network Organization. All rights reserved.
 				</div>
 				<div class="footer-legal-links">
 					<a class="footer-legal-link" routerLink="/legal/privacy/policy" routerLinkActive="active" >Privacy Policy</a>
@@ -66,20 +70,20 @@
 					<a class="footer-legal-link" routerLink="/legal" routerLinkActive="active" >Legal</a>
 					<!-- <a class="footer-legal-link" routerLink="/sitemap" routerLinkActive="active" >Sitemap</a> --> <!--ENABLE THIS WHEN SITEMAP EXISTS-->
 				</div>
-			</div>
-			<div class="social-links ml-auto float-right">
-				<p class="link-container follow-msg">Follow Engage Network</p>
-				<div class="link-container">
-					<a class="follow-msg" href="https://twitter.com/EngageNet" target="_blank" rel="noopener noreferrer"><span data-feather="twitter" width="25" height="25" stroke="black"></span></a>
-					<span class="link-tooltip">Follow Engage Network on Twitter, opens in a new tab</span>
-				</div>
-				<div class="link-container">
-					<a class="follow-msg" href="https://instagram.com/engage.network" target="_blank" rel="noopener noreferrer"><span data-feather="instagram" width="25" height="25" stroke="black"></span></a>
-					<span class="link-tooltip">Follow Engage Network on Instagram, opens in a new tab</span>
-				</div>
-				<div class="link-container">
-					<a class="follow-msg" href="https://www.youtube.com/channel/UCZfr4JVUMK4WskiTzI6xrZw" target="_blank" rel="noopener noreferrer"><span data-feather="youtube" width="25" height="25" stroke="black"></span></a>
-					<span class="link-tooltip">Follow Engage Network on YouTube, opens in a new tab</span>
+				<div class="social-links ml-auto float-right">
+					<p class="link-container follow-msg">Follow Engage Network</p>
+					<div class="link-container">
+						<a class="follow-msg" href="https://twitter.com/EngageNet" target="_blank" rel="noopener noreferrer"><span data-feather="twitter" width="25" height="25" stroke="black"></span></a>
+						<span class="link-tooltip">Follow Engage Network on Twitter, opens in a new tab</span>
+					</div>
+					<div class="link-container">
+						<a class="follow-msg" href="https://instagram.com/engage.network" target="_blank" rel="noopener noreferrer"><span data-feather="instagram" width="25" height="25" stroke="black"></span></a>
+						<span class="link-tooltip">Follow Engage Network on Instagram, opens in a new tab</span>
+					</div>
+					<div class="link-container">
+						<a class="follow-msg" href="https://www.youtube.com/channel/UCZfr4JVUMK4WskiTzI6xrZw" target="_blank" rel="noopener noreferrer"><span data-feather="youtube" width="25" height="25" stroke="black"></span></a>
+						<span class="link-tooltip">Follow Engage Network on YouTube, opens in a new tab</span>
+					</div>
 				</div>
 			</div>
 		</div>

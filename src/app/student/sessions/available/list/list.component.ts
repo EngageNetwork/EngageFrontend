@@ -28,7 +28,13 @@ export class ListComponent implements OnInit {
 		this.fetchData(true);
 		this.interval = setInterval(() => {
 			this.fetchData(false);
-		}, 60000);
+		}, 30000);
+	}
+
+	ngOnDestroy(): void {
+		if (this.interval) {
+			clearInterval(this.interval);
+		}
 	}
 	
 	fetchData(isInitial: boolean) {
@@ -40,8 +46,6 @@ export class ListComponent implements OnInit {
 			listings.forEach(function(item: any) {
 				item.startDateTime = moment(item.startDateTime).format('LT MMMM Do[,] YYYY');
 				item.endDateTime = moment(item.endDateTime).format('LT MMMM Do[,] YYYY');
-
-				console.log(item);
 
 				if (!!item.accountDetails?.contentRatings?.overallContentRating) {
 					item.accountDetails.contentRatings.overallContentRating = Math.round(item.accountDetails.contentRatings.overallContentRating);

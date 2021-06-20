@@ -32,9 +32,20 @@ export class AppComponent {
 		Feather.replace();
 	}
 	
+	redirectHome() {
+		const role = this.account.role;
+		if (role == Role.Admin) {
+			this.router.navigate(['/admin/home']);
+		} else if (role == Role.Tutor) {
+			this.router.navigate(['/tutor/home']);
+		} else if (role == Role.Student) {
+			this.router.navigate(['/student/home']);
+		}
+	}
+
 	logout() {
 		this.accountService.logout();
 		this.router.navigate(['/']);
-		this.snackBar.open('You have been logged out', 'Close', { duration: 10000 });
+		this.snackBar.open('You have been logged out', 'Close', { duration: 4000 });
 	}
 }

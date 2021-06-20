@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthGuard, DevGuard, ProdGuard } from './_helpers';
+import { AuthGuard, DevGuard } from './_helpers';
 import { Role } from './_models';
 
 import { GlobalHomeComponent } from './global-home/global-home.component';
