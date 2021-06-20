@@ -62,6 +62,19 @@ export class EditComponent implements OnInit {
 				return;
 			}
 
+			// Ensure time range starts after current time
+			var currentDateTime = new Date();
+			if (this.updateListingForm.value.startDateTime < currentDateTime) {
+				this.snackBar.open('Check Start Time', 'Close', { duration: 10000 });
+				return;
+			}
+
+			// Ensure time range is in correct oder
+			if (this.updateListingForm.value.startDateTime > this.updateListingForm.value.endDateTime) {
+				this.snackBar.open('Check Time Range', 'Close', { duration: 10000 });
+				return;
+			}
+
 			// Check for specific language if subject is FLA
 			if (this.updateListingForm.value.subject == 'Foreign Language Acquisition') {
 				if (!this.updateListingForm.value.details) {

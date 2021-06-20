@@ -29,9 +29,10 @@
                 <a routerLink="details/{{listing._id}}" class="btn btn-sm btn-primary mr-1">Details</a>
 			</td>
 		</tr>
-		<tr *ngIf="!listings">
+		<tr *ngIf="isLoading || !listings?.length">
 			<td colspan="4" class="text-center">
-				<span class="spinner-border spinner-border-lg align-center"></span>
+				<span *ngIf="isLoading" class="spinner-border spinner-border-lg align-center"></span>
+				<p *ngIf="!isLoading && !listings?.length" class="text-center mt-3">You have no past sessions. Click <a routerLink="../">here</a> to see your current schedule.</p>
 			</td>
 		</tr>
 	</tbody>

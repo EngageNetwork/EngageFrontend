@@ -31,9 +31,12 @@ export class DetailsComponent implements OnInit {
 		
 		this.slateService.getSessionById(this.id)
 		.pipe(first())
-		.subscribe(listing => {
+		.subscribe((listing: any) => {
 			listing.startDateTime = moment(listing.startDateTime).format('LT MMMM Do[,] YYYY');
 			listing.endDateTime = moment(listing.endDateTime).format('LT MMMM Do[,] YYYY');
+
+			listing.accountDetails.contentRatings.overallContentRating = Math.round(listing.accountDetails.contentRatings.overallContentRating);
+			listing.accountDetails.behaviourRating = Math.round(listing.accountDetails.behaviourRating);
 
 			this.listing = listing;
 		});

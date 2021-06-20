@@ -32,10 +32,12 @@ export class DetailsComponent implements OnInit {
 		
 		this.slateService.getListingById(this.id)
 		.pipe(first())
-		.subscribe(listing => {
+		.subscribe((listing: any) => {
 			listing.startDateTime = moment(listing.startDateTime).format('LT MMMM Do[,] YYYY');
 			listing.endDateTime = moment(listing.endDateTime).format('LT MMMM Do[,] YYYY');
-			
+
+			listing.registeredDetails.behaviourRating = Math.round(listing.registeredDetails.behaviourRating);
+
 			this.listing = listing;
 		});
 	}

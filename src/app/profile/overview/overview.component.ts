@@ -11,11 +11,11 @@ import { Role } from '@app/_models';
 
 export class OverviewComponent {
 	account = this.accountService.accountValue;
-	totalDays: number;
-	totalHours: number;
-	totalMinutes: number;
-	totalSeconds: number;
-	fractionalHours: number;
+	totalDays: number = 0;
+	totalHours: number = 0 ;
+	totalMinutes: number = 0;
+	totalSeconds: number = 0;
+	fractionalHours: number = 0;
 	
 	Role = Role;
 
@@ -27,9 +27,10 @@ export class OverviewComponent {
 	ngOnInit() {
 		this.title.setTitle('Profile Overview');
 
-		this.getTotalDHMS(this.account.totalDuration);
-
-		console.log(this.account);
+		// Verify that account has totalDuration entry
+		if (!!this.account.totalDuration) {
+			this.getTotalDHMS(this.account.totalDuration);
+		}
 	}
 
 	getTotalDHMS(seconds) {

@@ -25,7 +25,7 @@
 						<a *ngIf="account.role === Role.Student && account.approved" routerLink="/student/sessions" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Sessions</a>
 						<a routerLink="/about" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">About</a>
 						<!-- User Dropdown Menu -->
-						<div class="ms-4 d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+						<div class="pl-3 d-inline-block" ngbDropdown #myDrop="ngbDropdown">
 							<a class="nav-item nav-link" id="userDropdown" tabindex="0" ngbDropdownToggle role="button">{{account.firstName}} {{account.lastName}}</a>
 							<div ngbDropdownMenu aria-labelledby="userDropdown">
 								<button ngbDropdownItem routerLink="/profile" (click)="isNavbarCollapsed = true">Profile</button>

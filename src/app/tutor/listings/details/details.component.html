@@ -109,7 +109,7 @@
 						<span *ngIf="!listing.isMarkingComplete">Unmark Session As Complete</span>
 					</button>
 				</div>
-				<a routerLink="../../edit/{{listing.id}}" class="btn btn-sm btn-primary mr-2">Edit Listing</a>
+				<a routerLink="../../edit/{{id}}" class="btn btn-sm btn-primary mr-2">Edit Listing</a>
 				<button (click)="deleteListing(listing.id)" class="btn btn-sm btn-danger mr-2" [disabled]="listing.isDeleting || !!listing.registered">
 					<span *ngIf="listing.isDeleting" class="spinner-border spinner-border-sm"></span>
 					<span *ngIf="!listing.isDeleting">Delete Listing</span>

@@ -15,7 +15,7 @@ import { Account, Role } from '@app/_models';
 export class AppComponent {
 	public isNavbarCollapsed = true;
 
-	title = 'ConnectionWebApp';
+	title = 'EngageNetwork';
 	
 	Role = Role;
 	account: Account;

@@ -4,18 +4,18 @@
 <table class="table table-hover">
 	<thead id="table-header" class="thead-dark">
 		<tr>
-			<th style="width: 21%">Tutor Name</th>
-			<th style="width: 21%">Subject</th>
-			<th style="width: 45%">Date/Time Range</th>
-			<th style="width: 13%">Actions</th>
+			<th class="text-center" style="width: 21%">Tutor Name</th>
+			<th class="text-center" style="width: 21%">Subject</th>
+			<th class="text-center" style="width: 45%">Date/Time Range</th>
+			<th class="text-center" style="width: 13%">Actions</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr *ngFor="let session of sessions">
-			<td><a routerLink="/profile/viewprofile/{{session.account}}">{{session.accountDetails.firstName}} {{session.accountDetails.lastName}}</a></td>
-			<td><p *ngIf="session.subject !== 'Foreign Language Acquisition'">{{session.subject}}</p><p *ngIf="session.subject === 'Foreign Language Acquisition'" style="display:inline">FLA</p><p *ngIf="!!session.details" style="display:inline"> ({{session.details}})</p></td>
-			<td><h6 style="display:inline">{{session.startDateTime}}</h6> to <h6 style="display:inline">{{session.endDateTime}}</h6></td>
-			<td style="white-space: nowrap">
+			<td class="text-center"><a routerLink="/profile/viewprofile/{{session.account}}">{{session.accountDetails.firstName}} {{session.accountDetails.lastName}}</a></td>
+			<td class="text-center"><p *ngIf="session.subject !== 'Foreign Language Acquisition'">{{session.subject}}</p><p *ngIf="session.subject === 'Foreign Language Acquisition'" style="display:inline">FLA</p><p *ngIf="!!session.details" style="display:inline"> ({{session.details}})</p></td>
+			<td class="text-center"><h6 style="display:inline">{{session.startDateTime}}</h6> to <h6 style="display:inline">{{session.endDateTime}}</h6></td>
+			<td style="white-space: nowrap" class="text-center">
 				<a *ngIf="!!session.markedCompletedStudent && !!session.markedCompletedTutor" routerLink="details/{{session._id}}" class="btn btn-sm btn-success mr-1 finish-text">Complete Session</a>
 				<div *ngIf="!session.markedCompletedStudent || !session.markedCompletedTutor">
 					<a routerLink="details/{{session._id}}" class="btn btn-sm btn-primary mr-1">Details</a>
@@ -26,10 +26,10 @@
 				</div>
 			</td>
 		</tr>
-		<tr *ngIf="!sessions?.length">
+		<tr *ngIf="isLoading || !sessions?.length">
 			<td colspan="4" class="text-center">
-				<span class="spinner-border spinner-border-lg align-center mt-3"></span>
-				<p class="text-center mt-4">You currently have no registered sessions. Take a look at the <a routerLink="../available">available sessions</a> and register for one today!</p>
+				<span *ngIf="isLoading" class="spinner-border spinner-border-lg align-center mt-3"></span>
+				<p *ngIf="!isLoading && !sessions?.length" class="text-center mt-3">You currently have no registered sessions. Take a look at the <a routerLink="../available">available sessions</a> and register for one today!</p>
 			</td>
 		</tr>
 	</tbody>

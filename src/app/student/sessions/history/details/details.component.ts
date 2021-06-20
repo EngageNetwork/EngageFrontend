@@ -36,6 +36,7 @@ export class DetailsComponent implements OnInit {
 		.subscribe(session => {
 			session.startDateTime = moment(session.startDateTime).format('LT MMMM Do[,] YYYY');
 			session.endDateTime = moment(session.endDateTime).format('LT MMMM Do[,] YYYY')
+			session.updatedAt = moment(session.updatedAt).format('LT MMMM Do[,] YYYY')
 
 			this.session = session;
 		});

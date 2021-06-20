@@ -12,6 +12,7 @@ import { SlateService } from '@app/_services';
 })
 export class OverviewComponent implements OnInit {
 	listings: any[];
+	isLoading: boolean;
 	
 	constructor(
 		private snackBar: MatSnackBar,
@@ -22,10 +23,12 @@ export class OverviewComponent implements OnInit {
 	ngOnInit() {
 		this.title.setTitle('Past Sessions | Engage Network');
 
-		this.fetchData();
+		this.fetchData(true);
 	}
 	
-	fetchData() {
+	fetchData(isInitial: boolean) {
+		if (isInitial) this.isLoading = true;
+
 		this.slateService.getMyFinishedListings()
 		.pipe(first())
 		.subscribe(listings => {
@@ -35,6 +38,7 @@ export class OverviewComponent implements OnInit {
 			});
 			
 			this.listings = listings;
+			if (isInitial) this.isLoading = false;
 		});
 	}
 }
