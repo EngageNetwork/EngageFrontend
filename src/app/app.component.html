@@ -3,9 +3,9 @@
 	<div id="main-navbar" class="main-navbar-bg navbar navbar-expand-lg px-5 py-3 text-white navbar-dark">
 		<header class="mb-auto w-100">
 			<div>
-				<h1 *ngIf="account && account.role === Role.Admin" routerLink="/admin/home" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1>
-				<h1 *ngIf="account && account.role === Role.Tutor" routerLink="/tutor/home" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1>
-				<h1 *ngIf="account && account.role === Role.Student" routerLink="/student/home" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1>
+				<h1 *ngIf="account" (click)="redirectHome()" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1>
+				<!-- <h1 *ngIf="account && account.role === Role.Tutor" routerLink="/tutor/home" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1>
+				<h1 *ngIf="account && account.role === Role.Student" routerLink="/student/home" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1> -->
 				<h1 *ngIf="!account" routerLink="/" class="navbar-cursor navbar-brand float-md-start mb-0">Engage Network</h1>
 				
 				<button class="navbar-toggler float-right" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed">
@@ -18,11 +18,15 @@
 						<a *ngIf="account.role === Role.Admin" routerLink="/admin/home" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Home</a>
 						<a *ngIf="account.role === Role.Tutor" routerLink="/tutor/home" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Home</a>
 						<a *ngIf="account.role === Role.Student" routerLink="/student/home" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Home</a>
+
 						<a *ngIf="account.role === Role.Admin" routerLink="/admin/manage" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Admin</a>
+
 						<a *ngIf="account.role === Role.Admin" routerLink="/tutor/listings" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Listings</a>
 						<a *ngIf="account.role === Role.Tutor && account.approved" routerLink="/tutor/listings" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Listings</a>
+
 						<a *ngIf="account.role === Role.Admin" routerLink="/student/sessions" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Sessions</a>
 						<a *ngIf="account.role === Role.Student && account.approved" routerLink="/student/sessions" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Sessions</a>
+						
 						<a routerLink="/about" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">About</a>
 						<!-- User Dropdown Menu -->
 						<div class="pl-3 d-inline-block" ngbDropdown #myDrop="ngbDropdown">
