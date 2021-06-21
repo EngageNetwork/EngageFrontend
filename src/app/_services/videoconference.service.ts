@@ -12,6 +12,7 @@ import HandleLocalTracks from './video-conference/HandleLocalTracks';
 import HandleScreenShare from './video-conference/HandleScreenShare';
 import HandleAudioDeviceDisconnect from './video-conference/HandleAudioDeviceDisconnect';
 import HandleTrackPublicationFailed from './video-conference/HandleTrackPublicationFailed';
+import UseSelectedParticipant from './video-conference/UseSelectedParticipant';
 
 const baseUrl = `${environment.apiUrl}/slate/video`;
 
@@ -36,6 +37,8 @@ export class VideoConferenceService {
 	isSharingScreen: any;
 	toggleScreenShare: any;
 	getAudioAndVideoTracks: any;
+	selectedParticipant: any;
+	setSelectedParticipant: any;
 	
 	constructor(
 		private http: HttpClient
@@ -45,7 +48,7 @@ export class VideoConferenceService {
 		// Get connection options
 		const connectionOptions = ConnectionOptions();
 		this.options = connectionOptions;
-		
+
 		// HandleLocalTracks
 		const {
 			localTracks,
@@ -90,6 +93,11 @@ export class VideoConferenceService {
 		HandleAudioDeviceDisconnect(localTracks);
 
 		HandleTrackPublicationFailed(room);
+
+		// SelectedParticipant Value and Setter
+		const { selectedParticipant, setSelectedParticipant } = UseSelectedParticipant(room);
+		this.selectedParticipant = selectedParticipant;
+		this.setSelectedParticipant = setSelectedParticipant;
 	}
 	
 	initiateRoom(sessionId: string) {

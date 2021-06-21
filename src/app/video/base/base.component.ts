@@ -36,7 +36,7 @@ export class BaseComponent implements OnInit, AfterViewInit {
 	
 	ngOnInit() {
 		this.documentBody = this.document.body;
-		this.documentBody.appendChild()
+		// this.documentBody.appendChild();
 
 		this.videoConferenceService.initializeService();
 
@@ -78,14 +78,9 @@ export class BaseComponent implements OnInit, AfterViewInit {
 	}
 
 	toggleScreenShare() {
-		switch(this.isScreenSharing) {
-			case true:
-				this.isScreenSharing = false
-				break
-			case false:
-				this.isScreenSharing = true
-				break
-		}
+		this.videoConferenceService.toggleScreenShare();
+
+		this.isScreenSharing = this.videoConferenceService.isSharingScreen;
 	}
 
 	disconnectFromMeeting() {

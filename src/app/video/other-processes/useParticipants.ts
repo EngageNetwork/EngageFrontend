@@ -35,5 +35,5 @@ export default function useParticipants(videoConferenceService) {
 		// room.off('participantDisconnected', participantDisconnected);
 	}
 
-	return participants
+	return participants;
 }

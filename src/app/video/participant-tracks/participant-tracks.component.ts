@@ -17,6 +17,7 @@ export class ParticipantTracksComponent implements OnInit {
 	constructor() { }
 	
 	ngOnInit() {
+		console.log(this.participant, this.videoOnly, this.enableScreenShare, this.videoPriority, this.isLocalParticipant);
 	}
 	
 }
