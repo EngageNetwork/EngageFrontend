@@ -1,0 +1,85 @@
+.center {
+	display: block;
+	position: absolute;
+	top: 0; left: 0;
+	bottom: 0; right: 0;
+	margin: auto;
+}
+
+.loading-text {
+	position: absolute;
+	bottom: 20%;
+	left: calc(50vw - 382px / 2);
+}
+
+/* Loading Animation */
+.circle-animation {
+	display: block;
+	height: 300px;
+	width: 300px;
+	-webkit-animation: circle-animation-1 3s linear infinite;
+	animation: circle-animation-1 3s linear infinite;
+}
+@-webkit-keyframes circle-animation-1 {
+	0%   { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes circle-animation-1 {
+	0%   { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+.circle-animation span {
+	display: block;
+	position: absolute;
+	top: 0; left: 0;
+	bottom: 0; right: 0;
+	margin: auto;
+	height: 300px;
+	width: 300px;	
+	clip: rect(16px, 300px, 300px, 0);
+	-webkit-animation: circle-animation-2 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+	animation: circle-animation-2 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+}
+@-webkit-keyframes circle-animation-2 {
+	0%   { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes circle-animation-2 {
+	0%   { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+.circle-animation span::before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0; left: 0;
+	bottom: 0; right: 0;
+	margin: auto;
+	height: 300px;
+	width: 300px;
+	border: 3px solid transparent;
+	border-top: 4px solid black;
+	border-radius: 50%;
+	-webkit-animation: circle-animation-3 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+	animation: circle-animation-3 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+}
+@-webkit-keyframes circle-animation-3 {
+	0%   { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes circle-animation-3 {
+	0%   { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+.circle-animation span::after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0; left: 0;
+	bottom: 0; right: 0;
+	margin: auto;
+	height: 300px;
+	width: 300px;
+	border: 4px solid rgba(50, 50, 50, 0.5);
+	border-radius: 50%;
+}

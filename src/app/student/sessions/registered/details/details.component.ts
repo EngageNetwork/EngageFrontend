@@ -43,6 +43,10 @@ export class DetailsComponent implements OnInit {
 			this.session = session;
 		});
 	}
+
+	joinMeeting() {
+		window.open(`${window.location.origin}/video/${this.id}`, '_blank');
+	}
 	
 	markCompleted() {
 		const session = this.session;

@@ -44,7 +44,7 @@
 			<div *ngIf="!!listing.registered" class="row">
 				<div class="col">
 					<div class="center-btn-container">
-						<a class="btn btn-primary" href="/video/{{id}}">Join Meeting</a>
+						<a class="btn btn-primary" (click)="joinMeeting()">Join Meeting</a>
 					</div>
 				</div>
 			</div>
