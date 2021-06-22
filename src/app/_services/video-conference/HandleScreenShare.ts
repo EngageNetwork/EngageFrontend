@@ -1,8 +1,18 @@
 import { Track, Room, MediaStreamTrackPublishOptions } from "twilio-video"
 
-export default function HandleScreenShare(videoRoom: Room | null) {
+export default function HandleScreenShare(videoRoomParam, setIsSharingScreenVar) {
+	let videoRoom: Room | null;
 	let isSharing = false;
 	
+	//// Helper Methods
+	videoRoomParam.subscribe(value => this.videoRoom = value);
+
+	const setIsSharing = (_isSharing: boolean) => {
+		isSharing = _isSharing;
+		setIsSharingScreenVar(_isSharing);
+	}
+	//// End of Helper Methods
+
 	let stopScreenShare = () => void(null!);
 	
 	const shareScreen = () => {
@@ -36,14 +46,10 @@ export default function HandleScreenShare(videoRoom: Room | null) {
 	}
 
 	const toggleScreenShare = () => {
-		if (videoRoom) {
-			!isSharing ? shareScreen() : stopScreenShare();
-		}
-	}
-
-	//// Helper Methods
-	const setIsSharing = (_isSharing: boolean) => {
-		isSharing = _isSharing;
+		// if (videoRoom) {
+		// 	!isSharing ? shareScreen() : stopScreenShare();
+		// }
+		setIsSharing(!isSharing);
 	}
 
 

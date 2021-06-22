@@ -21,7 +21,7 @@ export class BaseComponent implements OnInit, AfterViewInit {
 
 	audioActive: boolean;
 	videoActive: boolean;
-	isScreenSharing: boolean;
+	isSharingScreen: boolean;
 
 	mainParticipant: string;
 
@@ -32,7 +32,7 @@ export class BaseComponent implements OnInit, AfterViewInit {
 		private snackBar: MatSnackBar,
 		private videoConferenceService: VideoConferenceService,
 		private title: Title
-	) { }
+	) {	}
 	
 	ngOnInit() {
 		this.documentBody = this.document.body;
@@ -46,13 +46,11 @@ export class BaseComponent implements OnInit, AfterViewInit {
 
 		this.audioActive = true;
 		this.videoActive = true;
-		this.isScreenSharing = false;
+		this.videoConferenceService.isSharingScreen.subscribe(value => this.isSharingScreen = value);
 	}
 	
 	ngAfterViewInit() {
-		
 
-		// this.connectVideoConference();
 	}
 	
 	toggleAudio() {
@@ -79,8 +77,6 @@ export class BaseComponent implements OnInit, AfterViewInit {
 
 	toggleScreenShare() {
 		this.videoConferenceService.toggleScreenShare();
-
-		this.isScreenSharing = this.videoConferenceService.isSharingScreen;
 	}
 
 	disconnectFromMeeting() {

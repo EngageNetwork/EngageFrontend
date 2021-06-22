@@ -1,28 +1,35 @@
 import { Room, TwilioError } from "twilio-video";
 
 export default function HandleRoomDisconnection(
-	videoRoom: Room | null,
+	videoRoomParam,
 	removeLocalAudioTrack: () => void,
 	removeLocalVideoTrack: () => void,
-	isSharingScreen: boolean,
+	isSharingScreenParam,
 	toggleScreenShare: () => void
-	) {
-		if (videoRoom) {
-			const onDisconnected = (_: Room, error: TwilioError) => {
-				if (error) {
-					// Handle error
-				}
+) {
+	videoRoomParam.subscribe(videoRoomVar => {
+		isSharingScreenParam.subscribe(isSharingScreenVar => {
+			const videoRoom: Room | null = videoRoomVar;
+			const isSharingScreen: boolean = isSharingScreenVar;
 
-				removeLocalAudioTrack();
-				removeLocalVideoTrack();
-				if (isSharingScreen) {
-					toggleScreenShare();
-				}
-			};
-
-			videoRoom.on('disconnected', onDisconnected);
-			return () => {
-				videoRoom.off('disconnected', onDisconnected);
-			};
-		}
-	}
+			if (videoRoom) {
+				const onDisconnected = (_: Room, error: TwilioError) => {
+					if (error) {
+						// Handle error
+					}
+		
+					removeLocalAudioTrack();
+					removeLocalVideoTrack();
+					if (isSharingScreen) {
+						toggleScreenShare();
+					}
+				};
+		
+				videoRoom.on('disconnected', onDisconnected);
+				
+				// Handle cleanup
+				// videoRoom.off('disconnected', onDisconnected);
+			}
+		});
+	});
+}

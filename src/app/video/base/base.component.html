@@ -30,11 +30,11 @@
 		</button>
 		
 		<button mat-flat-button (click)="toggleScreenShare()" class="action-button screen-share-button">
-			<mat-icon *ngIf="isScreenSharing == false" class="mat-btn-icon">screen_share</mat-icon>
-			<p *ngIf="isScreenSharing == false" class="mat-btn-text">Share Screen</p>
+			<mat-icon *ngIf="isSharingScreen == false" class="mat-btn-icon">screen_share</mat-icon>
+			<p *ngIf="isSharingScreen == false" class="mat-btn-text">Share Screen</p>
 			
-			<mat-icon *ngIf="isScreenSharing == true" class="mat-btn-icon">stop_screen_share</mat-icon>
-			<p *ngIf="isScreenSharing == true" class="mat-btn-text">Stop Sharing</p>
+			<mat-icon *ngIf="isSharingScreen == true" class="mat-btn-icon">stop_screen_share</mat-icon>
+			<p *ngIf="isSharingScreen == true" class="mat-btn-text">Stop Sharing</p>
 		</button>
 		
 		<button mat-flat-button color="warn" (click)="disconnectFromMeeting()" class="action-button disconnect-button">

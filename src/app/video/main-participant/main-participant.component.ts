@@ -25,8 +25,9 @@ export class MainParticipantComponent implements OnInit {
 	) { }
 	
 	ngOnInit() {
-		this.room = this.videoConferenceService.room;
-		this.selectedParticipant = this.videoConferenceService.selectedParticipant;
+		// this.videoConferenceService.isSharingScreen.subscribe(value => this.isSharingScreen = value);
+		this.videoConferenceService.room.subscribe(value => this.room = value);
+		this.videoConferenceService.selectedParticipant.subscribe(value => this.selectedParticipant = value);
 
 		this.mainParticipant = useMainParticipant(this.videoConferenceService);
 		this.localParticipant = this.room?.localParticipant;

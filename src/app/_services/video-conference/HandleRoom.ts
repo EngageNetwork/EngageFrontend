@@ -3,11 +3,26 @@ import Video, { ConnectOptions, LocalTrack, Room } from 'twilio-video';
 // @ts-ignore
 window.TwilioVideo = Video;
 
-export default function HandleRoom(localTracks: LocalTrack[], options?: ConnectOptions) {
+export default function HandleRoom(localTracksParam, setRoomVar, setIsConnectingVar, options?: ConnectOptions) {
 	let room: Room | null;
+	let localTracks: LocalTrack[];
 	let isConnecting = false;
 	let optionsRef = options;
 	
+	//// Helper Methods
+	localTracksParam.subscribe(value => this.localTracks = value);
+
+	const setRoom = (_room: any) => {
+		room = _room;
+		setRoomVar(_room);
+	}
+
+	const setIsConnecting = (_isConnecting: boolean) => {
+		isConnecting = _isConnecting;
+		setIsConnectingVar(_isConnecting);
+	}
+	//// End of Helper Methods
+
 	const connect = (token) => {
 		setIsConnecting(true);
 		return Video.connect(token, { ...optionsRef, tracks: localTracks}).then(
@@ -40,16 +55,6 @@ export default function HandleRoom(localTracks: LocalTrack[], options?: ConnectO
 				setIsConnecting(false);
 			}
 		)
-	}
-
-	//// Helper Methods
-	// Emulate ReactJS hooks
-	const setRoom = (_room: any) => {
-		room = _room;
-	}
-	
-	const setIsConnecting = (_isConnecting: boolean) => {
-		isConnecting = _isConnecting;
 	}
 
 

@@ -1,14 +1,18 @@
 import { Room } from 'twilio-video';
 
-export default function HandleTrackPublicationFailed(room: Room | null) {
-    const handlePublicationFailure = () => {
-        // Handle error
-    }
-    
-    if (room) {
-        room.localParticipant.on('trackPublicationFailed', handlePublicationFailure);
-        return () => {
-            room.localParticipant.off('trackPublicationFailed', handlePublicationFailure);
-        };
-    }
+export default function HandleTrackPublicationFailed(videoRoomParam) {
+	let videoRoom: Room | null;
+	
+	videoRoomParam.subscribe(value => this.videoRoom = value);
+	
+	const handlePublicationFailure = () => {
+		// Handle error
+	}
+	
+	if (videoRoom) {
+		videoRoom.localParticipant.on('trackPublicationFailed', handlePublicationFailure);
+
+		// Handle cleanup
+		// videoRoom.localParticipant.off('trackPublicationFailed', handlePublicationFailure);
+	}
 }

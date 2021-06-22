@@ -1,6 +1,6 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { ConnectOptions } from 'twilio-video';
 
 import { environment } from '@environments/environment';
@@ -25,24 +25,25 @@ interface AuthDetails {
 
 export class VideoConferenceService {
 	options: any;
-	room: any;
-	localTracks: any;
-	isConnecting: any;
+	room: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+	localTracks: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+	isConnecting: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+	isAcquiringLocalTracks: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+	isSharingScreen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+	selectedParticipant: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
 	getLocalVideoTrack: any;
 	getLocalAudioTrack: any;
 	connect: any;
-	isAcquiringLocalTracks: any;
 	removeLocalVideoTrack: any;
 	removeLocalAudioTrack: any;
-	isSharingScreen: any;
 	toggleScreenShare: any;
 	getAudioAndVideoTracks: any;
-	selectedParticipant: any;
 	setSelectedParticipant: any;
-	
+
 	constructor(
 		private http: HttpClient
-	) { }
+	) {	}
 
 	initializeService() {
 		// Get connection options
@@ -60,43 +61,47 @@ export class VideoConferenceService {
 			getAudioAndVideoTracks,
 		} = HandleLocalTracks();
 
-		this.localTracks = localTracks;
+		this.setLocalTracksVar(localTracks);
+		this.setIsAcquiringLocalTracksVar(isAcquiringLocalTracks);
+
 		this.getLocalVideoTrack = getLocalVideoTrack;
 		this.getLocalAudioTrack = getLocalAudioTrack;
-		this.isAcquiringLocalTracks = isAcquiringLocalTracks;
 		this.removeLocalAudioTrack = removeLocalAudioTrack;
 		this.removeLocalVideoTrack = removeLocalVideoTrack;
 		this.getAudioAndVideoTracks = getAudioAndVideoTracks;
 		
 		// HandleRoom
-		const { room, isConnecting, connect } = HandleRoom(this.localTracks, connectionOptions);
+		const { room, isConnecting, connect } = HandleRoom(this.localTracks, this.setRoomVar, this.setIsConnectingVar, connectionOptions);
 
-		this.room = room;
-		this.isConnecting = isConnecting;
+		this.setRoomVar(room);
+		this.setIsConnectingVar(isConnecting);
+
 		this.connect = connect;
 
 		// Handle Screen Share
-		const [ isSharingScreen, toggleScreenShare ] = HandleScreenShare(room);
-		
-		this.isSharingScreen = isSharingScreen;
+		const [ isSharingScreen, toggleScreenShare ] = HandleScreenShare(this.room, this.setIsSharingScreenVar);
+
+		this.setIsSharingScreenVar(isSharingScreen);
 		this.toggleScreenShare = toggleScreenShare;
 
 		// Register Handlers for Disconnect, Audio  Device Disconnect, and Failed Track Publication
 		HandleRoomDisconnection(
-			room,
+			this.room,
 			removeLocalAudioTrack,
 			removeLocalVideoTrack,
-			isSharingScreen,
+			this.isSharingScreen,
 			toggleScreenShare
 		);
 
-		HandleAudioDeviceDisconnect(localTracks);
+		HandleAudioDeviceDisconnect(this.localTracks);
 
-		HandleTrackPublicationFailed(room);
+		HandleTrackPublicationFailed(this.room);
 
 		// SelectedParticipant Value and Setter
 		const { selectedParticipant, setSelectedParticipant } = UseSelectedParticipant(room);
-		this.selectedParticipant = selectedParticipant;
+
+		this.setSelectedParticipantVar(selectedParticipant);
+
 		this.setSelectedParticipant = setSelectedParticipant;
 	}
 	
@@ -106,5 +111,25 @@ export class VideoConferenceService {
 	
 	getToken(sessionId: string) {
 		return this.http.get<AuthDetails>(`${baseUrl}/token/${sessionId}`);
+	}
+
+	//// Var Setter Methods
+	setRoomVar(value) {
+		this.room.next(value);
+	}
+	setLocalTracksVar(value) {
+		this.localTracks.next(value);
+	}
+	setIsConnectingVar(value: boolean) {
+		this.isConnecting.next(value);
+	}
+	setIsAcquiringLocalTracksVar(value) {
+		this.isAcquiringLocalTracks.next(value);
+	}
+	setIsSharingScreenVar(value: boolean) {
+		this.isSharingScreen.next(value);
+	}
+	setSelectedParticipantVar(value) {
+		this.selectedParticipant.next(value);
 	}
 }
