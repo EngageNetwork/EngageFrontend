@@ -42,6 +42,10 @@ export class DetailsComponent implements OnInit {
 		});
 	}
 
+	joinMeeting() {
+		window.open(`${window.location.origin}/video/${this.id}`, '_blank');
+	}
+
 	markCompleted() {
 		const listing = this.listing;
 		if (!listing.markedCompletedTutor) {

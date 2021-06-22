@@ -20,8 +20,4 @@ export class VideoConferenceService {
 	initiateRoom(sessionId: string) {
 		return this.http.post<any>(`${baseUrl}/initiate/${sessionId}`, null);
 	}
-	
-	getToken(sessionId: string) {
-		return this.http.get<AuthDetails>(`${baseUrl}/token/${sessionId}`);
-	}
 }
