@@ -37,8 +37,12 @@ export class DetailsComponent implements OnInit {
 			session.startDateTime = moment(session.startDateTime).format('LT MMMM Do[,] YYYY');
 			session.endDateTime = moment(session.endDateTime).format('LT MMMM Do[,] YYYY')
 
-			session.accountDetails.contentRatings.overallContentRating = Math.round(session.accountDetails.contentRatings.overallContentRating);
-			session.accountDetails.behaviourRating = Math.round(session.accountDetails.behaviourRating);
+			if (!!session.accountDetails?.contentRatings?.overallContentRating) {
+				session.accountDetails.contentRatings.overallContentRating = Math.round(session.accountDetails.contentRatings.overallContentRating);
+			}
+			if (!!session.accountDetails?.behaviourRating) {
+				session.accountDetails.behaviourRating = Math.round(session.accountDetails.behaviourRating);
+			}
 
 			this.session = session;
 		});
