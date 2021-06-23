@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
+import { environment } from '@environments/environment';
 import { VideoConferenceService } from '@app/_services';
+
+const videoUrl = environment.videoUrl;
 
 @Component({
 	selector: 'app-initialize',
@@ -29,7 +32,7 @@ export class InitializeComponent implements OnInit {
 		this.videoConferenceService.initiateRoom(this.id)
 		.pipe(first())
 		.subscribe(sessionDetails => {
-			location.href = `http://localhost:3000/room/${sessionDetails.latestVideoConferenceRoom.sid}`;
+			location.href = `${videoUrl}/room/${sessionDetails.latestVideoConferenceRoom.sid}`;
 		});
 	}
 

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:4000'
+  apiUrl: 'http://localhost:4000',
+  videoUrl: 'http://localhost:3000'
 };
 
 // http://192.168.1.101:4000
