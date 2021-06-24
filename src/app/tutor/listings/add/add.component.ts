@@ -5,11 +5,13 @@ import { first } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { SlateService } from '@app/_services';
+import { AccountService, SlateService } from '@app/_services';
+import { Account } from '@app/_models';
 
 @Component({ templateUrl: './add.component.html' })
 
 export class AddComponent implements OnInit {
+	account: Account;
 	createListingForm: FormGroup;
 	loading = false;
 	submitted = false;
@@ -19,9 +21,12 @@ export class AddComponent implements OnInit {
 		private route: ActivatedRoute,
 		private router: Router,
 		private snackBar: MatSnackBar,
+		private accountService: AccountService,
 		private slateService: SlateService,
 		private title: Title
-	) { }
+	) {
+		this.accountService.account.subscribe(a => this.account = a);
+	}
 	
 	ngOnInit() {
 		this.title.setTitle('Create Listing | Engage Network');
