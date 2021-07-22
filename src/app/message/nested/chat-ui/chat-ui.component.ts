@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, AfterViewInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
@@ -16,7 +16,7 @@ import { Account } from '@app/_models';
 	styleUrls: ['./chat-ui.component.scss']
 })
 
-export class ChatUIComponent implements OnInit, AfterViewInit {
+export class ChatUIComponent implements AfterViewInit {
 	@Input() id: string;
 
 	interval: any;
@@ -36,10 +36,6 @@ export class ChatUIComponent implements OnInit, AfterViewInit {
 		private title: Title
 	) {
 		this.accountService.account.subscribe(a => this.account = a);
-	}
-	
-	ngOnInit(): void {
-		this.chatSetup();
 	}
 
 	ngOnChanges(): void {
