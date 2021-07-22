@@ -1,0 +1,7 @@
+<div class="main-container">
+	<app-user-list (changeContactIdEvent)="updateActiveContactId($event)">
+	</app-user-list>
+	
+	<app-chat-ui *ngIf="!!id" [id]="id">
+	</app-chat-ui>
+</div>

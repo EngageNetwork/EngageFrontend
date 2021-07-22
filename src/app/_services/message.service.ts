@@ -27,14 +27,18 @@ export class MessageService {
 	}
 	
 	initiateChat(userIds) {
-		return this.http.post<Chat>(`${baseUrl}/initiate`, userIds)
+		return this.http.post<Chat>(`${baseUrl}/initiate`, userIds);
 	}
 	
 	postMsg(id: string, msgPayload) {
-		return this.http.post<any>(`${baseUrl}/${id}/message`, { msgPayload })
+		return this.http.post<any>(`${baseUrl}/${id}/message`, { msgPayload });
+	}
+
+	getContacts() {
+		return this.http.get(`${baseUrl}/contacts`);
 	}
 	
 	getConversationByChatId(id: string) {
-		return this.http.get<Message>(`${baseUrl}/${id}`)
+		return this.http.get<Message>(`${baseUrl}/${id}`);
 	}
 }

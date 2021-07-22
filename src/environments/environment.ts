@@ -5,11 +5,15 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:4000',
-  videoUrl: 'http://localhost:3000'
+  videoUrl: 'https://video.engageapp.net'
 };
 
 // http://192.168.1.101:4000
 // http://localhost:4000
+// https://testapi.engageapp.net
+
+// http://localhost:3000
+// https://video.engageapp.net
 
 /*
  * For easier debugging in development mode, you can import the following file

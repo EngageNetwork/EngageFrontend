@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
@@ -11,21 +11,24 @@ import { AccountService, MessageService } from '@app/_services';
 import { Account } from '@app/_models';
 
 @Component({
+	selector: 'app-chat-ui',
 	templateUrl: './chat-ui.component.html',
 	styleUrls: ['./chat-ui.component.scss']
 })
 
 export class ChatUIComponent implements OnInit, AfterViewInit {
+	@Input() id: string;
+
 	interval: any;
 	account: Account;
-	id: string;
+	// id: string;
 	chatId: string;
 	messages: any;
 	otherUserName: string;
 	msgPayload: string;
 	
 	constructor(
-		private route: ActivatedRoute,
+		// private route: ActivatedRoute,
 		private router: Router,
 		private snackBar: MatSnackBar,
 		private accountService: AccountService,
@@ -36,10 +39,17 @@ export class ChatUIComponent implements OnInit, AfterViewInit {
 	}
 	
 	ngOnInit(): void {
-		this.title.setTitle('Chat');
-		
-		this.id = this.route.snapshot.params['id'];
-		
+		this.chatSetup();
+	}
+
+	ngOnChanges(): void {
+		if (this.interval) {
+			clearInterval(this.interval);
+		}
+		this.chatSetup();
+	}
+
+	chatSetup() {		
 		// Check for if user is chatting with self
 		if (this.account.id === this.id) {
 			const role = this.accountService.accountValue.role;
@@ -57,6 +67,7 @@ export class ChatUIComponent implements OnInit, AfterViewInit {
 		.subscribe({
 			next: accountDetails => {
 				this.otherUserName = [accountDetails.firstName, accountDetails.lastName].join(' ');
+				this.title.setTitle(`Chatting with ${accountDetails.firstName}`);
 			},
 			error: error => {
 				// Display error to user
@@ -70,6 +81,7 @@ export class ChatUIComponent implements OnInit, AfterViewInit {
 			next: chat => {
 				this.chatId = chat.id
 				this.getConversation(this.chatId);
+				
 				this.interval = setInterval(() => {
 					this.getConversation(this.chatId);
 				}, 1000);
