@@ -1,0 +1,39 @@
+.user-list-wrapper {
+	margin: 10px auto;
+}
+
+.user-list {
+	border-radius: 2px;
+	list-style: none;
+	padding: 10px 20px;
+}
+
+.user-list-item {
+	display: flex;
+	margin: 10px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	&:last-child {
+		border-bottom: none;
+	}
+	&-contact-details {
+		margin-left: 20px;
+		h4, p {
+			margin: 0;
+		}
+		h4 {
+			margin-top: 8px;
+			font-size: 16px;
+		}
+		p {
+			margin-top: 5px;
+			color: #aaa;
+		}
+	}
+}
+
+.contact-details {
+	text-decoration: none;
+	color: black;
+}

@@ -5,8 +5,8 @@
 	</div>
 	<div class="p-2 keyline keyline-top-all"></div>
 	<div class="main-content-area">
-		<div class="messages px-4 m-0" #scrollableChatArea [scrollTop]="scrollableChatArea.scrollHeight">
-			<ul class="message-list">
+		<div class="messages px-2 m-0" #scrollableChatArea [scrollTop]="scrollableChatArea.scrollHeight">
+			<ul class="message-list px-0">
 				<li *ngFor="let message of messages" class="message-item mt-4">
 					<div *ngIf="message.postedByUser._id === account.id" class="ml-auto float-right">
 						<p class="fw-light small-role-text mb-0">{{message.postedByUser.role}}</p>
@@ -26,9 +26,9 @@
 			</ul>
 		</div>
 		<div class="px-5 mt-5">
-			<textarea class="inputArea mb-0" [(ngModel)]="msgPayload" placeholder="Message {{otherUserName}}" (keydown)="triggerFunction($event)"></textarea>
-			<div class="sendBtnSpacer"></div>
-			<button class="ms-3 p-3 sendMessageBtn align-top" (click)="sendMessage()"><span data-feather="send" stroke="black"></span></button>
+			<textarea class="inputArea mb-0" [(ngModel)]="msgPayload" placeholder="Message {{otherUserName}}. Press enter to send." (keydown)="triggerFunction($event)"></textarea>
+			<!-- <div class="sendBtnSpacer"></div>
+			<button class="ms-3 p-3 sendMessageBtn align-top" (click)="sendMessage()"><span data-feather="send" stroke="black"></span></button> -->
 		</div>
 	</div>
 </div>

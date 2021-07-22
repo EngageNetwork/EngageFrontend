@@ -21,6 +21,8 @@
 
 						<a *ngIf="account.role === Role.Admin" routerLink="/admin/manage" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Admin</a>
 
+						<a routerLink="/message" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">Messages</a>
+
 						<a *ngIf="account.role === Role.Admin" routerLink="/tutor/listings" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Listings</a>
 						<a *ngIf="account.role === Role.Tutor && account.approved" routerLink="/tutor/listings" routerLinkActive="active" class="navbar-cursor nav-item nav-link px-3" (click)="isNavbarCollapsed = true">My Listings</a>
 

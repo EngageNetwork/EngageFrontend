@@ -35,8 +35,12 @@ export class DetailsComponent implements OnInit {
 			listing.startDateTime = moment(listing.startDateTime).format('LT MMMM Do[,] YYYY');
 			listing.endDateTime = moment(listing.endDateTime).format('LT MMMM Do[,] YYYY');
 
-			listing.accountDetails.contentRatings.overallContentRating = Math.round(listing.accountDetails.contentRatings.overallContentRating);
-			listing.accountDetails.behaviourRating = Math.round(listing.accountDetails.behaviourRating);
+			if (!!listing.accountDetails?.contentRatings?.overallContentRating) {
+				listing.accountDetails.contentRatings.overallContentRating = Math.round(listing.accountDetails.contentRatings.overallContentRating);
+			}
+			if (!!listing.accountDetails?.behaviourRating) {
+				listing.accountDetails.behaviourRating = Math.round(listing.accountDetails.behaviourRating);
+			}
 
 			this.listing = listing;
 		});

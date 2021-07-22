@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ChatUIComponent } from './chat-ui/chat-ui.component';
+import { OverviewComponent } from './overview/overview.component';
 
 const routes: Routes = [
-	{ path: ':id', component: ChatUIComponent }
+	{ path: '', component: OverviewComponent },
+	{ path: ':id', component: OverviewComponent }
 ];
 
 @NgModule({

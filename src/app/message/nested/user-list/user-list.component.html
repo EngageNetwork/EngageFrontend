@@ -1,0 +1,10 @@
+<div class="user-list-wrapper">
+	<ul class="user-list">
+		<li *ngFor="let contact of contacts" class="user-list-item">
+			<a class="contact-details" routerLink="/message/{{contact.contactProfile._id}}" (click)="updateActiveContactId(contact.contactProfile._id)">
+				<h4>{{contact.contactProfile.firstName}} {{contact.contactProfile.lastName}}</h4>
+				<p>{{contact.contactProfile._id}}</p>
+			</a>
+		</li>
+	</ul>
+</div>
