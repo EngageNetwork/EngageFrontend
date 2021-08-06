@@ -6,11 +6,10 @@ import { AccountService } from '@app/_services';
 import { Account, Role } from '@app/_models';
 
 @Component({
-	templateUrl: './global-home.component.html',
-	styleUrls: ['./global-home.component.scss']
+	templateUrl: './home-page.component.html',
+	styleUrls: ['./home-page.component.scss']
 })
-
-export class GlobalHomeComponent implements OnInit {
+export class HomePageComponent implements OnInit {
 	account: Account;
 
 	constructor(

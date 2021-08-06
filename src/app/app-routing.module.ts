@@ -4,10 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard, DevGuard } from './_helpers';
 import { Role } from './_models';
 
-import { GlobalHomeComponent } from './global-home/global-home.component';
-
 const routes: Routes = [
-	{ path: '', component: GlobalHomeComponent },
+	{
+		path: '',
+		loadChildren: () => import('./global-home/global-home.module').then(m => m.GlobalHomeModule)
+	},
 	{
 		path: 'about',
 		loadChildren: () => import('./about/about.module').then(m => m.AboutModule)

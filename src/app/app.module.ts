@@ -12,12 +12,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AccountService } from './_services';
 
-import { GlobalHomeComponent } from './global-home/global-home.component';
-
 @NgModule({
 	declarations: [
-		AppComponent,
-		GlobalHomeComponent
+		AppComponent
 	],
 	imports: [
 		BrowserModule,
