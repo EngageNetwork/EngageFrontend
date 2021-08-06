@@ -1,0 +1,33 @@
+/* Page Layout */
+.page-layout {
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+}
+/**/
+
+/* Idea Columns */
+.idea-columns .col-lg-4 {
+	margin-bottom: 1.5rem;
+	text-align: center;
+}
+.idea-columns h2 {
+	font-weight: 450;
+}
+.idea-columns .col-lg-4 p {
+	margin-top: 10px;
+	margin-right: .75rem;
+	margin-left: .75rem;
+	margin-bottom: 0;
+}
+/**/
+
+.idea-column-divider {
+	margin: 3rem 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Details */
+.application-requirements {
+	padding-left: 7rem;
+	padding-right: 7rem;
+}
+/**/

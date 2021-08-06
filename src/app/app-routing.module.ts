@@ -19,6 +19,10 @@ const routes: Routes = [
 		canActivate: [DevGuard]
 	},
 	{
+		path: 'events',
+		loadChildren: () => import('./events/events.module').then(m => m.EventsModule),
+	},
+	{
 		path: 'legal',
 		loadChildren: () => import('./legal/legal.module').then(m => m.LegalModule)
 	},
